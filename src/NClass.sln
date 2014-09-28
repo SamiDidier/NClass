@@ -14,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translations", "Translation
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGenerator", "CodeGenerator\CodeGenerator.csproj", "{BE60D62D-E757-44F4-A342-5388742F5986}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyImport", "AssemblyImport\AssemblyImport.csproj", "{88605D35-9E31-47CC-B6A2-45E6381D52B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssemblyCSharpImport", "AssemblyCSharpImport\AssemblyCSharpImport.csproj", "{88605D35-9E31-47CC-B6A2-45E6381D52B9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp", "CSharp\CSharp.csproj", "{755B2714-62DB-419C-9097-49C08439E7E3}"
 EndProject

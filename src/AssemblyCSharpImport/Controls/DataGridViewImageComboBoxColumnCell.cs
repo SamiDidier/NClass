@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace NClass.AssemblyImport.Controls
+namespace NClass.AssemblyCSharpImport.Controls
 {
   public class DataGridViewImageComboBoxColumnCell : DataGridViewComboBoxCell
   {

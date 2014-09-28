@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using NReflect.Filter;
 
-namespace NClass.AssemblyImport
+namespace NClass.AssemblyCSharpImport
 {
   /// <summary>
   /// This is needed to serialize an ArrayList of ImportSettings.

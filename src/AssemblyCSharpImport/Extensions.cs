@@ -1,6 +1,6 @@
 using NClass.Core;
 
-namespace NClass.AssemblyImport
+namespace NClass.AssemblyCSharpImport
 {
   public static class Extensions
   {

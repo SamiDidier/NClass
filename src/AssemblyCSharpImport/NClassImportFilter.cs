@@ -8,7 +8,7 @@ using NReflect.NRMembers;
 using NReflect.NRParameters;
 using NReflect.NRAttributes;
 
-namespace NClass.AssemblyImport
+namespace NClass.AssemblyCSharpImport
 {
   /// <summary>
   /// This import filter will filter out all entities and members NClass doesn't

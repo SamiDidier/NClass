@@ -4,7 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
-using NClass.AssemblyImport.Lang;
+using NClass.AssemblyCSharpImport.Lang;
 using NClass.Core;
 using NClass.DiagramEditor.ClassDiagram;
 using NClass.DiagramEditor.ClassDiagram.Connections;
@@ -17,7 +17,7 @@ using NReflect.NRParameters;
 using NReflect.NRCode;
 using NReflect.NRRelationship;
 
-namespace NClass.AssemblyImport
+namespace NClass.AssemblyCSharpImport
 {
   public class NETImport
   {

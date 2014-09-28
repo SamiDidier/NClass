@@ -1,6 +1,6 @@
-﻿using NClass.AssemblyImport.Controls;
+﻿using NClass.AssemblyCSharpImport.Controls;
 
-namespace NClass.AssemblyImport
+namespace NClass.AssemblyCSharpImport
 {
   partial class ImportSettingsForm
   {

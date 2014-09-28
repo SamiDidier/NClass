@@ -47,7 +47,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\GUI\bin\Release\Plugins\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -124,7 +124,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="libs\PdfSharp.dll" />
     <None Include="Resources\Document-pdf-16.PNG" />
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">

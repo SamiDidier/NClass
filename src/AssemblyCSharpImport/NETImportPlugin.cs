@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Forms;
-using NClass.AssemblyImport.Lang;
+using NClass.AssemblyCSharpImport.Lang;
 using NClass.CSharp;
 using NClass.DiagramEditor.ClassDiagram;
 using NClass.GUI;
 
-namespace NClass.AssemblyImport
+namespace NClass.AssemblyCSharpImport
 {
   /// <summary>
   ///   Implements the PlugIn-Interface of NClass.

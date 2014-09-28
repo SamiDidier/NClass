@@ -2,7 +2,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace NClass.AssemblyImport.Controls
+namespace NClass.AssemblyCSharpImport.Controls
 {
   public class DataGridViewImageComboBoxEditingControl : ImageComboBox, IDataGridViewEditingControl
   {

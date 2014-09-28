@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace NClass.AssemblyImport.Controls
+namespace NClass.AssemblyCSharpImport.Controls
 {
   /// <summary>
   ///   An improved <see cref = "ComboBox" /> which is able to display images next to

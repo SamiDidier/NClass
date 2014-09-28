@@ -8,8 +8,8 @@
     <ProjectGuid>{88605D35-9E31-47CC-B6A2-45E6381D52B9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NClass.AssemblyImport</RootNamespace>
-    <AssemblyName>AssemblyImport</AssemblyName>
+    <RootNamespace>NClass.AssemblyCSharpImport</RootNamespace>
+    <AssemblyName>AssemblyCSharpImport</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -21,11 +21,12 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\GUI\bin\Release\Plugins\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -143,9 +144,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\default.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="libs\NReflect.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
