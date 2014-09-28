@@ -1,0 +1,40 @@
+
+API DOCS:
+
+GtkSpell.SpellCheck 
+{
+  /**** Contstructors ****/
+  // Set language for spell checking by passing in language id string 
+  // (eg. "EN-US", "EN-GB"). Pass NULL to use default. 
+  SpellCheck(Gtk.TextView, string);
+  
+  /**** Members ****/
+  // Set language for spell checking by passing in a locale string 
+  // (eg. "EN-US", "EN-GB"). Pass NULL to use default. 
+  // Returns false if its unable to set the langauge. 
+  bool SetLanguage(string);
+  void RecheckAll();
+  void Detach();
+
+  // This deprecated method will attach a new (and different) GtkSpell checker
+  // to a TextView with the default language. This method returns no errors. 
+  [Deprecated] void Attach(Gtk.TextView);
+ 
+  /**** Static Members ****/
+  // Should return NULL if no SpellCheck was attached before.
+  (static) GtkSpell.SpellCheck GetFromTextView(Gtk.TextView);
+
+  // Really old versions of libgtkspell require you to initalize aspell/ispell 
+  // This shouldn't do anything in new versions of libgtkspell.
+  [Deprecated] (static) ErrorFlags Init();  
+}
+
+// this enum was really suppost to be used in the future but the only method 
+// that uses it is now Deprecated and might not get ever get reused for
+// gtkspell3
+[Deprecated] 
+enum GtkSpell.ErrorFlags
+{
+  Backend,
+}
+

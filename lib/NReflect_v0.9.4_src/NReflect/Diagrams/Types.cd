@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NReflect.NREntities.NRClass">
+    <Position X="2.75" Y="10.5" Width="1.5" />
+    <Members>
+      <Method Name="Accept" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AIAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NREntities\NRClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NReflect.NREntities.NRCompositeType">
+    <Position X="2" Y="5.25" Width="2" />
+    <Members>
+      <Method Name="NRCompositeType" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAgAAAAAAAAAAAAACAEA=</HashCode>
+      <FileName>NREntities\NRCompositeType.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NReflect.NREntities.NRDelegate">
+    <Position X="6" Y="5.25" Width="1.5" />
+    <Members>
+      <Method Name="Accept" Hidden="true" />
+      <Method Name="NRDelegate" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAEAAA=</HashCode>
+      <FileName>NREntities\NRDelegate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NReflect.NREntities.NREnum">
+    <Position X="7.25" Y="3" Width="1.5" />
+    <Members>
+      <Method Name="Accept" Hidden="true" />
+      <Method Name="NREnum" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>NREntities\NREnum.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NReflect.NREntities.NRInterface">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <Members>
+      <Method Name="Accept" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NREntities\NRInterface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NReflect.NREntities.NRStruct">
+    <Position X="4.75" Y="10.5" Width="1.5" />
+    <Members>
+      <Method Name="Accept" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NREntities\NRStruct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NReflect.NREntities.NRSingleInheritanceType">
+    <Position X="3.75" Y="7.75" Width="1.75" />
+    <Members>
+      <Method Name="NRSingleInheritanceType" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAgAAAAAAAAAIAAAAAAAAoAA=</HashCode>
+      <FileName>NREntities\NRSingleInheritanceType.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NReflect.NREntities.NRGenericType">
+    <Position X="4.5" Y="3" Width="1.5" />
+    <Members>
+      <Method Name="NRGenericType" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>NREntities\NRGenericType.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NReflect.NREntities.NRTypeBase">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <Members>
+      <Method Name="Accept" Hidden="true" />
+      <Method Name="NRTypeBase" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AIAABAAAAAAAAIAAAAAAQAQQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NREntities\NRTypeBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

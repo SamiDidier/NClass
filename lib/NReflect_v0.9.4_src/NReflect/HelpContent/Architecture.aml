@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="8f080f07-d44c-44ac-b883-a0993850d183" revisionNumber="1">
+  <developerOrientationDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>
+        This section gives an introduction of the architecture of the created result
+        of NReflect.
+      </para>
+    </introduction>
+    <inThisSection>
+      <link xlink:href="c47434e4-4a2e-40cd-b86c-4378cdcc537c"/>
+      <para>
+        Here you can find a short description about the root of the resulting
+        object tree.
+      </para>
+      <link xlink:href="7a5a5f55-104d-4753-9a03-a68362a41cb8"/>
+      <para>
+        This section describes how types are represented at the result.
+      </para>
+      <link xlink:href="8345ab04-1135-4bba-84a6-6d9c851eb1f6"/>
+      <para>
+        Each type may have members. The way they are represented is described
+        in this section.
+      </para>
+      <link xlink:href="e402ea0a-b8d5-4f05-800f-2ae0d1127fc5"/>
+      <para>
+        Generics are also reflected by NReflect. Here you learn how.
+      </para>
+      <link xlink:href="3933b29f-b7f6-4c1a-8bf2-c4dad758c537"/>
+      <para>
+        Nearly everything may be tagged with an attribute. This section shows how
+        attributes are reflected.
+      </para>
+      <link xlink:href="51ae2c74-edd3-44cd-b666-b12639296cfb"/>
+      <para>
+        You don't want to reflect everything? These filters will help you.
+      </para>
+      <link xlink:href="5ebdd67b-0f04-4e7d-a71f-a225a10f7ca4"/>
+      <para>
+        After the reflection is done you might want to work with the result. Since
+        NReflect implements the visitor pattern, you might want to use it.
+      </para>
+    </inThisSection>
+    <relatedTopics>
+      <link xlink:href="ffe32e8d-3d36-4dba-8dfb-feca3c18011b"/>
+    </relatedTopics>
+  </developerOrientationDocument>
+</topic>

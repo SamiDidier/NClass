@@ -1,0 +1,32 @@
+GtkSpell#
+  
+An interactive, realtime spell checker for Gtk.TextView. 
+Similar to MS Word's red squiggly spell checking feature.
+
+GtkSpell# wraps libgtkspell 2.0, which wraps any installed aspell 
+or ispell spellchecking library. 
+
+
+Copyright(C) 2005-2006, Zac Bowling
+ Licenced under the LGPL v1.1 (or at your option, any later version).
+
+Special thanks to: 
+ Rafael Teixeira (Samples)
+ Mike Kestner (GAPI and gtk#)
+
+
+
+Building:
+
+$ ./configure
+$ make
+$ sudo make install
+
+
+WIN32 runtimes:
+ libgtkspell 2.0 will build on WIN32, but for simplisty I use GAIM's GTK+ 
+ runtime installer as it contains libgtkspell for deploying.
+ http://gaim.sf.net/win32
+
+You can get the dictionaries and installers for win32 here:
+ http://www.aspell.org/win32/

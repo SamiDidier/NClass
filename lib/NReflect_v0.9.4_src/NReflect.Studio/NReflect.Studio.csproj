@@ -1,0 +1,393 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7155A7BE-5650-409B-BC0C-D90F21BCCEC8}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NReflect.Studio</RootNamespace>
+    <AssemblyName>NReflect.Studio</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aga.Controls, Version=1.7.0.0, Culture=neutral, PublicKeyToken=fcc90fbf924463a3, processorArchitecture=MSIL">
+      <HintPath>libs\TreeViewAdv 1.7\Aga.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="FastColoredTextBox, Version=2.8.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>libs\FastColoredTextBox.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WeifenLuo.WinFormsUI.Docking">
+      <HintPath>libs\DockPanelSuite 2.6\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CompileForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CompileForm.Designer.cs">
+      <DependentUpon>CompileForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CoreData.cs" />
+    <Compile Include="CoreView.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Message.cs" />
+    <Compile Include="MessageSeverity.cs" />
+    <Compile Include="Models\NReflectResult.cs" />
+    <Compile Include="Models\TestCaseAssembly.cs" />
+    <Compile Include="Models\TestCaseCSharp.cs" />
+    <Compile Include="Panels\BasePanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\BasePanel.Designer.cs">
+      <DependentUpon>BasePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\BaseTestCasePanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\BaseTestCasePanel.Designer.cs">
+      <DependentUpon>BaseTestCasePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\ObjectPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\ObjectPanel.Designer.cs">
+      <DependentUpon>ObjectPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\OptionsPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\OptionsPanel.Designer.cs">
+      <DependentUpon>OptionsPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="RunVisitorsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RunVisitorsForm.Designer.cs">
+      <DependentUpon>RunVisitorsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StatusEventArgs.cs" />
+    <Compile Include="TestCaseRunner.cs" />
+    <Compile Include="TestCaseStateNodeControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Models\TestCaseBase.cs" />
+    <Compile Include="Models\TestCaseEventArgs.cs" />
+    <Compile Include="Models\TestCaseGroup.cs" />
+    <Compile Include="Models\TestCaseModel.cs" />
+    <Compile Include="Models\TestCaseTreeModel.cs" />
+    <Compile Include="Models\TestCaseState.cs" />
+    <Compile Include="ObjectTree\Comparer\ComparePercentageNodeControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ObjectTree\Comparer\CompareResult.cs" />
+    <Compile Include="ObjectTree\Comparer\ResultState.cs" />
+    <Compile Include="ObjectTree\Model\ObjectFieldClass.cs" />
+    <Compile Include="ObjectTree\Model\ObjectFieldCollection.cs" />
+    <Compile Include="ObjectTree\Model\ObjectFieldDictionary.cs" />
+    <Compile Include="ObjectTree\Model\ObjectFieldList.cs" />
+    <Compile Include="ObjectTree\Model\ObjectFieldValue.cs" />
+    <Compile Include="ObjectTree\NewValueEventArgs.cs" />
+    <Compile Include="ObjectTree\Model\ObjectField.cs" />
+    <Compile Include="ObjectTree\ObjectFieldEventArgs.cs" />
+    <Compile Include="ObjectTree\ObjectNameNodeControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ObjectTree\ObjectTree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ObjectTree\ObjectTree.Designer.cs">
+      <DependentUpon>ObjectTree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ObjectTree\ObjectTreeModel.cs" />
+    <Compile Include="ObjectTree\Comparer\ObjectTreeModelComparer.cs" />
+    <Compile Include="ObjectTree\ObjectTreeModelCreator.cs" />
+    <Compile Include="ObjectTree\ObjectTreeViewAdv.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ObjectTree\ObjectValueNodeControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ObjectTree\ValueChangedEventArgs.cs" />
+    <Compile Include="Panels\CodePanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\CodePanel.Designer.cs">
+      <DependentUpon>CodePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\MessagePanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\MessagePanel.Designer.cs">
+      <DependentUpon>MessagePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\ObjectComparePanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\ObjectComparePanel.Designer.cs">
+      <DependentUpon>ObjectComparePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Panels\VisitorPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\VisitorPanel.Designer.cs">
+      <DependentUpon>VisitorPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\TestCase.cs" />
+    <Compile Include="Panels\TestCasesPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Panels\TestCasesPanel.Designer.cs">
+      <DependentUpon>TestCasesPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Visitor\CSharpVisitorConfigControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Visitor\CSharpVisitorConfigControl.Designer.cs">
+      <DependentUpon>CSharpVisitorConfigControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Visitor\VisitorConfigPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Visitor\VisitorConfig.cs" />
+    <Compile Include="Visitor\VisitorManager.cs" />
+    <Compile Include="Visitor\CSharpVisitorConfig.cs" />
+    <EmbeddedResource Include="CompileForm.resx">
+      <DependentUpon>CompileForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ObjectTree\ObjectTree.resx">
+      <DependentUpon>ObjectTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\CodePanel.resx">
+      <DependentUpon>CodePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\MessagePanel.resx">
+      <DependentUpon>MessagePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\ObjectComparePanel.resx">
+      <DependentUpon>ObjectComparePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\ObjectPanel.resx">
+      <DependentUpon>ObjectPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\OptionsPanel.resx">
+      <DependentUpon>OptionsPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Panels\VisitorPanel.resx">
+      <DependentUpon>VisitorPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Panels\TestCasesPanel.resx">
+      <DependentUpon>TestCasesPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RunVisitorsForm.resx">
+      <DependentUpon>RunVisitorsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Visitor\CSharpVisitorConfigControl.resx">
+      <DependentUpon>CSharpVisitorConfigControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="ClassDiagramModel.cd" />
+    <None Include="ObjectTree\Model\ClassDiagram.cd" />
+    <None Include="Properties\DataSources\NReflect.Studio.Models.TestCase.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CSharpFile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Null.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Minus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sync.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Equal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Out.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\In.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NotEqual.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Autoresize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ignore.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UseAsRoot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RunAll.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Unknown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AssemblyFile.png" />
+    <Content Include="Resources\ClearAll.png" />
+    <None Include="Resources\VisitorCompare.png" />
+    <None Include="Resources\Visitor.png" />
+    <None Include="Resources\Messages.png" />
+    <None Include="Resources\ObjectCompare.png" />
+    <None Include="Resources\Object.png" />
+    <None Include="Resources\Explorer.png" />
+    <None Include="Resources\NewCSharpFile.png" />
+    <None Include="Resources\NewFolder.png" />
+    <None Include="Resources\Play.png" />
+    <None Include="Resources\Compile.png" />
+    <None Include="Resources\Options.png" />
+    <None Include="Resources\Refresh.png" />
+    <Content Include="Resources\SaveAll.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NReflect.Visitors\NReflect.Visitors.csproj">
+      <Project>{B926C01D-6729-432C-9F0D-18B30FA2F607}</Project>
+      <Name>NReflect.Visitors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NReflect\NReflect.csproj">
+      <Project>{760AF36D-9463-491D-9FD0-B9C429D8030C}</Project>
+      <Name>NReflect</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,43 @@
+Version 0.9.4 (not yet released)
+---------------------------
++ Reflector can now reflect an already loaded assembly
++ Added a visitor which creates C#-Code
++ New project NReflect.Visitors which holds some generic printing visitors
++ The underlying type of an enum is now also reflected
++ The first parameter of an extension method is marked as an extension parameter
++ Namespace of an attribute and every type is now also available
++ NRCode.CSharp is now configurable: Create attributes (yes/no), Use namespaces (yes/no) and Known namespaces
++ NReflect.Studio
+# Improved the CSharp class
+# Operators are now reflected language independent
+# Renamed NRType to NRTypeUsage to make the reason of the class more clearly
+! The interfaces another interface derives from where not reflected
+! Only interfaces which are not part of the base class / interface are shown as implemented interfaces
+! Type parameters of nested generics where handled wrong
+! Some attributes like the DynamicAttribute should not be reflected
+! String and char literals where not escaped and not surrounded by "/' by NRCode.CSharp
+- Nested types are no longer part of the types since they can be found by the RelationshipCreator
+
+Version 0.9.3 (03-Dec-2011)
+---------------------------
+! The interfaces an interface extend were not reflected - fixed
++ Modules of an assembly are now reflected
++ Added the ability to reflect generic methods
++ Added reflection of generic constraints
++ Added reflection of extension methods
++ Added reflection of attributes
++ Improved documentation
+
+Version 0.9.2 (23-Sep-2011)
+---------------------------
+! Nullable ref parameters were not reflected correctly - thanks to openvenom 
++ Added the ability to reflect dynamic return types, parameters, ...
+
+Version 0.9.1 (24-Jun-2011)
+---------------------------
++ Added more documentation
+
+
+Version 0.9.0 (13-May-2011)
+---------------------------
++ First release

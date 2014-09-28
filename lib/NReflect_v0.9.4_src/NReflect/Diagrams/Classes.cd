@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NReflect.NRAssembly" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="0.75" Width="1.5" />
+    <Members>
+      <Method Name="Accept" Hidden="true" />
+      <Method Name="NRAssembly" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AoAAAAAAAgEAAIAAAAAAAAgQAAAAAAAMAAAABAAFAAA=</HashCode>
+      <FileName>NRAssembly.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NReflect.Reflector">
+    <Position X="5.75" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Reflector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NReflect.NRParameters.NRParameter" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="5.5" Width="1.75" />
+    <Members>
+      <Method Name="Accept" Hidden="true" />
+      <Method Name="NRParameter" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AIAAAAEAAAAAAAAAAAAAAAQQAABAAAAAAQAAAAAAEAA=</HashCode>
+      <FileName>NRParameters\NRParameter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NReflect.NRMembers.NREnumValue">
+    <Position X="4.75" Y="5.5" Width="1.5" />
+    <Members>
+      <Method Name="Accept" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAQQAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>NRMembers\NREnumValue.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NReflect.NRParameters.NRTypeParameter">
+    <Position X="2.5" Y="5.5" Width="1.5" />
+    <Members>
+      <Method Name="Accept" Hidden="true" />
+      <Method Name="NRTypeParameter" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAQAAAAAAQQAQAAAAAoAAgAAEAAAAA=</HashCode>
+      <FileName>NRParameters\NRTypeParameter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NReflect.NRAttributes.NRAttribute">
+    <Position X="4.75" Y="3.25" Width="1.5" />
+    <Members>
+      <Method Name="Accept" Hidden="true" />
+      <Method Name="NRAttribute" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAQAAAgAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>NRAttributes\NRAttribute.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NReflect.NRAttributes.NRAttributeValue">
+    <Position X="6.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAgAAAAAAA=</HashCode>
+      <FileName>NRAttributes\NRAttributeValue.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NReflect.NRModule">
+    <Position X="2.5" Y="1" Width="1.5" />
+    <Members>
+      <Method Name="Accept" Hidden="true" />
+      <Method Name="NRModule" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAEAAAAAAAAAAAwQAAAAAAAMAAAAAAAEgEA=</HashCode>
+      <FileName>NRModule.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NReflect.NRTypeUsage">
+    <Position X="6.75" Y="5.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AKAAAAAAAAABAAAAAAoAAAQAAAgAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>NRTypeUsage.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

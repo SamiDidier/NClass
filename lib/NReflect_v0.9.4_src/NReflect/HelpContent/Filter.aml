@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="51ae2c74-edd3-44cd-b666-b12639296cfb" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>Filters can be used to describe which types and members to reflect.</para>
+    </introduction>
+    <section address="SecOverview">
+      <title>Overview</title>
+      <content>
+        <para>
+          The following figure shows all types related to the filter system of
+          NReflect:
+        </para>
+        <mediaLink address="FigFilter">
+          <caption placement="after" lead="Figure 1">Class diagram showing the filters supplied with NReflect.</caption>
+          <image xlink:href="Filter"/>
+        </mediaLink>
+        <para>
+          A filter implements the 
+          <codeEntityReference qualifyHint="true">T:NReflect.Filter.IFilter</codeEntityReference>
+          interface.
+        </para>
+        <section>
+          <title>Creating a new filter</title>
+          <content>
+            <para>
+              If you want to create your own filter, just implement the
+              interface <codeEntityReference qualifyHint="true">T:NReflect.Filter.IFilter</codeEntityReference>
+              and provide an instance of your type to the
+              <codeEntityReference qualifyHint="true">M:NReflect.Reflector.Reflect(System.String,NReflect.Filter.IFilter@,System.Boolean)</codeEntityReference>
+              method. While reflecting, the methods will be called for every type and
+              member to reflect.
+            </para>
+          </content>
+        </section>
+        <section>
+          <title>Supplied filters</title>
+          <content>
+            <para>
+              The following three filters are supplied with NReflect:
+              <table>
+                <title>Supplied filters</title>
+                <tableHeader>
+                  <row>
+                    <entry><para>Filter name</para></entry>
+                    <entry><para>Description</para></entry>
+                  </row>
+                </tableHeader>
+				<row>
+                  <entry><para><codeEntityReference qualifyHint="true">T:NReflect.Filter.ReflectAllFilter</codeEntityReference></para></entry>
+				  <entry>
+				    <para>
+				    The most easy filter supplied is this one: If used, it will reflect
+				    everything without any exception.
+				    </para>
+				  </entry>
+				</row>
+                <row>
+                  <entry><para><codeEntityReference qualifyHint="true">T:NReflect.Filter.IncludeFilter</codeEntityReference></para></entry>
+                  <entry>
+                    <para>
+                      This filter takes a set of rules to determine which type and element
+                      to reflect. Each rule is an instance of the type
+                      <codeEntityReference qualifyHint="true">T:NReflect.Filter.FilterRule</codeEntityReference>.
+                    </para>
+                  </entry>
+			    </row>
+				<row>
+                  <entry><para><codeEntityReference qualifyHint="true">T:NReflect.Filter.InvertFilter</codeEntityReference></para></entry>
+				  <entry>
+				   	<para>
+				   	  This filter inverts the results of another filter.
+				   	</para>
+				  </entry>
+				</row>
+				<row>
+                  <entry><para><codeEntityReference qualifyHint="true">T:NReflect.Filter.StatisticFilter</codeEntityReference></para></entry>
+				  <entry>
+				    <para>
+				      This filter doesn't filter anything. It just counts the occurrence of
+				      each entity and member. Like the <codeEntityReference qualifyHint="false">T:NReflect.Filter.InvertFilter</codeEntityReference>,
+				      this filter needs another filter to work. After reflection is done,
+				      one can get the statistcs values by accessing the properties
+		              of the <codeEntityReference qualifyHint="true">T:NReflect.Filter.StatisticFilter</codeEntityReference>.
+				    </para>
+				  </entry>
+				</row>
+              </table>
+            </para>
+          </content>
+        </section>
+      </content>
+    </section>
+    <relatedTopics>
+      <link xlink:href="8f080f07-d44c-44ac-b883-a0993850d183"/>
+      <link xlink:href="7a5a5f55-104d-4753-9a03-a68362a41cb8"/>
+      <link xlink:href="8345ab04-1135-4bba-84a6-6d9c851eb1f6"/>
+      <link xlink:href="49965532-f214-4fbe-8cf1-6efce62a0014"/>
+      <link xlink:href="0d0a652d-4595-4f2c-91f0-b0cd6fbbb4a7"/>
+      <link xlink:href="fd83b536-0ab8-44da-8d84-33d40879eb7e"/>
+      <codeEntityReference>N:NReflect.Filter</codeEntityReference>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

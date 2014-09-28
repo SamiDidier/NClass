@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NReflect.NRMembers.NREvent">
+    <Position X="0.5" Y="6.25" Width="1.5" />
+    <Members>
+      <Method Name="Accept" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NRMembers\NREvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NReflect.NRMembers.NRField">
+    <Position X="8.75" Y="3" Width="1.5" />
+    <Members>
+      <Method Name="Accept" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AIAAAAEAAAAAAAIACAAAEAAIAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>NRMembers\NRField.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NReflect.NRMembers.NRMethod">
+    <Position X="4.25" Y="8.25" Width="1.75" />
+    <Members>
+      <Method Name="Accept" Hidden="true" />
+      <Method Name="NRMethod" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAQQAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>NRMembers\NRMethod.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NReflect.NRMembers.NROperation">
+    <Position X="3.25" Y="3" Width="2.25" />
+    <Members>
+      <Method Name="NROperation" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAARAAAAIAAAAAAAAIAAAAAAAAAIICAAAAAAA=</HashCode>
+      <FileName>NRMembers\NROperation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NReflect.NRMembers.NRProperty">
+    <Position X="8.5" Y="6.25" Width="1.5" />
+    <Members>
+      <Method Name="Accept" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AIAAQAAAAAAAAAgAgAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>NRMembers\NRProperty.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NReflect.NRMembers.NRConstructor">
+    <Position X="2.5" Y="6.25" Width="1.5" />
+    <Members>
+      <Method Name="Accept" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NRMembers\NRConstructor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NReflect.NRMembers.NROperator">
+    <Position X="6.5" Y="8.25" Width="1.75" />
+    <Members>
+      <Method Name="Accept" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NRMembers\NROperator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NReflect.NRMembers.NRMember">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <Members>
+      <Method Name="Accept" Hidden="true" />
+      <Method Name="NRMember" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AIAABAEAAAAAAAAAAAAAAAQQAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>NRMembers\NRMember.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NReflect.NRMembers.NRReturnValueOperation">
+    <Position X="5.25" Y="6.25" Width="2" />
+    <Members>
+      <Method Name="NRReturnValueOperation" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>NRMembers\NRReturnValueOperation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="8345ab04-1135-4bba-84a6-6d9c851eb1f6" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>
+        Here you can find some information about the way members are reflected.
+      </para>
+    </introduction>
+    <section address="SecMembers">
+      <title>Members</title>
+      <content>
+        <para>
+          Every reflected member is also represented by an object. The possible
+          types are shown in Figure 2.
+        </para>
+        <mediaLink address="FigMembers">
+          <caption placement="after" lead="Figure 2">Class diagram showing the types used for reflected members.</caption>
+          <image xlink:href="Members"/>
+        </mediaLink>
+        <para>
+          There is one type of members which does not have a parent type:
+          <codeEntityReference qualifyHint="true">T:NReflect.NRMembers.NREnumValue</codeEntityReference>.
+          Every other member derives from
+          <codeEntityReference qualifyHint="true">T:NReflect.NRMembers.NRMember</codeEntityReference>.
+          A field, which is the simplest member of for example a class, directly
+          derives this class. All callable members derives the class
+          <codeEntityReference qualifyHint="true">T:NReflect.NRMembers.NROperation</codeEntityReference>.
+          All callable members having a return type derive from 
+          <codeEntityReference qualifyHint="true">T:NReflect.NRMembers.NRReturnValueOperation</codeEntityReference>.
+        </para>
+      </content>
+    </section>
+    <relatedTopics>
+      <link xlink:href="8f080f07-d44c-44ac-b883-a0993850d183"/>
+      <codeEntityReference>N:NReflect.NRMembers</codeEntityReference>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

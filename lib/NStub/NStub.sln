@@ -1,0 +1,97 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AE38214D-21A9-477C-9E75-BFCFC6081BB7}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		Solution Items\NDoc.shfb = Solution Items\NDoc.shfb
+		Solution Items\NStub.FxCop = Solution Items\NStub.FxCop
+		Solution Items\NStub.NDepend.xml = Solution Items\NStub.NDepend.xml
+		Solution Items\NStub.nunit = Solution Items\NStub.nunit
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NStub.CSharp", "NStub.CSharp\NStub.CSharp.csproj", "{20A2C8B8-3C1E-47C4-AC56-277476293B62}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NStub.Core.Tests", "NStub.Core.Tests\NStub.Core.Tests.csproj", "{F6082BBA-3099-40F1-A2D5-D462F84033F5}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NStub.CSharp.Tests", "NStub.CSharp.Tests\NStub.CSharp.Tests.csproj", "{9389B464-5F04-466A-9EB6-079799624967}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NStub.Core", "NStub.Core\NStub.Core.csproj", "{7A2B767A-715C-480D-A4CF-0510A5052C7D}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NStub.Gui", "NStub.Gui\NStub.Gui.csproj", "{B458C315-0D5F-48AB-8FCC-15F84931F5A4}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External Dependencies", "External Dependencies", "{C498BE3D-7D06-4FED-848E-2CAEE491A5A9}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		External Dependencies\nunit.framework.dll = External Dependencies\nunit.framework.dll
+		External Dependencies\nunit.framework.xml = External Dependencies\nunit.framework.xml
+		External Dependencies\Rhino.Mocks.dll = External Dependencies\Rhino.Mocks.dll
+		External Dependencies\Rhino.Mocks.xml = External Dependencies\Rhino.Mocks.xml
+	EndProjectSection
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "NStub.Deployment", "NStub.Deployment\NStub.Deployment.vdproj", "{EF32DA6E-0EE5-4535-A0AA-48FD1207CBC9}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{20A2C8B8-3C1E-47C4-AC56-277476293B62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20A2C8B8-3C1E-47C4-AC56-277476293B62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20A2C8B8-3C1E-47C4-AC56-277476293B62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20A2C8B8-3C1E-47C4-AC56-277476293B62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6082BBA-3099-40F1-A2D5-D462F84033F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6082BBA-3099-40F1-A2D5-D462F84033F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6082BBA-3099-40F1-A2D5-D462F84033F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6082BBA-3099-40F1-A2D5-D462F84033F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9389B464-5F04-466A-9EB6-079799624967}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9389B464-5F04-466A-9EB6-079799624967}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9389B464-5F04-466A-9EB6-079799624967}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9389B464-5F04-466A-9EB6-079799624967}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A2B767A-715C-480D-A4CF-0510A5052C7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A2B767A-715C-480D-A4CF-0510A5052C7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A2B767A-715C-480D-A4CF-0510A5052C7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A2B767A-715C-480D-A4CF-0510A5052C7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B458C315-0D5F-48AB-8FCC-15F84931F5A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B458C315-0D5F-48AB-8FCC-15F84931F5A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B458C315-0D5F-48AB-8FCC-15F84931F5A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B458C315-0D5F-48AB-8FCC-15F84931F5A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF32DA6E-0EE5-4535-A0AA-48FD1207CBC9}.Debug|Any CPU.ActiveCfg = Debug
+		{EF32DA6E-0EE5-4535-A0AA-48FD1207CBC9}.Release|Any CPU.ActiveCfg = Release
+		{EF32DA6E-0EE5-4535-A0AA-48FD1207CBC9}.Release|Any CPU.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

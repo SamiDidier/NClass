@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{760AF36D-9463-491D-9FD0-B9C429D8030C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NReflect</RootNamespace>
+    <AssemblyName>NReflect</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\NReflect.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Filter\InvertFilter.cs" />
+    <Compile Include="Filter\FilterElements.cs" />
+    <Compile Include="Filter\FilterModifiers.cs" />
+    <Compile Include="Filter\FilterRule.cs" />
+    <Compile Include="Filter\ReflectAllFilter.cs" />
+    <Compile Include="Filter\IFilter.cs" />
+    <Compile Include="Filter\IncludeFilter.cs" />
+    <Compile Include="Filter\StatisticFilter.cs" />
+    <Compile Include="Interfaces\IEntityContainer.cs" />
+    <Compile Include="Interfaces\IAttributable.cs" />
+    <Compile Include="Interfaces\IGeneric.cs" />
+    <Compile Include="Modifier\AccessModifier.cs" />
+    <Compile Include="Modifier\ClassModifier.cs" />
+    <Compile Include="Modifier\FieldModifier.cs" />
+    <Compile Include="Modifier\ParameterModifier.cs" />
+    <Compile Include="NRAssembly.cs" />
+    <Compile Include="IVisitable.cs" />
+    <Compile Include="IVisitor.cs" />
+    <Compile Include="NRAttributes\NRAttribute.cs" />
+    <Compile Include="NRAttributes\NRAttributeValue.cs" />
+    <Compile Include="NRCode\CSharp.cs" />
+    <Compile Include="Interfaces\IMethodContainer.cs" />
+    <Compile Include="Interfaces\IFieldContainer.cs" />
+    <Compile Include="NREntities\NRClass.cs" />
+    <Compile Include="NREntities\NRCompositeType.cs" />
+    <Compile Include="NREntities\NRDelegate.cs" />
+    <Compile Include="NREntities\NREnum.cs" />
+    <Compile Include="NREntities\NRGenericType.cs" />
+    <Compile Include="NREntities\NRInterface.cs" />
+    <Compile Include="NREntities\NRSingleInheritanceType.cs" />
+    <Compile Include="NREntities\NRStruct.cs" />
+    <Compile Include="NREntities\NRTypeBase.cs" />
+    <Compile Include="Modifier\OperationModifier.cs" />
+    <Compile Include="NRMembers\NRConstructor.cs" />
+    <Compile Include="NRMembers\NREnumValue.cs" />
+    <Compile Include="NRMembers\NREvent.cs" />
+    <Compile Include="NRMembers\NRField.cs" />
+    <Compile Include="NRMembers\NRMember.cs" />
+    <Compile Include="NRMembers\NRMethod.cs" />
+    <Compile Include="NRMembers\NROperation.cs" />
+    <Compile Include="NRMembers\NROperator.cs" />
+    <Compile Include="NRMembers\NRProperty.cs" />
+    <Compile Include="NRMembers\NRReturnValueOperation.cs" />
+    <Compile Include="NRMembers\OperatorType.cs" />
+    <Compile Include="NRModule.cs" />
+    <Compile Include="NRParameters\NRParameter.cs" />
+    <Compile Include="NRParameters\NRTypeParameter.cs" />
+    <Compile Include="NRRelationships.cs" />
+    <Compile Include="NRRelationship\NRAssociation.cs" />
+    <Compile Include="NRRelationship\NRRealization.cs" />
+    <Compile Include="NRRelationship\NRGeneralization.cs" />
+    <Compile Include="NRRelationship\NRNesting.cs" />
+    <Compile Include="NRTypeUsage.cs" />
+    <Compile Include="ReflectionWorker.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reflector.cs" />
+    <Compile Include="RelationshipCreator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Diagrams\Classes.cd" />
+    <None Include="Diagrams\Enums.cd" />
+    <None Include="Diagrams\Interfaces.cd" />
+    <None Include="Diagrams\Members.cd" />
+    <None Include="Diagrams\Types.cd" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

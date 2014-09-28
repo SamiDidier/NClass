@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="5bfee795-e5c3-4bc8-8af4-3c8399e95ce5" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>NReflect provides an extremly simple way to get a description of all types of an assembly.</para>
+    </introduction>
+    <section address="SecOverview">
+      <title>Overview</title>
+      <content>
+        <para>Reflection is used to extract the types and each of their members
+              out of an assembly. The result of this process is an object tree
+              that can be easily processed further. With its powerful filter
+              functionality, you will get only the types or elements you realy
+              need. If desired, the assembly remains unlocked after processing,
+              because reflection takes place inside another application domain.</para>
+      </content>
+    </section>
+    <section address="SecFeatures">
+      <title>Features</title>
+      <content>
+        <para>
+          <list class="bullet">
+            <listItem><para>Works with nearly all .NET assemblies</para></listItem>
+			<listItem><para>Extracts all types and members</para></listItem>
+			<listItem><para>Powerful filter to determine what to reflect</para></listItem>
+			<listItem><para>Reflection takes place inside a second application domain so assemblies aren't locked afterwards if desired</para></listItem>
+			<listItem><para>Result is a simple to use object tree</para></listItem>
+			<listItem><para>Result object tree can be traversed by a visitor</para></listItem>
+          </list>
+        </para>
+      </content>
+    </section>
+    <relatedTopics>
+      <link xlink:href="8f080f07-d44c-44ac-b883-a0993850d183" />
+      <link xlink:href="ffe32e8d-3d36-4dba-8dfb-feca3c18011b" />
+      <codeEntityReference>N:NReflect</codeEntityReference>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

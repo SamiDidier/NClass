@@ -1,0 +1,2068 @@
+<Project>
+  <Name>NReflect</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Filter</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>InvertFilter</Name>
+        <Access>Public</Access>
+        <Location left="141" top="809" />
+        <Size width="290" height="349" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public IFilter Filter { get; set; }</Member>
+        <Member type="Constructor">public InvertFilter(IFilter filter)</Member>
+        <Member type="Method">public Boolean Reflect(NRClass nrClass)</Member>
+        <Member type="Method">public Boolean Reflect(NRInterface nrInterface)</Member>
+        <Member type="Method">public Boolean Reflect(NRStruct nrStruct)</Member>
+        <Member type="Method">public Boolean Reflect(NRDelegate nrDelegate)</Member>
+        <Member type="Method">public Boolean Reflect(NREnum nrEnum)</Member>
+        <Member type="Method">public Boolean Reflect(NREnumValue nrEnumValue)</Member>
+        <Member type="Method">public Boolean Reflect(NRMethod nrMethod)</Member>
+        <Member type="Method">public Boolean Reflect(NROperator nrOperator)</Member>
+        <Member type="Method">public Boolean Reflect(NREvent nrEvent)</Member>
+        <Member type="Method">public Boolean Reflect(NRField nrField)</Member>
+        <Member type="Method">public Boolean Reflect(NRConstructor nrConstructor)</Member>
+        <Member type="Method">public Boolean Reflect(NRProperty nrProperty)</Member>
+        <Member type="Method">public Boolean Reflect(NRAttribute nrAttribute)</Member>
+        <Member type="Method">public Boolean Reflect(NRModule nrModule)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>StatisticFilter</Name>
+        <Access>Public</Access>
+        <Location left="474" top="809" />
+        <Size width="290" height="825" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public IFilter Filter { get; set; }</Member>
+        <Member type="Property">public Int32 ReflectedClasses { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredClasses { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedInterfaces { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredInterfaces { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedStructures { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredStructures { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedDelegates { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredDelegates { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedEnums { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredEnums { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedEnumValues { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredEnumValues { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedConstructors { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredConstructors { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedMethods { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredMethods { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedOperators { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredOperators { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedEvents { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredEvents { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedFields { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredFields { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedProperties { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredProperties { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedAttributes { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredAttributes { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedModules { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredModules { get; private set; }</Member>
+        <Member type="Constructor">public StatisticFilter(IFilter filter)</Member>
+        <Member type="Method">public Boolean Reflect(NRClass nrClass)</Member>
+        <Member type="Method">public Boolean Reflect(NRInterface nrInterface)</Member>
+        <Member type="Method">public Boolean Reflect(NRStruct nrStruct)</Member>
+        <Member type="Method">public Boolean Reflect(NRDelegate nrDelegate)</Member>
+        <Member type="Method">public Boolean Reflect(NREnum nrEnum)</Member>
+        <Member type="Method">public Boolean Reflect(NREnumValue nrEnumValue)</Member>
+        <Member type="Method">public Boolean Reflect(NRConstructor nrConstructor)</Member>
+        <Member type="Method">public Boolean Reflect(NRMethod nrMethod)</Member>
+        <Member type="Method">public Boolean Reflect(NROperator nrOperator)</Member>
+        <Member type="Method">public Boolean Reflect(NREvent nrEvent)</Member>
+        <Member type="Method">public Boolean Reflect(NRField nrField)</Member>
+        <Member type="Method">public Boolean Reflect(NRProperty nrProperty)</Member>
+        <Member type="Method">public Boolean Reflect(NRAttribute nrAttribute)</Member>
+        <Member type="Method">public Boolean Reflect(NRModule nrModule)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ReflectAllFilter</Name>
+        <Access>Public</Access>
+        <Location left="141" top="396" />
+        <Size width="290" height="332" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public ReflectAllFilter()</Member>
+        <Member type="Method">public Boolean Reflect(NRClass nrClass)</Member>
+        <Member type="Method">public Boolean Reflect(NRInterface nrInterface)</Member>
+        <Member type="Method">public Boolean Reflect(NRStruct nrStruct)</Member>
+        <Member type="Method">public Boolean Reflect(NRDelegate nrDelegate)</Member>
+        <Member type="Method">public Boolean Reflect(NREnum nrEnum)</Member>
+        <Member type="Method">public Boolean Reflect(NREnumValue nrEnumValue)</Member>
+        <Member type="Method">public Boolean Reflect(NRMethod nrMethod)</Member>
+        <Member type="Method">public Boolean Reflect(NROperator nrOperator)</Member>
+        <Member type="Method">public Boolean Reflect(NREvent nrEvent)</Member>
+        <Member type="Method">public Boolean Reflect(NRField nrField)</Member>
+        <Member type="Method">public Boolean Reflect(NRConstructor nrConstructor)</Member>
+        <Member type="Method">public Boolean Reflect(NRProperty nrProperty)</Member>
+        <Member type="Method">public Boolean Reflect(NRAttribute nrAttribute)</Member>
+        <Member type="Method">public Boolean Reflect(NRModule nrModule)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>IncludeFilter</Name>
+        <Access>Public</Access>
+        <Location left="474" top="396" />
+        <Size width="290" height="349" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public List&lt;FilterRule&gt; Rules { get; set; }</Member>
+        <Member type="Constructor">public IncludeFilter()</Member>
+        <Member type="Method">public Boolean Reflect(NRClass nrClass)</Member>
+        <Member type="Method">public Boolean Reflect(NRInterface nrInterface)</Member>
+        <Member type="Method">public Boolean Reflect(NRStruct nrStruct)</Member>
+        <Member type="Method">public Boolean Reflect(NRDelegate nrDelegate)</Member>
+        <Member type="Method">public Boolean Reflect(NREnum nrEnum)</Member>
+        <Member type="Method">public Boolean Reflect(NREnumValue nrEnumValue)</Member>
+        <Member type="Method">public Boolean Reflect(NRConstructor nrConstructor)</Member>
+        <Member type="Method">public Boolean Reflect(NRMethod nrMethod)</Member>
+        <Member type="Method">public Boolean Reflect(NROperator nrOperator)</Member>
+        <Member type="Method">public Boolean Reflect(NREvent nrEvent)</Member>
+        <Member type="Method">public Boolean Reflect(NRField nrField)</Member>
+        <Member type="Method">public Boolean Reflect(NRProperty nrProperty)</Member>
+        <Member type="Method">public Boolean Reflect(NRAttribute nrAttribute)</Member>
+        <Member type="Method">public Boolean Reflect(NRModule nrModule)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IFilter</Name>
+        <Access>Public</Access>
+        <Location left="310" top="35" />
+        <Size width="284" height="299" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">Boolean Reflect(NRClass nrClass)</Member>
+        <Member type="Method">Boolean Reflect(NRInterface nrInterface)</Member>
+        <Member type="Method">Boolean Reflect(NRStruct nrStruct)</Member>
+        <Member type="Method">Boolean Reflect(NRDelegate nrDelegate)</Member>
+        <Member type="Method">Boolean Reflect(NREnum nrEnum)</Member>
+        <Member type="Method">Boolean Reflect(NREnumValue nrEnumValue)</Member>
+        <Member type="Method">Boolean Reflect(NRConstructor nrConstructor)</Member>
+        <Member type="Method">Boolean Reflect(NRMethod nrMethod)</Member>
+        <Member type="Method">Boolean Reflect(NROperator nrOperator)</Member>
+        <Member type="Method">Boolean Reflect(NREvent nrEvent)</Member>
+        <Member type="Method">Boolean Reflect(NRField nrField)</Member>
+        <Member type="Method">Boolean Reflect(NRProperty nrProperty)</Member>
+        <Member type="Method">Boolean Reflect(NRAttribute nrAttribute)</Member>
+        <Member type="Method">Boolean Reflect(NRModule nrModule)</Member>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Realization" first="1" second="4">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>452</X>
+          <Y>783</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="3" second="4">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="0" second="4">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>452</X>
+          <Y>783</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="2" second="4">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Visitor</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Interface">
+        <Name>IVisitable</Name>
+        <Access>Public</Access>
+        <Location left="26" top="23" />
+        <Size width="185" height="78" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">Void Accept(IVisitor visitor)</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IVisitor</Name>
+        <Access>Public</Access>
+        <Location left="249" top="23" />
+        <Size width="290" height="367" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">Void Visit(NRAssembly nrAssembly)</Member>
+        <Member type="Method">Void Visit(NRClass nrClass)</Member>
+        <Member type="Method">Void Visit(NRInterface nrInterface)</Member>
+        <Member type="Method">Void Visit(NRDelegate nrDelegate)</Member>
+        <Member type="Method">Void Visit(NRStruct nrStruct)</Member>
+        <Member type="Method">Void Visit(NREnum nrEnum)</Member>
+        <Member type="Method">Void Visit(NRField nrField)</Member>
+        <Member type="Method">Void Visit(NRProperty nrProperty)</Member>
+        <Member type="Method">Void Visit(NRMethod nrMethod)</Member>
+        <Member type="Method">Void Visit(NROperator nrMethod)</Member>
+        <Member type="Method">Void Visit(NRConstructor nrConstructor)</Member>
+        <Member type="Method">Void Visit(NREvent nrEvent)</Member>
+        <Member type="Method">Void Visit(NRParameter nrParameter)</Member>
+        <Member type="Method">Void Visit(NRTypeParameter nrTypeParameter)</Member>
+        <Member type="Method">Void Visit(NREnumValue nrEnumValue)</Member>
+        <Member type="Method">Void Visit(NRAttribute nrAttribute)</Member>
+        <Member type="Method">Void Visit(NRModule nrModule)</Member>
+        <Member type="Method">Void Visit(NRTypeUsage nrTypeUsage)</Member>
+      </Entity>
+    </Entities>
+    <Relationships />
+  </ProjectItem>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Name>NReflect.dll</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Interface">
+        <Name>IVisitable</Name>
+        <Access>Public</Access>
+        <Location left="2132" top="1982" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">Void Accept(IVisitor visitor)</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IAttributable</Name>
+        <Access>Public</Access>
+        <Location left="1920" top="1982" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">List&lt;NRAttribute&gt; Attributes { get; }</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IGeneric</Name>
+        <Access>Public</Access>
+        <Location left="1708" top="1982" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">List&lt;NRTypeParameter&gt; GenericTypes { get; }</Member>
+        <Member type="Property">Boolean IsGeneric { get; }</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IMethodContainer</Name>
+        <Access>Public</Access>
+        <Location left="1496" top="1982" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">List&lt;NRMethod&gt; Methods { get; }</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IFieldContainer</Name>
+        <Access>Public</Access>
+        <Location left="1284" top="1982" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">List&lt;NRField&gt; Fields { get; }</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IEntityContainer</Name>
+        <Access>Public</Access>
+        <Location left="1072" top="1982" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">List&lt;NRClass&gt; Classes { get; }</Member>
+        <Member type="Property">List&lt;NRInterface&gt; Interfaces { get; }</Member>
+        <Member type="Property">List&lt;NRStruct&gt; Structs { get; }</Member>
+        <Member type="Property">List&lt;NREnum&gt; Enums { get; }</Member>
+        <Member type="Property">List&lt;NRDelegate&gt; Delegates { get; }</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IFilter</Name>
+        <Access>Public</Access>
+        <Location left="860" top="1982" />
+        <Size width="162" height="299" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">Boolean Reflect(NRClass nrClass)</Member>
+        <Member type="Method">Boolean Reflect(NRInterface nrInterface)</Member>
+        <Member type="Method">Boolean Reflect(NRStruct nrStruct)</Member>
+        <Member type="Method">Boolean Reflect(NRDelegate nrDelegate)</Member>
+        <Member type="Method">Boolean Reflect(NREnum nrEnum)</Member>
+        <Member type="Method">Boolean Reflect(NREnumValue nrEnumValue)</Member>
+        <Member type="Method">Boolean Reflect(NRConstructor nrConstructor)</Member>
+        <Member type="Method">Boolean Reflect(NRMethod nrMethod)</Member>
+        <Member type="Method">Boolean Reflect(NROperator nrOperator)</Member>
+        <Member type="Method">Boolean Reflect(NREvent nrEvent)</Member>
+        <Member type="Method">Boolean Reflect(NRField nrField)</Member>
+        <Member type="Method">Boolean Reflect(NRProperty nrProperty)</Member>
+        <Member type="Method">Boolean Reflect(NRAttribute nrAttribute)</Member>
+        <Member type="Method">Boolean Reflect(NRModule nrModule)</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IVisitor</Name>
+        <Access>Public</Access>
+        <Location left="648" top="1982" />
+        <Size width="162" height="350" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">Void Visit(NRAssembly nrAssembly)</Member>
+        <Member type="Method">Void Visit(NRClass nrClass)</Member>
+        <Member type="Method">Void Visit(NRInterface nrInterface)</Member>
+        <Member type="Method">Void Visit(NRDelegate nrDelegate)</Member>
+        <Member type="Method">Void Visit(NRStruct nrStruct)</Member>
+        <Member type="Method">Void Visit(NREnum nrEnum)</Member>
+        <Member type="Method">Void Visit(NRField nrField)</Member>
+        <Member type="Method">Void Visit(NRProperty nrProperty)</Member>
+        <Member type="Method">Void Visit(NRMethod nrMethod)</Member>
+        <Member type="Method">Void Visit(NROperator nrMethod)</Member>
+        <Member type="Method">Void Visit(NRConstructor nrConstructor)</Member>
+        <Member type="Method">Void Visit(NREvent nrEvent)</Member>
+        <Member type="Method">Void Visit(NRParameter nrParameter)</Member>
+        <Member type="Method">Void Visit(NRTypeParameter nrTypeParameter)</Member>
+        <Member type="Method">Void Visit(NREnumValue nrEnumValue)</Member>
+        <Member type="Method">Void Visit(NRAttribute nrAttribute)</Member>
+        <Member type="Method">Void Visit(NRModule nrModule)</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRMember</Name>
+        <Access>Public</Access>
+        <Location left="436" top="1982" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public AccessModifier AccessModifier { get; set; }</Member>
+        <Member type="Property">public String Name { get; set; }</Member>
+        <Member type="Property">public NRType Type { get; set; }</Member>
+        <Member type="Property">public String TypeFullName { get; set; }</Member>
+        <Member type="Property">public List&lt;NRAttribute&gt; Attributes { get; private set; }</Member>
+        <Member type="Method">public abstract Void Accept(IVisitor visitor)</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NROperation</Name>
+        <Access>Public</Access>
+        <Location left="224" top="1982" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public OperationModifier OperationModifier { get; set; }</Member>
+        <Member type="Property">public Boolean IsStatic { get; set; }</Member>
+        <Member type="Property">public Boolean IsAbstract { get; set; }</Member>
+        <Member type="Property">public Boolean IsVirtual { get; set; }</Member>
+        <Member type="Property">public Boolean IsOverride { get; set; }</Member>
+        <Member type="Property">public Boolean IsHider { get; set; }</Member>
+        <Member type="Property">public Boolean IsSealed { get; set; }</Member>
+        <Member type="Property">public List&lt;NRParameter&gt; Parameters { get; private set; }</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRReturnValueOperation</Name>
+        <Access>Public</Access>
+        <Location left="12" top="1982" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public List&lt;NRAttribute&gt; ReturnValueAttributes { get; private set; }</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRProperty</Name>
+        <Access>Public</Access>
+        <Location left="2132" top="1668" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public AccessModifier GetterModifier { get; set; }</Member>
+        <Member type="Property">public AccessModifier SetterModifier { get; set; }</Member>
+        <Member type="Property">public Boolean HasGetter { get; set; }</Member>
+        <Member type="Property">public Boolean HasSetter { get; set; }</Member>
+        <Member type="Constructor">public NRProperty()</Member>
+        <Member type="Method">public override Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRTypeBase</Name>
+        <Access>Public</Access>
+        <Location left="1920" top="1668" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String Name { get; set; }</Member>
+        <Member type="Property">public String FullName { get; set; }</Member>
+        <Member type="Property">public AccessModifier AccessModifier { get; set; }</Member>
+        <Member type="Property">public String Parent { get; set; }</Member>
+        <Member type="Property">public List&lt;NRAttribute&gt; Attributes { get; private set; }</Member>
+        <Member type="Method">public abstract Void Accept(IVisitor visitor)</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRGenericType</Name>
+        <Access>Public</Access>
+        <Location left="1708" top="1668" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public List&lt;NRTypeParameter&gt; GenericTypes { get; private set; }</Member>
+        <Member type="Property">public Boolean IsGeneric { get; }</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRCompositeType</Name>
+        <Access>Public</Access>
+        <Location left="1496" top="1668" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public List&lt;String&gt; ImplementedInterfaces { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRProperty&gt; Properties { get; private set; }</Member>
+        <Member type="Property">public List&lt;NREvent&gt; Events { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRMethod&gt; Methods { get; private set; }</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRSingleInheritanceType</Name>
+        <Access>Public</Access>
+        <Location left="1284" top="1668" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String BaseType { get; set; }</Member>
+        <Member type="Property">public List&lt;NRTypeBase&gt; NestedTypes { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRConstructor&gt; Constructors { get; private set; }</Member>
+        <Member type="Property">public List&lt;NROperator&gt; Operators { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRField&gt; Fields { get; private set; }</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRInterface</Name>
+        <Access>Public</Access>
+        <Location left="1072" top="1668" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public NRInterface()</Member>
+        <Member type="Method">public override Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRAttribute</Name>
+        <Access>Public</Access>
+        <Location left="860" top="1668" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String Name { get; set; }</Member>
+        <Member type="Property">public List&lt;NRAttributeValue&gt; Values { get; private set; }</Member>
+        <Member type="Property">public Dictionary&lt;String, NRAttributeValue&gt; NamedValues { get; private set; }</Member>
+        <Member type="Constructor">public NRAttribute()</Member>
+        <Member type="Method">public Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRModule</Name>
+        <Access>Public</Access>
+        <Location left="648" top="1668" />
+        <Size width="162" height="264" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String Name { get; set; }</Member>
+        <Member type="Property">public List&lt;NRAttribute&gt; Attributes { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRClass&gt; Classes { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRInterface&gt; Interfaces { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRStruct&gt; Structs { get; private set; }</Member>
+        <Member type="Property">public List&lt;NREnum&gt; Enums { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRDelegate&gt; Delegates { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRField&gt; Fields { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRMethod&gt; Methods { get; private set; }</Member>
+        <Member type="Constructor">public NRModule()</Member>
+        <Member type="Method">public Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRField</Name>
+        <Access>Public</Access>
+        <Location left="436" top="1668" />
+        <Size width="162" height="230" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String InitialValue { get; set; }</Member>
+        <Member type="Property">public FieldModifier FieldModifier { get; set; }</Member>
+        <Member type="Property">public Boolean IsStatic { get; set; }</Member>
+        <Member type="Property">public Boolean IsReadonly { get; set; }</Member>
+        <Member type="Property">public Boolean IsConstant { get; set; }</Member>
+        <Member type="Property">public Boolean IsHider { get; set; }</Member>
+        <Member type="Property">public Boolean IsVolatile { get; set; }</Member>
+        <Member type="Constructor">public NRField()</Member>
+        <Member type="Method">public override Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NREnum</Name>
+        <Access>Public</Access>
+        <Location left="224" top="1668" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public List&lt;NREnumValue&gt; Values { get; private set; }</Member>
+        <Member type="Constructor">public NREnum()</Member>
+        <Member type="Method">public override Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRClass</Name>
+        <Access>Public</Access>
+        <Location left="12" top="1668" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public ClassModifier ClassModifier { get; set; }</Member>
+        <Member type="Constructor">public NRClass()</Member>
+        <Member type="Method">public override Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRAssembly</Name>
+        <Access>Public</Access>
+        <Location left="2132" top="793" />
+        <Size width="162" height="315" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String FullName { get; set; }</Member>
+        <Member type="Property">public String Source { get; set; }</Member>
+        <Member type="Property">public List&lt;NRModule&gt; Modules { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRAttribute&gt; Attributes { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRClass&gt; Classes { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRInterface&gt; Interfaces { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRStruct&gt; Structs { get; private set; }</Member>
+        <Member type="Property">public List&lt;NREnum&gt; Enums { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRDelegate&gt; Delegates { get; private set; }</Member>
+        <Member type="Property">public IEnumerable&lt;NRTypeBase&gt; Types { get; }</Member>
+        <Member type="Property">public IEnumerable&lt;NRCompositeType&gt; CompositTypes { get; }</Member>
+        <Member type="Property">public IEnumerable&lt;NRSingleInheritanceType&gt; SingleInheritanceTypes { get; }</Member>
+        <Member type="Constructor">public NRAssembly()</Member>
+        <Member type="Method">public Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Extensions</Name>
+        <Access>Public</Access>
+        <Location left="1920" top="793" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public static IEnumerable&lt;MethodInfo&gt; GetMethods(Type type, String name, params Type[] parameterTypes)</Member>
+        <Modifier>Static</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRTypeParameter</Name>
+        <Access>Public</Access>
+        <Location left="1708" top="793" />
+        <Size width="162" height="247" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String Name { get; set; }</Member>
+        <Member type="Property">public List&lt;String&gt; BaseTypes { get; private set; }</Member>
+        <Member type="Property">public Boolean IsClass { get; set; }</Member>
+        <Member type="Property">public Boolean IsStruct { get; set; }</Member>
+        <Member type="Property">public Boolean IsConstructor { get; set; }</Member>
+        <Member type="Property">public Boolean IsIn { get; set; }</Member>
+        <Member type="Property">public Boolean IsOut { get; set; }</Member>
+        <Member type="Property">public List&lt;NRAttribute&gt; Attributes { get; private set; }</Member>
+        <Member type="Constructor">public NRTypeParameter()</Member>
+        <Member type="Method">public Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRParameter</Name>
+        <Access>Public</Access>
+        <Location left="1496" top="793" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String Name { get; set; }</Member>
+        <Member type="Property">public NRType Type { get; set; }</Member>
+        <Member type="Property">public String TypeFullName { get; set; }</Member>
+        <Member type="Property">public ParameterModifier ParameterModifier { get; set; }</Member>
+        <Member type="Property">public String DefaultValue { get; set; }</Member>
+        <Member type="Property">public List&lt;NRAttribute&gt; Attributes { get; private set; }</Member>
+        <Member type="Constructor">public NRParameter()</Member>
+        <Member type="Method">public Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>StatisticFilter</Name>
+        <Access>Public</Access>
+        <Location left="1284" top="793" />
+        <Size width="162" height="825" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public IFilter Filter { get; set; }</Member>
+        <Member type="Property">public Int32 ReflectedClasses { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredClasses { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedInterfaces { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredInterfaces { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedStructures { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredStructures { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedDelegates { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredDelegates { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedEnums { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredEnums { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedEnumValues { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredEnumValues { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedConstructors { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredConstructors { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedMethods { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredMethods { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedOperators { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredOperators { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedEvents { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredEvents { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedFields { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredFields { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedProperties { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredProperties { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedAttributes { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredAttributes { get; private set; }</Member>
+        <Member type="Property">public Int32 ReflectedModules { get; private set; }</Member>
+        <Member type="Property">public Int32 IgnoredModules { get; private set; }</Member>
+        <Member type="Constructor">public StatisticFilter(IFilter filter)</Member>
+        <Member type="Method">public Boolean Reflect(NRClass nrClass)</Member>
+        <Member type="Method">public Boolean Reflect(NRInterface nrInterface)</Member>
+        <Member type="Method">public Boolean Reflect(NRStruct nrStruct)</Member>
+        <Member type="Method">public Boolean Reflect(NRDelegate nrDelegate)</Member>
+        <Member type="Method">public Boolean Reflect(NREnum nrEnum)</Member>
+        <Member type="Method">public Boolean Reflect(NREnumValue nrEnumValue)</Member>
+        <Member type="Method">public Boolean Reflect(NRConstructor nrConstructor)</Member>
+        <Member type="Method">public Boolean Reflect(NRMethod nrMethod)</Member>
+        <Member type="Method">public Boolean Reflect(NROperator nrOperator)</Member>
+        <Member type="Method">public Boolean Reflect(NREvent nrEvent)</Member>
+        <Member type="Method">public Boolean Reflect(NRField nrField)</Member>
+        <Member type="Method">public Boolean Reflect(NRProperty nrProperty)</Member>
+        <Member type="Method">public Boolean Reflect(NRAttribute nrAttribute)</Member>
+        <Member type="Method">public Boolean Reflect(NRModule nrModule)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRAssociation</Name>
+        <Access>Public</Access>
+        <Location left="1072" top="793" />
+        <Size width="162" height="230" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public NRTypeBase StartType { get; set; }</Member>
+        <Member type="Property">public NRTypeBase EndType { get; set; }</Member>
+        <Member type="Property">public String StartRole { get; set; }</Member>
+        <Member type="Property">public String EndRole { get; set; }</Member>
+        <Member type="Property">public String StartMultiplicity { get; set; }</Member>
+        <Member type="Property">public String EndMultiplicity { get; set; }</Member>
+        <Member type="Constructor">public NRAssociation()</Member>
+        <Member type="Constructor">public NRAssociation(NRTypeBase startType, NRTypeBase endType)</Member>
+        <Member type="Method">public override String ToString()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NROperator</Name>
+        <Access>Public</Access>
+        <Location left="860" top="793" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public NROperator()</Member>
+        <Member type="Method">public override Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>CSharp</Name>
+        <Access>Public</Access>
+        <Location left="648" top="793" />
+        <Size width="162" height="298" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public static String Declaration(NREnumValue enumValue)</Member>
+        <Member type="Method">public static String Declaration(NREvent nrEvent)</Member>
+        <Member type="Method">public static String Declaration(NRField field)</Member>
+        <Member type="Method">public static String Declaration(NRConstructor constructor)</Member>
+        <Member type="Method">public static String Declaration(NRMethod method)</Member>
+        <Member type="Method">public static String Declaration(NROperator nrOperator)</Member>
+        <Member type="Method">public static String Declaration(NRProperty property)</Member>
+        <Member type="Method">public static String Declaration(IEnumerable&lt;NRParameter&gt; parameters)</Member>
+        <Member type="Method">public static String Declaration(NRParameter parameter)</Member>
+        <Member type="Method">public static String Declaration(OperationModifier modifier)</Member>
+        <Member type="Method">public static String Declaration(AccessModifier modifier)</Member>
+        <Member type="Method">public static String Declaration(ParameterModifier modifier)</Member>
+        <Member type="Method">public static String Declaration(FieldModifier modifier)</Member>
+        <Modifier>Static</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRNesting</Name>
+        <Access>Public</Access>
+        <Location left="436" top="793" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public NRSingleInheritanceType ParentType { get; set; }</Member>
+        <Member type="Property">public NRTypeBase InnerType { get; set; }</Member>
+        <Member type="Constructor">public NRNesting()</Member>
+        <Member type="Constructor">public NRNesting(NRSingleInheritanceType parentType, NRTypeBase innerType)</Member>
+        <Member type="Method">public override String ToString()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>InvertFilter</Name>
+        <Access>Public</Access>
+        <Location left="224" top="793" />
+        <Size width="162" height="349" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public IFilter Filter { get; set; }</Member>
+        <Member type="Constructor">public InvertFilter(IFilter filter)</Member>
+        <Member type="Method">public Boolean Reflect(NRClass nrClass)</Member>
+        <Member type="Method">public Boolean Reflect(NRInterface nrInterface)</Member>
+        <Member type="Method">public Boolean Reflect(NRStruct nrStruct)</Member>
+        <Member type="Method">public Boolean Reflect(NRDelegate nrDelegate)</Member>
+        <Member type="Method">public Boolean Reflect(NREnum nrEnum)</Member>
+        <Member type="Method">public Boolean Reflect(NREnumValue nrEnumValue)</Member>
+        <Member type="Method">public Boolean Reflect(NRMethod nrMethod)</Member>
+        <Member type="Method">public Boolean Reflect(NROperator nrOperator)</Member>
+        <Member type="Method">public Boolean Reflect(NREvent nrEvent)</Member>
+        <Member type="Method">public Boolean Reflect(NRField nrField)</Member>
+        <Member type="Method">public Boolean Reflect(NRConstructor nrConstructor)</Member>
+        <Member type="Method">public Boolean Reflect(NRProperty nrProperty)</Member>
+        <Member type="Method">public Boolean Reflect(NRAttribute nrAttribute)</Member>
+        <Member type="Method">public Boolean Reflect(NRModule nrModule)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRGeneralization</Name>
+        <Access>Public</Access>
+        <Location left="12" top="793" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public NRCompositeType BaseType { get; set; }</Member>
+        <Member type="Property">public NRCompositeType DerivedType { get; set; }</Member>
+        <Member type="Constructor">public NRGeneralization()</Member>
+        <Member type="Constructor">public NRGeneralization(NRCompositeType baseType, NRCompositeType derivedType)</Member>
+        <Member type="Method">public override String ToString()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NREvent</Name>
+        <Access>Public</Access>
+        <Location left="2132" top="411" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public NREvent()</Member>
+        <Member type="Method">public override Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ReflectAllFilter</Name>
+        <Access>Public</Access>
+        <Location left="1920" top="411" />
+        <Size width="162" height="332" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public ReflectAllFilter()</Member>
+        <Member type="Method">public Boolean Reflect(NRClass nrClass)</Member>
+        <Member type="Method">public Boolean Reflect(NRInterface nrInterface)</Member>
+        <Member type="Method">public Boolean Reflect(NRStruct nrStruct)</Member>
+        <Member type="Method">public Boolean Reflect(NRDelegate nrDelegate)</Member>
+        <Member type="Method">public Boolean Reflect(NREnum nrEnum)</Member>
+        <Member type="Method">public Boolean Reflect(NREnumValue nrEnumValue)</Member>
+        <Member type="Method">public Boolean Reflect(NRMethod nrMethod)</Member>
+        <Member type="Method">public Boolean Reflect(NROperator nrOperator)</Member>
+        <Member type="Method">public Boolean Reflect(NREvent nrEvent)</Member>
+        <Member type="Method">public Boolean Reflect(NRField nrField)</Member>
+        <Member type="Method">public Boolean Reflect(NRConstructor nrConstructor)</Member>
+        <Member type="Method">public Boolean Reflect(NRProperty nrProperty)</Member>
+        <Member type="Method">public Boolean Reflect(NRAttribute nrAttribute)</Member>
+        <Member type="Method">public Boolean Reflect(NRModule nrModule)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRDelegate</Name>
+        <Access>Public</Access>
+        <Location left="1708" top="411" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public NRType ReturnType { get; set; }</Member>
+        <Member type="Property">public List&lt;NRParameter&gt; Parameters { get; private set; }</Member>
+        <Member type="Constructor">public NRDelegate()</Member>
+        <Member type="Method">public override Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Reflector</Name>
+        <Access>Public</Access>
+        <Location left="1496" top="411" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public Reflector()</Member>
+        <Member type="Method">public NRAssembly Reflect(String fileName, Boolean useNewAppDomain = True)</Member>
+        <Member type="Method">public NRAssembly Reflect(String fileName, ref IFilter filter, Boolean useNewAppDomain = True)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRType</Name>
+        <Access>Public</Access>
+        <Location left="1284" top="411" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String Type { get; set; }</Member>
+        <Member type="Property">public Boolean IsDynamic { get; set; }</Member>
+        <Member type="Constructor">public NRType()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRRealization</Name>
+        <Access>Public</Access>
+        <Location left="1072" top="411" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public NRInterface BaseType { get; set; }</Member>
+        <Member type="Property">public NRSingleInheritanceType ImplementingType { get; set; }</Member>
+        <Member type="Constructor">public NRRealization()</Member>
+        <Member type="Constructor">public NRRealization(NRInterface baseType, NRSingleInheritanceType implementingType)</Member>
+        <Member type="Method">public override String ToString()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRMethod</Name>
+        <Access>Public</Access>
+        <Location left="860" top="411" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public Boolean IsExtensionMethod { get; set; }</Member>
+        <Member type="Property">public List&lt;NRTypeParameter&gt; GenericTypes { get; private set; }</Member>
+        <Member type="Property">public Boolean IsGeneric { get; }</Member>
+        <Member type="Constructor">public NRMethod()</Member>
+        <Member type="Method">public override Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NREnumValue</Name>
+        <Access>Public</Access>
+        <Location left="648" top="411" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String Name { get; set; }</Member>
+        <Member type="Property">public String Value { get; set; }</Member>
+        <Member type="Constructor">public NREnumValue()</Member>
+        <Member type="Method">public Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRConstructor</Name>
+        <Access>Public</Access>
+        <Location left="436" top="411" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public NRConstructor()</Member>
+        <Member type="Method">public override Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>RelationshipCreator</Name>
+        <Access>Public</Access>
+        <Location left="224" top="411" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public RelationshipCreator()</Member>
+        <Member type="Method">public NRRelationships CreateRelationships(NRAssembly nrAssembly, Boolean createNesting = True, Boolean createGeneralization = True, Boolean createRealization = True, Boolean createAssociation = True)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRAttributeValue</Name>
+        <Access>Public</Access>
+        <Location left="12" top="411" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String Type { get; set; }</Member>
+        <Member type="Property">public Object Value { get; set; }</Member>
+        <Member type="Constructor">public NRAttributeValue()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRRelationships</Name>
+        <Access>Public</Access>
+        <Location left="2132" top="12" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public List&lt;NRNesting&gt; Nestings { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRGeneralization&gt; Generalizations { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRRealization&gt; Realizations { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRAssociation&gt; Associations { get; private set; }</Member>
+        <Member type="Constructor">public NRRelationships()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>IncludeFilter</Name>
+        <Access>Public</Access>
+        <Location left="1920" top="12" />
+        <Size width="162" height="349" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public List&lt;FilterRule&gt; Rules { get; set; }</Member>
+        <Member type="Constructor">public IncludeFilter()</Member>
+        <Member type="Method">public Boolean Reflect(NRClass nrClass)</Member>
+        <Member type="Method">public Boolean Reflect(NRInterface nrInterface)</Member>
+        <Member type="Method">public Boolean Reflect(NRStruct nrStruct)</Member>
+        <Member type="Method">public Boolean Reflect(NRDelegate nrDelegate)</Member>
+        <Member type="Method">public Boolean Reflect(NREnum nrEnum)</Member>
+        <Member type="Method">public Boolean Reflect(NREnumValue nrEnumValue)</Member>
+        <Member type="Method">public Boolean Reflect(NRConstructor nrConstructor)</Member>
+        <Member type="Method">public Boolean Reflect(NRMethod nrMethod)</Member>
+        <Member type="Method">public Boolean Reflect(NROperator nrOperator)</Member>
+        <Member type="Method">public Boolean Reflect(NREvent nrEvent)</Member>
+        <Member type="Method">public Boolean Reflect(NRField nrField)</Member>
+        <Member type="Method">public Boolean Reflect(NRProperty nrProperty)</Member>
+        <Member type="Method">public Boolean Reflect(NRAttribute nrAttribute)</Member>
+        <Member type="Method">public Boolean Reflect(NRModule nrModule)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRStruct</Name>
+        <Access>Public</Access>
+        <Location left="1708" top="12" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public NRStruct()</Member>
+        <Member type="Method">public override Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Structure">
+        <Name>FilterRule</Name>
+        <Access>Public</Access>
+        <Location left="1496" top="12" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public FilterModifiers Modifier { get; set; }</Member>
+        <Member type="Property">public FilterElements Element { get; set; }</Member>
+        <Member type="Constructor">public FilterRule(FilterModifiers modifier, FilterElements element)</Member>
+      </Entity>
+      <Entity type="Enum">
+        <Name>ParameterModifier</Name>
+        <Access>Public</Access>
+        <Location left="1284" top="12" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Value>In = 0</Value>
+        <Value>InOut = 1</Value>
+        <Value>Out = 2</Value>
+        <Value>Params = 3</Value>
+        <Value>Optional = 4</Value>
+      </Entity>
+      <Entity type="Enum">
+        <Name>OperationModifier</Name>
+        <Access>Public</Access>
+        <Location left="1072" top="12" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Value>None = 0</Value>
+        <Value>Static = 1</Value>
+        <Value>Virtual = 2</Value>
+        <Value>Abstract = 4</Value>
+        <Value>Override = 8</Value>
+        <Value>Sealed = 16</Value>
+        <Value>Hider = 32</Value>
+      </Entity>
+      <Entity type="Enum">
+        <Name>FieldModifier</Name>
+        <Access>Public</Access>
+        <Location left="860" top="12" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Value>None = 0</Value>
+        <Value>Static = 1</Value>
+        <Value>Readonly = 2</Value>
+        <Value>Constant = 4</Value>
+        <Value>Hider = 8</Value>
+        <Value>Volatile = 16</Value>
+      </Entity>
+      <Entity type="Enum">
+        <Name>ClassModifier</Name>
+        <Access>Public</Access>
+        <Location left="648" top="12" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Value>None = 0</Value>
+        <Value>Abstract = 1</Value>
+        <Value>Sealed = 2</Value>
+        <Value>Static = 3</Value>
+      </Entity>
+      <Entity type="Enum">
+        <Name>FilterModifiers</Name>
+        <Access>Public</Access>
+        <Location left="436" top="12" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Value>AllModifiers = 0</Value>
+        <Value>Private = 1</Value>
+        <Value>Public = 2</Value>
+        <Value>Protected = 4</Value>
+        <Value>Internal = 8</Value>
+        <Value>ProtectedInternal = 16</Value>
+        <Value>Static = 32</Value>
+        <Value>Instance = 64</Value>
+        <Value>Default = 128</Value>
+      </Entity>
+      <Entity type="Enum">
+        <Name>FilterElements</Name>
+        <Access>Public</Access>
+        <Location left="224" top="12" />
+        <Size width="162" height="333" />
+        <Collapsed>False</Collapsed>
+        <Value>AllElements = 0</Value>
+        <Value>Class = 1</Value>
+        <Value>Struct = 2</Value>
+        <Value>Interface = 3</Value>
+        <Value>Enum = 4</Value>
+        <Value>EnumValue = 5</Value>
+        <Value>Delegate = 6</Value>
+        <Value>Field = 7</Value>
+        <Value>Constant = 8</Value>
+        <Value>Property = 9</Value>
+        <Value>Constructor = 10</Value>
+        <Value>Method = 11</Value>
+        <Value>Operator = 12</Value>
+        <Value>Event = 13</Value>
+        <Value>Attribute = 14</Value>
+        <Value>Module = 15</Value>
+      </Entity>
+      <Entity type="Enum">
+        <Name>AccessModifier</Name>
+        <Access>Public</Access>
+        <Location left="12" top="12" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Value>Default = 0</Value>
+        <Value>Public = 1</Value>
+        <Value>ProtectedInternal = 2</Value>
+        <Value>Internal = 3</Value>
+        <Value>Protected = 4</Value>
+        <Value>Private = 5</Value>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Generalization" first="9" second="8">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="10" second="9">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="11" second="9">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="13" second="12">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="14" second="13">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="15" second="14">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="16" second="14">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="19" second="8">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="20" second="12">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="21" second="15">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="28" second="10">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="33" second="9">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="35" second="13">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="39" second="10">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="41" second="9">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="46" second="15">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="8" second="0">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="8" second="1">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="9" second="0">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="9" second="1">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="10" second="0">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="10" second="1">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="11" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="11" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="12" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="12" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="13" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="13" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="13" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="14" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="14" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="14" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="14" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="15" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="15" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="15" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="15" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="15" second="4">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="16" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="16" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="16" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="16" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="17" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="18" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="18" second="5">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="18" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="18" second="4">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="18" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="19" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="19" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="20" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="20" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="21" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="21" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="21" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="21" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="21" second="4">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="22" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="22" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="22" second="5">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="24" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="24" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="25" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="25" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="26" second="6">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="28" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="28" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="31" second="6">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="33" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="33" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="34" second="6">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="35" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="35" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="35" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="39" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="39" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="39" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="40" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="41" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="41" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="45" second="6">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="46" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="46" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="46" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="46" second="3">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="46" second="4">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Types</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>NRGenericType</Name>
+        <Access>Public</Access>
+        <Location left="416" top="262" />
+        <Size width="335" height="111" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public List&lt;NRTypeParameter&gt; GenericTypes { get; private set; }</Member>
+        <Member type="Property">public Boolean IsGeneric { get; }</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRInterface</Name>
+        <Access>Public</Access>
+        <Location left="832" top="670" />
+        <Size width="269" height="111" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public NRInterface()</Member>
+        <Member type="Method">public override Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRClass</Name>
+        <Access>Public</Access>
+        <Location left="832" top="892" />
+        <Size width="269" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public ClassModifier ClassModifier { get; set; }</Member>
+        <Member type="Constructor">public NRClass()</Member>
+        <Member type="Method">public override Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRStruct</Name>
+        <Access>Public</Access>
+        <Location left="1152" top="892" />
+        <Size width="269" height="111" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public NRStruct()</Member>
+        <Member type="Method">public override Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRDelegate</Name>
+        <Access>Public</Access>
+        <Location left="832" top="469" />
+        <Size width="269" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public NRTypeUsage ReturnType { get; set; }</Member>
+        <Member type="Property">public List&lt;NRParameter&gt; Parameters { get; private set; }</Member>
+        <Member type="Constructor">public NRDelegate()</Member>
+        <Member type="Method">public override void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRCompositeType</Name>
+        <Access>Public</Access>
+        <Location left="416" top="469" />
+        <Size width="335" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public List&lt;NRTypeUsage&gt; ImplementedInterfaces { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRProperty&gt; Properties { get; private set; }</Member>
+        <Member type="Property">public List&lt;NREvent&gt; Events { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRMethod&gt; Methods { get; private set; }</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRSingleInheritanceType</Name>
+        <Access>Public</Access>
+        <Location left="416" top="670" />
+        <Size width="335" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public NRTypeUsage BaseType { get; set; }</Member>
+        <Member type="Property">public List&lt;NRConstructor&gt; Constructors { get; private set; }</Member>
+        <Member type="Property">public List&lt;NROperator&gt; Operators { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRField&gt; Fields { get; private set; }</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NREnum</Name>
+        <Access>Public</Access>
+        <Location left="832" top="262" />
+        <Size width="269" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public List&lt;NREnumValue&gt; Values { get; private set; }</Member>
+        <Member type="Property">public string UnderlyingType { get; set; }</Member>
+        <Member type="Constructor">public NREnum()</Member>
+        <Member type="Method">public override void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRTypeBase</Name>
+        <Access>Public</Access>
+        <Location left="416" top="16" />
+        <Size width="335" height="196" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public string Name { get; set; }</Member>
+        <Member type="Property">public string Namespace { get; set; }</Member>
+        <Member type="Property">public string FullName { get; set; }</Member>
+        <Member type="Property">public AccessModifier AccessModifier { get; set; }</Member>
+        <Member type="Property">public string DeclaringTypeFullName { get; set; }</Member>
+        <Member type="Property">public List&lt;NRAttribute&gt; Attributes { get; private set; }</Member>
+        <Member type="Method">public abstract void Accept(IVisitor visitor)</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Generalization" first="0" second="8">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="5" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="6" second="5">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="7" second="8">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="4" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="1" second="5">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="2" second="6">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="3" second="6">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Members</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>NREvent</Name>
+        <Access>Public</Access>
+        <Location left="1013" top="554" />
+        <Size width="189" height="111" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public NREvent()</Member>
+        <Member type="Method">public override Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRConstructor</Name>
+        <Access>Public</Access>
+        <Location left="778" top="554" />
+        <Size width="189" height="111" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public NRConstructor()</Member>
+        <Member type="Method">public override Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRMethod</Name>
+        <Access>Public</Access>
+        <Location left="74" top="776" />
+        <Size width="306" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public Boolean IsExtensionMethod { get; set; }</Member>
+        <Member type="Property">public List&lt;NRTypeParameter&gt; GenericTypes { get; private set; }</Member>
+        <Member type="Property">public Boolean IsGeneric { get; }</Member>
+        <Member type="Constructor">public NRMethod()</Member>
+        <Member type="Method">public override Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRField</Name>
+        <Access>Public</Access>
+        <Location left="477" top="261" />
+        <Size width="245" height="230" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String InitialValue { get; set; }</Member>
+        <Member type="Property">public FieldModifier FieldModifier { get; set; }</Member>
+        <Member type="Property">public Boolean IsStatic { get; set; }</Member>
+        <Member type="Property">public Boolean IsReadonly { get; set; }</Member>
+        <Member type="Property">public Boolean IsConstant { get; set; }</Member>
+        <Member type="Property">public Boolean IsHider { get; set; }</Member>
+        <Member type="Property">public Boolean IsVolatile { get; set; }</Member>
+        <Member type="Constructor">public NRField()</Member>
+        <Member type="Method">public override Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRReturnValueOperation</Name>
+        <Access>Public</Access>
+        <Location left="74" top="554" />
+        <Size width="320" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public List&lt;NRAttribute&gt; ReturnValueAttributes { get; private set; }</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NROperation</Name>
+        <Access>Public</Access>
+        <Location left="74" top="261" />
+        <Size width="320" height="213" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public OperationModifier OperationModifier { get; set; }</Member>
+        <Member type="Property">public Boolean IsStatic { get; set; }</Member>
+        <Member type="Property">public Boolean IsAbstract { get; set; }</Member>
+        <Member type="Property">public Boolean IsVirtual { get; set; }</Member>
+        <Member type="Property">public Boolean IsOverride { get; set; }</Member>
+        <Member type="Property">public Boolean IsHider { get; set; }</Member>
+        <Member type="Property">public Boolean IsSealed { get; set; }</Member>
+        <Member type="Property">public List&lt;NRParameter&gt; Parameters { get; private set; }</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRMember</Name>
+        <Access>Public</Access>
+        <Location left="74" top="26" />
+        <Size width="320" height="179" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public AccessModifier AccessModifier { get; set; }</Member>
+        <Member type="Property">public String Name { get; set; }</Member>
+        <Member type="Property">public NRTypeUsage Type { get; set; }</Member>
+        <Member type="Property">public String TypeFullName { get; set; }</Member>
+        <Member type="Property">public List&lt;NRAttribute&gt; Attributes { get; private set; }</Member>
+        <Member type="Method">public abstract Void Accept(IVisitor visitor)</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRProperty</Name>
+        <Access>Public</Access>
+        <Location left="477" top="554" />
+        <Size width="263" height="179" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public AccessModifier GetterModifier { get; set; }</Member>
+        <Member type="Property">public AccessModifier SetterModifier { get; set; }</Member>
+        <Member type="Property">public Boolean HasGetter { get; set; }</Member>
+        <Member type="Property">public Boolean HasSetter { get; set; }</Member>
+        <Member type="Constructor">public NRProperty()</Member>
+        <Member type="Method">public override Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NREnumValue</Name>
+        <Access>Public</Access>
+        <Location left="929" top="172" />
+        <Size width="255" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String Name { get; set; }</Member>
+        <Member type="Property">public String Value { get; set; }</Member>
+        <Member type="Property">public List&lt;NRAttribute&gt; Attributes { get; private set; }</Member>
+        <Member type="Constructor">public NREnumValue()</Member>
+        <Member type="Method">public Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NROperator</Name>
+        <Access>Public</Access>
+        <Location left="477" top="776" />
+        <Size width="252" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public OperatorType OperatorType { get; set; }</Member>
+        <Member type="Constructor">public NROperator()</Member>
+        <Member type="Method">public override void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Generalization" first="1" second="5">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>873</X>
+          <Y>529</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>234</X>
+          <Y>500</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="2" second="4">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>234</X>
+          <Y>673</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="0" second="5">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="3" second="6">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="7" second="5">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="4" second="5">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>234</X>
+          <Y>529</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>234</X>
+          <Y>502</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="5" second="6">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>234</X>
+          <Y>236</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>234</X>
+          <Y>236</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="9" second="4">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>234</X>
+          <Y>748</Y>
+        </BendPoint>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Generics</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>NRTypeParameter</Name>
+        <Access>Public</Access>
+        <Location left="434" top="290" />
+        <Size width="280" height="247" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String Name { get; set; }</Member>
+        <Member type="Property">public List&lt;NRTypeUsage&gt; BaseTypes { get; private set; }</Member>
+        <Member type="Property">public Boolean IsClass { get; set; }</Member>
+        <Member type="Property">public Boolean IsStruct { get; set; }</Member>
+        <Member type="Property">public Boolean IsConstructor { get; set; }</Member>
+        <Member type="Property">public Boolean IsIn { get; set; }</Member>
+        <Member type="Property">public Boolean IsOut { get; set; }</Member>
+        <Member type="Property">public List&lt;NRAttribute&gt; Attributes { get; private set; }</Member>
+        <Member type="Constructor">public NRTypeParameter()</Member>
+        <Member type="Method">public Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRGenericType</Name>
+        <Access>Public</Access>
+        <Location left="396" top="181" />
+        <Size width="162" height="111" />
+        <Collapsed>True</Collapsed>
+        <Member type="Property">public List&lt;NRTypeParameter&gt; GenericTypes { get; private set; }</Member>
+        <Member type="Property">public Boolean IsGeneric { get; }</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IGeneric</Name>
+        <Access>Public</Access>
+        <Location left="434" top="30" />
+        <Size width="280" height="95" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">List&lt;NRTypeParameter&gt; GenericTypes { get; }</Member>
+        <Member type="Property">Boolean IsGeneric { get; }</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRMethod</Name>
+        <Access>Public</Access>
+        <Location left="590" top="181" />
+        <Size width="162" height="162" />
+        <Collapsed>True</Collapsed>
+        <Member type="Property">public Boolean IsExtensionMethod { get; set; }</Member>
+        <Member type="Property">public List&lt;NRTypeParameter&gt; GenericTypes { get; private set; }</Member>
+        <Member type="Property">public Boolean IsGeneric { get; }</Member>
+        <Member type="Constructor">public NRMethod()</Member>
+        <Member type="Method">public override Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Realization" first="1" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>479</X>
+          <Y>156</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>571</X>
+          <Y>156</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="3" second="2">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>672</X>
+          <Y>156</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>571</X>
+          <Y>156</Y>
+        </BendPoint>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Attributes</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>NRReturnValueOperation</Name>
+        <Access>Public</Access>
+        <Location left="76" top="552" />
+        <Size width="320" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public List&lt;NRAttribute&gt; ReturnValueAttributes { get; private set; }</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRModule</Name>
+        <Access>Public</Access>
+        <Location left="273" top="173" />
+        <Size width="162" height="264" />
+        <Collapsed>True</Collapsed>
+        <Member type="Property">public String Name { get; set; }</Member>
+        <Member type="Property">public List&lt;NRAttribute&gt; Attributes { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRClass&gt; Classes { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRInterface&gt; Interfaces { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRStruct&gt; Structs { get; private set; }</Member>
+        <Member type="Property">public List&lt;NREnum&gt; Enums { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRDelegate&gt; Delegates { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRField&gt; Fields { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRMethod&gt; Methods { get; private set; }</Member>
+        <Member type="Constructor">public NRModule()</Member>
+        <Member type="Method">public Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRAssembly</Name>
+        <Access>Public</Access>
+        <Location left="36" top="173" />
+        <Size width="162" height="315" />
+        <Collapsed>True</Collapsed>
+        <Member type="Property">public String FullName { get; set; }</Member>
+        <Member type="Property">public String Source { get; set; }</Member>
+        <Member type="Property">public List&lt;NRModule&gt; Modules { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRAttribute&gt; Attributes { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRClass&gt; Classes { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRInterface&gt; Interfaces { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRStruct&gt; Structs { get; private set; }</Member>
+        <Member type="Property">public List&lt;NREnum&gt; Enums { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRDelegate&gt; Delegates { get; private set; }</Member>
+        <Member type="Property">public IEnumerable&lt;NRTypeBase&gt; Types { get; }</Member>
+        <Member type="Property">public IEnumerable&lt;NRCompositeType&gt; CompositTypes { get; }</Member>
+        <Member type="Property">public IEnumerable&lt;NRSingleInheritanceType&gt; SingleInheritanceTypes { get; }</Member>
+        <Member type="Constructor">public NRAssembly()</Member>
+        <Member type="Method">public Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRTypeParameter</Name>
+        <Access>Public</Access>
+        <Location left="273" top="359" />
+        <Size width="162" height="247" />
+        <Collapsed>True</Collapsed>
+        <Member type="Property">public String Name { get; set; }</Member>
+        <Member type="Property">public List&lt;String&gt; BaseTypes { get; private set; }</Member>
+        <Member type="Property">public Boolean IsClass { get; set; }</Member>
+        <Member type="Property">public Boolean IsStruct { get; set; }</Member>
+        <Member type="Property">public Boolean IsConstructor { get; set; }</Member>
+        <Member type="Property">public Boolean IsIn { get; set; }</Member>
+        <Member type="Property">public Boolean IsOut { get; set; }</Member>
+        <Member type="Property">public List&lt;NRAttribute&gt; Attributes { get; private set; }</Member>
+        <Member type="Constructor">public NRTypeParameter()</Member>
+        <Member type="Method">public Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRParameter</Name>
+        <Access>Public</Access>
+        <Location left="36" top="359" />
+        <Size width="162" height="216" />
+        <Collapsed>True</Collapsed>
+        <Member type="Property">public String Name { get; set; }</Member>
+        <Member type="Property">public NRType Type { get; set; }</Member>
+        <Member type="Property">public String TypeFullName { get; set; }</Member>
+        <Member type="Property">public ParameterModifier ParameterModifier { get; set; }</Member>
+        <Member type="Property">public String DefaultValue { get; set; }</Member>
+        <Member type="Property">public List&lt;NRAttribute&gt; Attributes { get; private set; }</Member>
+        <Member type="Constructor">public NRParameter()</Member>
+        <Member type="Method">public Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRMember</Name>
+        <Access>Public</Access>
+        <Location left="273" top="264" />
+        <Size width="162" height="179" />
+        <Collapsed>True</Collapsed>
+        <Member type="Property">public AccessModifier AccessModifier { get; set; }</Member>
+        <Member type="Property">public String Name { get; set; }</Member>
+        <Member type="Property">public NRType Type { get; set; }</Member>
+        <Member type="Property">public String TypeFullName { get; set; }</Member>
+        <Member type="Property">public List&lt;NRAttribute&gt; Attributes { get; private set; }</Member>
+        <Member type="Method">public abstract Void Accept(IVisitor visitor)</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRTypeBase</Name>
+        <Access>Public</Access>
+        <Location left="36" top="264" />
+        <Size width="162" height="179" />
+        <Collapsed>True</Collapsed>
+        <Member type="Property">public String Name { get; set; }</Member>
+        <Member type="Property">public String FullName { get; set; }</Member>
+        <Member type="Property">public AccessModifier AccessModifier { get; set; }</Member>
+        <Member type="Property">public String Parent { get; set; }</Member>
+        <Member type="Property">public List&lt;NRAttribute&gt; Attributes { get; private set; }</Member>
+        <Member type="Method">public abstract Void Accept(IVisitor visitor)</Member>
+        <Modifier>Abstract</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IAttributable</Name>
+        <Access>Public</Access>
+        <Location left="121" top="44" />
+        <Size width="228" height="78" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">List&lt;NRAttribute&gt; Attributes { get; }</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRAttribute</Name>
+        <Access>Public</Access>
+        <Location left="516" top="129" />
+        <Size width="379" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String Name { get; set; }</Member>
+        <Member type="Property">public List&lt;NRAttributeValue&gt; Values { get; private set; }</Member>
+        <Member type="Property">public Dictionary&lt;String, NRAttributeValue&gt; NamedValues { get; private set; }</Member>
+        <Member type="Constructor">public NRAttribute()</Member>
+        <Member type="Method">public Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRAttributeValue</Name>
+        <Access>Public</Access>
+        <Location left="620" top="328" />
+        <Size width="170" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String Type { get; set; }</Member>
+        <Member type="Property">public Object Value { get; set; }</Member>
+        <Member type="Constructor">public NRAttributeValue()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NREnumValue</Name>
+        <Access>Public</Access>
+        <Location left="36" top="456" />
+        <Size width="162" height="216" />
+        <Collapsed>True</Collapsed>
+        <Member type="Property">public String Name { get; set; }</Member>
+        <Member type="Property">public String Value { get; set; }</Member>
+        <Member type="Constructor">public NREnumValue()</Member>
+        <Member type="Method">public Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Realization" first="4" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>235</X>
+          <Y>334</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="3" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>235</X>
+          <Y>335</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="2" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="1" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="6" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>235</X>
+          <Y>239</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="5" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>235</X>
+          <Y>239</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Realization" first="10" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>235</X>
+          <Y>423</Y>
+        </BendPoint>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <Name>AssemblyModule</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Interface">
+        <Name>IEntityContainer</Name>
+        <Access>Public</Access>
+        <Location left="359" top="30" />
+        <Size width="229" height="146" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">List&lt;NRClass&gt; Classes { get; }</Member>
+        <Member type="Property">List&lt;NRInterface&gt; Interfaces { get; }</Member>
+        <Member type="Property">List&lt;NRStruct&gt; Structs { get; }</Member>
+        <Member type="Property">List&lt;NREnum&gt; Enums { get; }</Member>
+        <Member type="Property">List&lt;NRDelegate&gt; Delegates { get; }</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRAssembly</Name>
+        <Access>Public</Access>
+        <Location left="26" top="244" />
+        <Size width="421" height="315" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String FullName { get; set; }</Member>
+        <Member type="Property">public String Source { get; set; }</Member>
+        <Member type="Property">public List&lt;NRModule&gt; Modules { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRAttribute&gt; Attributes { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRClass&gt; Classes { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRInterface&gt; Interfaces { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRStruct&gt; Structs { get; private set; }</Member>
+        <Member type="Property">public List&lt;NREnum&gt; Enums { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRDelegate&gt; Delegates { get; private set; }</Member>
+        <Member type="Property">public IEnumerable&lt;NRTypeBase&gt; Types { get; }</Member>
+        <Member type="Property">public IEnumerable&lt;NRCompositeType&gt; CompositTypes { get; }</Member>
+        <Member type="Property">public IEnumerable&lt;NRSingleInheritanceType&gt; SingleInheritanceTypes { get; }</Member>
+        <Member type="Constructor">public NRAssembly()</Member>
+        <Member type="Method">public Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>NRModule</Name>
+        <Access>Public</Access>
+        <Location left="496" top="244" />
+        <Size width="255" height="264" />
+        <Collapsed>False</Collapsed>
+        <Member type="Property">public String Name { get; set; }</Member>
+        <Member type="Property">public List&lt;NRAttribute&gt; Attributes { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRClass&gt; Classes { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRInterface&gt; Interfaces { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRStruct&gt; Structs { get; private set; }</Member>
+        <Member type="Property">public List&lt;NREnum&gt; Enums { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRDelegate&gt; Delegates { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRField&gt; Fields { get; private set; }</Member>
+        <Member type="Property">public List&lt;NRMethod&gt; Methods { get; private set; }</Member>
+        <Member type="Constructor">public NRModule()</Member>
+        <Member type="Method">public Void Accept(IVisitor visitor)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Realization" first="1" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Realization" first="2" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>

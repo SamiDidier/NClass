@@ -1,0 +1,9 @@
+prefix=@prefix@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+
+Name: 
+Description: GtkSpell# - A Gtk# GtkSpell binding
+Version: @VERSION@
+Requires: gtk-sharp-2.0
+Libs: -r:${libdir}/mono/gtkspell-sharp-2.0/gtkspell-sharp.dll

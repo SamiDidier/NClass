@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="0d0a652d-4595-4f2c-91f0-b0cd6fbbb4a7" revisionNumber="1">
+  <developerSampleDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>
+        This page shows how to create an exclude filter.
+      </para>
+    </introduction>
+    <section address="SecTop">
+      <title>Using an exclude filter</title>
+      <content>
+        <para>
+          Suppose you want to reflect everything but private fields. Now you could
+          use the include filter and specify everything which should be reflected.
+          You will end up with a realy big block of code declaring the rules. To
+          make things easier, you can use the include filter in conjunction with
+          the invert filter as follows:
+        </para>
+      </content>
+    </section>
+    <codeExample>
+      <code language="C#">
+// Create the filter
+IncludeFilter includeFilter = new IncludeFilter();
+includeFilter.Rules.Add(new FilterRule(FilterModifiers.Private, FilterElements.Field));
+
+IFilter filter = new InvertFilter(includeFilter);
+
+// Do the reflection
+NRAssembly nrAssembly;
+try
+{
+  Reflector reflector = new Reflector();
+  nrAssembly = reflector.Reflect("MyAssembly.dll", ref filter);
+}
+catch(Exception ex)
+{
+  Console.WriteLine("Exception while reflecting: " + ex.Message);
+  return;
+}
+
+// Output the results
+PrintVisitor printVisitor = new PrintVisitor();
+nrAssembly.Accept(printVisitor);
+      </code>
+    </codeExample>
+    <relatedTopics>
+      <link xlink:href="ffe32e8d-3d36-4dba-8dfb-feca3c18011b"/>
+      <link xlink:href="51ae2c74-edd3-44cd-b666-b12639296cfb" />
+      <codeEntityReference>N:NReflect.Filter</codeEntityReference>
+    </relatedTopics>
+  </developerSampleDocument>
+</topic>

@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="3933b29f-b7f6-4c1a-8bf2-c4dad758c537" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>
+        Attributes are reflected by NReflect. This pages shows how.
+      </para>
+    </introduction>
+    <section address="SecOverview">
+      <title>Overview</title>
+      <content>
+        <para>
+          The following figure shows every type related to attribute reflection
+          of NReflect.
+        </para>
+        <mediaLink address="FigAttributes">
+          <caption placement="after" lead="Figure 1">Class diagram showing all types belonging to the reflection of attributes.</caption>
+          <image xlink:href="Attributes"/>
+        </mediaLink>
+        <para>
+          Since nearly everything in IL can have attributes, NReflect provides an
+          interface <codeEntityReference qualifyHint="true">T:NReflect.IAttributable</codeEntityReference>
+          which is implemented by the following NReflect types:
+          <list class="bullet">
+            <listItem><para><codeEntityReference qualifyHint="true">T:NReflect.NRAssembly</codeEntityReference></para></listItem>
+			<listItem><para><codeEntityReference qualifyHint="true">T:NReflect.NRModule</codeEntityReference></para></listItem>
+			<listItem><para><codeEntityReference qualifyHint="true">T:NReflect.NREntities.NRTypeBase</codeEntityReference></para></listItem>
+			<listItem><para><codeEntityReference qualifyHint="true">T:NReflect.NRMembers.NRMember</codeEntityReference></para></listItem>
+			<listItem><para><codeEntityReference qualifyHint="true">T:NReflect.NRParameters.NRParameter</codeEntityReference></para></listItem>
+			<listItem><para><codeEntityReference qualifyHint="true">T:NReflect.NRParameters.NRTypeParameter</codeEntityReference></para></listItem>
+			<listItem><para><codeEntityReference qualifyHint="true">T:NReflect.NRMembers.NREnumValue</codeEntityReference></para></listItem>
+		  </list>
+		  Notice the type <codeEntityReference qualifyHint="true">T:NReflect.NRMembers.NRReturnValueOperation</codeEntityReference>
+		  which does not implement the interface but also has a list of attributes.
+		  These attributes are placed at the return value of an operation.
+        </para>
+        <para>
+          Each of the mentioned types has a list of
+          <codeEntityReference qualifyHint="true">T:NReflect.NRAttributes.NRAttribute</codeEntityReference>
+          instances, one per placed attribute. Since attributes may be placed using
+          parameters, we have to reflect the parameter values, too. These are hold
+          within the <codeEntityReference qualifyHint="true">P:NReflect.NRAttributes.NRAttribute.Values</codeEntityReference>
+          and <codeEntityReference qualifyHint="true">P:NReflect.NRAttributes.NRAttribute.NamedValues</codeEntityReference>
+          properties. The first one holds the values used for the constructor
+          of the attribute. The latter one takes the values of the properties of
+          the attribute which are also set.
+        </para>
+        <para>
+          The values itself are stored as a <codeEntityReference qualifyHint="true">T:NReflect.NRAttributes.NRAttributeValue</codeEntityReference>
+          instance which holds the type of the value and the value itself.
+        </para>
+      </content>
+    </section>
+    <relatedTopics>
+      <link xlink:href="8f080f07-d44c-44ac-b883-a0993850d183"/>
+      <codeEntityReference>N:NReflect.NRAttributes</codeEntityReference>
+   </relatedTopics>
+  </developerConceptualDocument>
+</topic>

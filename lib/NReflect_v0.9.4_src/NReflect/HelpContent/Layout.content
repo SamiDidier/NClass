@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Topics>
+  <Topic id="5bfee795-e5c3-4bc8-8af4-3c8399e95ce5" visible="True" isDefault="true" title="NReflect" />
+  <Topic id="8f080f07-d44c-44ac-b883-a0993850d183" visible="True" title="Architecture">
+    <Topic id="c47434e4-4a2e-40cd-b86c-4378cdcc537c" visible="True" title="Assemblies and Modules" />
+    <Topic id="7a5a5f55-104d-4753-9a03-a68362a41cb8" visible="True" />
+    <Topic id="8345ab04-1135-4bba-84a6-6d9c851eb1f6" visible="True" />
+    <Topic id="e402ea0a-b8d5-4f05-800f-2ae0d1127fc5" visible="True" />
+    <Topic id="3933b29f-b7f6-4c1a-8bf2-c4dad758c537" visible="True" />
+    <Topic id="51ae2c74-edd3-44cd-b666-b12639296cfb" visible="True" title="Filter" />
+    <Topic id="5ebdd67b-0f04-4e7d-a71f-a225a10f7ca4" visible="True" title="Visitor" />
+  </Topic>
+  <Topic id="ffe32e8d-3d36-4dba-8dfb-feca3c18011b" visible="True">
+    <Topic id="00a76374-994c-419f-b0a6-135a3cfa3041" visible="True" title="Reflect an assembly" />
+    <Topic id="49965532-f214-4fbe-8cf1-6efce62a0014" visible="True" title="Using the include filter" />
+    <Topic id="0d0a652d-4595-4f2c-91f0-b0cd6fbbb4a7" visible="True" title="How to create an exclude filter" />
+    <Topic id="fd83b536-0ab8-44da-8d84-33d40879eb7e" visible="True" title="Using the statistic filter" />
+  </Topic>
+</Topics>

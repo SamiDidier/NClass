@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NReflect.Studio.Models.TestCase">
+    <Position X="0.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAgMAAAABAAABAAAAAQAQAAYAEAACMAAAADQBAAAA=</HashCode>
+      <FileName>Models\TestCase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NReflect.Studio.Models.TestCaseTreeModel">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AhAAAAAAAAAIABAQAACAEAAAAAACQAAAAAAAABACAAI=</HashCode>
+      <FileName>Models\TestCaseTreeModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NReflect.Studio.Models.TestCaseBase">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAJAIAAAQAQAgAAAAAAAAAAADAAAAAA=</HashCode>
+      <FileName>Models\TestCaseBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NReflect.Studio.Models.TestCaseEventArgs">
+    <Position X="8.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Models\TestCaseEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NReflect.Studio.Models.TestCaseGroup">
+    <Position X="2.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAQAAAAEEAAAAAAADAAAAAA=</HashCode>
+      <FileName>Models\TestCaseGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NReflect.Studio.Models.TestCaseModel">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAQIAAAAQAACAEARAAgQAEIAAAEAAAQsAIABACAAA=</HashCode>
+      <FileName>Models\TestCaseModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NReflect.Studio.Models.TestCaseCSharp">
+    <Position X="0.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgIAAAAAAAAAAAAAgAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\TestCaseCSharp.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NReflect.Studio.Models.TestCaseAssembly">
+    <Position X="2.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\TestCaseAssembly.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="NReflect.Studio.Models.TestCaseState">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAkAAgAAAAAAAAAAAAAEABA=</HashCode>
+      <FileName>Models\TestCaseState.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

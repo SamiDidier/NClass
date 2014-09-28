@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="49965532-f214-4fbe-8cf1-6efce62a0014" revisionNumber="1">
+  <developerSampleDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>
+        This sample shows how to use the include filter.
+      </para>
+    </introduction>
+    <section address="SecTop">
+      <title>Using the include filter</title>
+      <content>
+        <para>
+          Suppose we want to reflect all public elements of an assembly. To achieve
+          that, we will use the include filter. It gets a set of rules to determine
+          what to reflect. The following code shows how to get the desired behavior:
+        </para>
+      </content>
+    </section>
+    <codeExample>
+      <code language="C#">
+// Create the filter
+IncludeFilter includeFilter = new IncludeFilter();
+includeFilter.Rules.Add(new FilterRule(FilterModifiers.Public, FilterElements.AllElements));
+
+// Do the reflection
+NRAssembly nrAssembly;
+IFilter filter = includeFilter;
+try
+{
+  Reflector reflector = new Reflector();
+  nrAssembly = reflector.Reflect("MyAssembly.dll", ref filter);
+}
+catch(Exception ex)
+{
+  Console.WriteLine("Exception while reflecting: " + ex.Message);
+  return;
+}
+
+// Output the results
+PrintVisitor printVisitor = new PrintVisitor();
+nrAssembly.Accept(printVisitor);
+      </code>
+    </codeExample>
+    <relatedTopics>
+      <link xlink:href="ffe32e8d-3d36-4dba-8dfb-feca3c18011b"/>
+      <link xlink:href="51ae2c74-edd3-44cd-b666-b12639296cfb" />
+      <codeEntityReference>N:NReflect.Filter</codeEntityReference>
+    </relatedTopics>
+  </developerSampleDocument>
+</topic>

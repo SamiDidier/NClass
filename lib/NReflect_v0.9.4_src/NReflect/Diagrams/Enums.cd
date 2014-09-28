@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Enum Name="NReflect.Modifier.ClassModifier">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAEACAA=</HashCode>
+      <FileName>Modifier\ClassModifier.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="NReflect.Modifier.FieldModifier">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAIAAAAAAAAAAgEAAAAAAEAAAg=</HashCode>
+      <FileName>Modifier\FieldModifier.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="NReflect.Modifier.OperationModifier">
+    <Position X="0.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQABAQAAAABAAAAAAAAAAAAAAAAEAAAAAAEACAA=</HashCode>
+      <FileName>Modifier\OperationModifier.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="NReflect.Modifier.ParameterModifier">
+    <Position X="2.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAABAAIAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Modifier\ParameterModifier.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="NReflect.Modifier.AccessModifier">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIEAIAAAEAAAAAAAAAAACAAAQAA=</HashCode>
+      <FileName>Modifier\AccessModifier.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="NReflect.NRMembers.OperatorType">
+    <Position X="7.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QCAAACDAABDAAIAAIAEBCGAQABAAIgACKAgAAQBAADA=</HashCode>
+      <FileName>NRMembers\OperatorType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

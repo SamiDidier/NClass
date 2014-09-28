@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="fd83b536-0ab8-44da-8d84-33d40879eb7e" revisionNumber="1">
+  <developerSampleDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>
+        This example shows you how to use the statistics filter.
+      </para>
+    </introduction>
+    <section address="SecTop">
+      <title>Use of the statistics filter</title>
+      <content>
+        <para>
+          The statistics filter provides some information about the reflected
+          assembly after it is done. The following code shows how to use this
+          filter:
+        </para>
+      </content>
+    </section>
+    <codeExample>
+      <code language="C#">
+// Create the filter
+ReflectAllFilter allFilter = new ReflectAllFilter();
+
+StatisticFilter statisticFilter = new StatisticFilter(allFilter);
+
+// Do the reflection
+NRAssembly nrAssembly;
+IFilter filter = statisticFilter;
+try
+{
+  Reflector reflector = new Reflector();
+  nrAssembly = reflector.Reflect("MyAssembly.dll", ref filter);
+}
+catch(Exception ex)
+{
+  Console.WriteLine("Exception while reflecting: " + ex.Message);
+  return;
+}
+
+// Output the results
+Console.WriteLine("Statistic:");
+Console.WriteLine("Classes     : {0}/{1}", statisticFilter.ReflectedClasses, statisticFilter.ReflectedClasses + statisticFilter.IgnoredClasses);
+Console.WriteLine("Interfaces  : {0}/{1}", statisticFilter.ReflectedInterfaces, statisticFilter.ReflectedInterfaces + statisticFilter.IgnoredInterfaces);
+Console.WriteLine("Structures  : {0}/{1}", statisticFilter.ReflectedStructures, statisticFilter.ReflectedStructures + statisticFilter.IgnoredStructures);
+Console.WriteLine("Delegates   : {0}/{1}", statisticFilter.ReflectedDelegates, statisticFilter.ReflectedDelegates + statisticFilter.IgnoredDelegates);
+Console.WriteLine("Enums       : {0}/{1}", statisticFilter.ReflectedEnums, statisticFilter.ReflectedEnums + statisticFilter.IgnoredEnums);
+Console.WriteLine("EnumValues  : {0}/{1}", statisticFilter.ReflectedEnumValues, statisticFilter.ReflectedEnumValues + statisticFilter.IgnoredEnumValues);
+Console.WriteLine("Constructors: {0}/{1}", statisticFilter.ReflectedConstructors, statisticFilter.ReflectedConstructors + statisticFilter.IgnoredConstructors);
+Console.WriteLine("Methods     : {0}/{1}", statisticFilter.ReflectedMethods, statisticFilter.ReflectedMethods + statisticFilter.IgnoredMethods);
+Console.WriteLine("Fields      : {0}/{1}", statisticFilter.ReflectedFields, statisticFilter.ReflectedFields + statisticFilter.IgnoredFields);
+Console.WriteLine("Properties  : {0}/{1}", statisticFilter.ReflectedProperties, statisticFilter.ReflectedProperties + statisticFilter.IgnoredProperties);
+Console.WriteLine("Events      : {0}/{1}", statisticFilter.ReflectedEvents, statisticFilter.ReflectedEvents + statisticFilter.IgnoredEvents);
+Console.WriteLine("Operators   : {0}/{1}", statisticFilter.ReflectedOperators, statisticFilter.ReflectedOperators + statisticFilter.IgnoredOperators);
+Console.WriteLine("Attributes  : {0}/{1}", statisticFilter.ReflectedAttributes, statisticFilter.ReflectedAttributes + statisticFilter.IgnoredAttributes);
+Console.WriteLine("Modules     : {0}/{1}", statisticFilter.ReflectedModules, statisticFilter.ReflectedModules + statisticFilter.IgnoredModules);
+      </code>
+    </codeExample>
+    <relatedTopics>
+      <link xlink:href="ffe32e8d-3d36-4dba-8dfb-feca3c18011b"/>
+      <link xlink:href="51ae2c74-edd3-44cd-b666-b12639296cfb" />
+      <codeEntityReference>N:NReflect.Filter</codeEntityReference>
+    </relatedTopics>
+  </developerSampleDocument>
+</topic>

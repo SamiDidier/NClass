@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="5ebdd67b-0f04-4e7d-a71f-a225a10f7ca4" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>
+        All types returned by NReflect implement the Visitor pattern. That means,
+        the returned tree can be traversed by a vistor.
+      </para>
+    </introduction>
+    <section address="SecOverview">
+      <title>Overview</title>
+      <content>
+        <para>
+          The following types are related to the pattern:
+        </para>
+        <mediaLink address="FigVisitor">
+          <caption placement="after" lead="Figure 1">Class diagram showing visitor related types within NReflect.</caption>
+          <image xlink:href="Visitor"/>
+        </mediaLink>
+        <para>
+          Each visitable type implements the interface
+          <codeEntityReference qualifyHint="true">T:NReflect.IVisitable</codeEntityReference>
+          and can be visited by an visitor. Each class of the namespaces
+          <codeEntityReference qualifyHint="true">N:NReflect.NREntities</codeEntityReference>,
+          <codeEntityReference qualifyHint="true">N:NReflect.NRMembers</codeEntityReference>,
+          <codeEntityReference qualifyHint="true">N:NReflect.NRParameters</codeEntityReference> and
+          <codeEntityReference qualifyHint="true">N:NReflect.NRAttributes</codeEntityReference>
+          implement this interface so they are visitable.
+        </para>
+        <section>
+          <title>Creating a new visitor</title>
+          <content>
+            <para>
+              To create a new visitor, just implement the interface
+              <codeEntityReference qualifyHint="true">T:NReflect.IVisitor</codeEntityReference>
+              and start visiting like this:
+              <code language="C#">
+IVisitor visitor = new MyVisitor();
+nrAssembly.Accept(visitor);
+              </code>
+            </para>
+          </content>
+        </section>
+      </content>
+    </section>
+    <relatedTopics>
+      <link xlink:href="8f080f07-d44c-44ac-b883-a0993850d183"/>
+      <link xlink:href="c47434e4-4a2e-40cd-b86c-4378cdcc537c"/>
+      <link xlink:href="7a5a5f55-104d-4753-9a03-a68362a41cb8"/>
+      <link xlink:href="8345ab04-1135-4bba-84a6-6d9c851eb1f6"/>
+      <link xlink:href="00a76374-994c-419f-b0a6-135a3cfa3041"/>
+      <codeEntityReference>T:NReflect.IVisitable</codeEntityReference>
+      <codeEntityReference>T:NReflect.IVisitor</codeEntityReference>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

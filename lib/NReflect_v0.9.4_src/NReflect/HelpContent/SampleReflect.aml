@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="00a76374-994c-419f-b0a6-135a3cfa3041" revisionNumber="1">
+  <developerSampleDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>This shows how to reflect all public elements of an assembly.</para>
+    </introduction>
+    <section address="SecTop">
+      <title>Reflect an assembly</title>
+      <content>
+        <para>
+          The following code shows how to reflect the contents of an assembly and
+          print out the results:
+        </para>
+      </content>
+    </section>
+    <codeExample>
+      <code language="C#">
+// Do the reflection
+NRAssembly nrAssembly;
+try
+{
+  Reflector reflector = new Reflector();
+  nrAssembly = reflector.Reflect("MyAssembly.dll");
+}
+catch(Exception ex)
+{
+  Console.WriteLine("Exception while reflecting: " + ex.Message);
+  return;
+}
+
+// Output the results
+PrintVisitor printVisitor = new PrintVisitor();
+nrAssembly.Accept(printVisitor);
+
+RelationshipCreator relationshipCreator = new RelationshipCreator();
+NRRelationships nrRelationships = relationshipCreator.CreateRelationships(nrAssembly);
+      </code>
+      <alert class="note">
+        Notice the use of the <codeInline>PrintVisitor</codeInline> which is defined
+        at the demonstration program <codeInline>NReflectRunner</codeInline> which
+        is supplied with NReflect.
+      </alert>
+      <alert class="note">
+        Also notice the use of the <codeEntityReference qualifyHint="true">T:NReflect.RelationshipCreator</codeEntityReference>
+        which is used to find the relations between the reflected entities. The
+        result of this operation is an instance of <codeEntityReference qualifyHint="true">T:NReflect.NRRelationships</codeEntityReference>
+        which contains all found relations.
+      </alert>
+    </codeExample>
+    <relatedTopics>
+      <link xlink:href="ffe32e8d-3d36-4dba-8dfb-feca3c18011b"/>
+      <link xlink:href="8f080f07-d44c-44ac-b883-a0993850d183" />
+      <link xlink:href="5ebdd67b-0f04-4e7d-a71f-a225a10f7ca4" />
+      <codeEntityReference>N:NReflect</codeEntityReference>
+    </relatedTopics>
+  </developerSampleDocument>
+</topic>

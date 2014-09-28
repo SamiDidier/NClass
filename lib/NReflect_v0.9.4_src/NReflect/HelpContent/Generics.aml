@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="e402ea0a-b8d5-4f05-800f-2ae0d1127fc5" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>
+        This pages gives an intoduction of the way generics are reflected by
+        NReflect.
+      </para>
+    </introduction>
+    <section address="SecOverview">
+      <title>Overview</title>
+      <content>
+        <para>
+          The following figure shows the important types for the reflection of generics.
+        </para>
+        <mediaLink address="FigGenerics">
+          <caption placement="after" lead="Figure 1">Class diagram showing all types belonging to the reflection of generics.</caption>
+          <image xlink:href="Generics"/>
+        </mediaLink>
+        <para>
+          IL allows two things to be a generic: Some types (namely delegat, interface,
+          class and struct) and methods. So each of the corresponding NReflect types
+          implements the <codeEntityReference qualifyHint="true">T:NReflect.IGeneric</codeEntityReference>
+          interace (see figure 1). This interface defines two properties: one to get
+          a value indicating if the member or type is generic one. The second one
+          gets a list containing information about the type parameters. Each type
+          parameter is stored as a <codeEntityReference qualifyHint="true">T:NReflect.NRParameters.NRTypeParameter</codeEntityReference>.
+          This is necessary because a type parameter can have some constraints like
+          the following:
+          <code language="C#">
+public class MyGenericClass&lt;T, S&gt; where T : class, IComparable, IConvertible, new()
+                                  where S : class, new()
+{
+  // ...
+}
+          </code>
+          All the information is reflected by NReflect.
+        </para>
+      </content>
+    </section>
+    <relatedTopics>
+      <link xlink:href="8f080f07-d44c-44ac-b883-a0993850d183"/>
+      <codeEntityReference>T:NReflect.IGeneric</codeEntityReference>
+      <codeEntityReference>T:NReflect.NRParameters.NRTypeParameter</codeEntityReference>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="c47434e4-4a2e-40cd-b86c-4378cdcc537c" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>
+        This pages gives on overview about the assembly and modules.
+      </para>
+    </introduction>
+    <section address="SecOverview">
+      <title>Overview</title>
+      <content>
+        <para>
+          An assembly is a .dll or .exe file and contains the logic and the resources
+          needed for a program to run (ok, most likely there are some other assemblies
+          needed, but that's not important here).
+        </para>
+        <para>
+          An assembly consists of one or more modules. A module can contain types,
+          fields and methods. There are no types outside a module, especially not
+          directly at an assembly.
+        </para>
+        <para>
+          Since the most of the time you are only interested in the types of an
+          assembly (and not the modules), NReflect gives you the opportunity to
+          access all types of the assembly (regardless in which module they are
+          placed) and the modules whith all contained types.
+        </para>
+        <para>
+          The types which are used by NReflect to deal with assemblies and modules
+          are shown in figure 1.
+        </para>
+        <mediaLink address="FigAssemblyModule">
+          <caption placement="after" lead="Figure 1">This class diagram shows all types belonging to assemblies and modules.</caption>
+          <image xlink:href="AssemblyModule"/>
+        </mediaLink>
+      </content>
+    </section>
+    <section address="SecTypes">
+      <title>Types used by NReflect for assemblies and modules</title>
+      <sections>
+        <section address="SubSecAssembly">
+          <title>Assembly</title>
+          <content>
+            <para>
+              When reflecting an assembly using any <codeEntityReference qualifyHint="true" autoUpgrade="true">M:NReflect.Reflector.Reflect(System.Reflection.Assembly)</codeEntityReference>-Method,
+              you will get an instance of <codeEntityReference qualifyHint="true">T:NReflect.NRAssembly</codeEntityReference>
+              which is the root of the returned object tree.
+            </para>
+          </content>
+        </section>
+        <section address="SubSecModule">
+          <title>Module</title>
+          <content>
+            <para>
+              It is not possible to reflect the modules without reflecting an assembly.
+              If you reflected an assembly, the modules are stored at the
+              <codeEntityReference qualifyHint="true">P:NReflect.NRAssembly.Modules</codeEntityReference>
+              property.
+            </para>
+          </content>
+        </section>
+      </sections>
+    </section>
+    <section address="SecEntityContainer">
+      <title>Entity container</title>
+      <content>
+        <para>
+          Since both assembly and module may contain entities, they are both implementing
+          the interface <codeEntityReference qualifyHint="true">T:NReflect.IEntityContainer</codeEntityReference>.
+        </para>
+      </content>
+    </section>
+    <relatedTopics>
+      <link xlink:href="8f080f07-d44c-44ac-b883-a0993850d183"/>
+      <link xlink:href="7a5a5f55-104d-4753-9a03-a68362a41cb8"/>
+      <codeEntityReference>N:NReflect</codeEntityReference>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

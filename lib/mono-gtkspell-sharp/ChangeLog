@@ -1,0 +1,31 @@
+28-08-2007 Brad Taylor <brad@getcoded.net>
+
+	* configure.in: Fixes for win32 build -- Remove specific Mono checks in
+	  favour of more cross-platform checks that are found later in the
+	  file. Add GENERATED_SOURCES fix from gtk-sharp.
+	* gtkspell/Makefile.am: Put -out before sources, as csc.exe complains
+	  otherwise. Use $(GENERATED_SOURCES) so that we can switch the
+	  directory separator based on platform.
+
+11-04-2006 Zac Bowling <zac@zacbowling.com>
+	sample/TestGtkSpell.cs - Cleaned up spacing
+	
+10-04-2006 Zac Bowling <zac@zacbowling.com>
+	gtkspell/Makefile.am - Updated mcs build to prevent warnings
+
+09-03-2006 Zac Bowling <zac@zacbowling.com>
+	README: updated description 
+	docs/README: simple set of api documentation
+
+24-03-2005 Rafael Teixeira <rafaelteixeirabr@hotmail.com>
+	sample/TestGtkSpell.cs
+	-- added a delete event handler to end the application when closing the window
+	-- now accepts an optional command line argument to specify locale. 
+	   Ex: "mono TestGtkSpell.exe pt-br", defaults to en-us as before
+
+13-04-2005 Zac Bowling <zac@zacbowling.com>
+	sources/gtkspell-sharp.sources:
+	sources/gtkspell-2.0.10.tar.gz: added sources used to build
+	sources/Win32/libgtkspell.dll: added win32 dll for convience
+	api/*: removed, sources generate directly to raw now
+

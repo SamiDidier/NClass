@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="7a5a5f55-104d-4753-9a03-a68362a41cb8" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>
+        Here you can find some information about the way types are reflected.
+      </para>
+    </introduction>
+    <section address="SecTypes">
+      <title>Types</title>
+      <content>
+        <para>
+          The result of a reflection process with NReflect is an object tree.
+          Every reflected type is represented by an object of one of types
+          displayed in Figure 1.
+        </para>
+        <mediaLink address="FigTypes">
+          <caption placement="after" lead="Figure 1">Class diagram showing the types used for reflected types.</caption>
+          <image xlink:href="Types"/>
+        </mediaLink>
+        <para>
+          As you can see, every type derives from
+          <codeEntityReference qualifyHint="true">T:NReflect.NREntities.NRTypeBase</codeEntityReference>.
+          Since enums can't be a generic, they directly
+          derive this class. Every other type derives from the derived abstract class
+          <codeEntityReference qualifyHint="true">T:NReflect.NREntities.NRGenericType</codeEntityReference>
+          which adds information about the generic. Thats enough for a delegate so they derive
+          this class. The next step is the
+          <codeEntityReference qualifyHint="true">T:NReflect.NREntities.NRCompositeType</codeEntityReference>.
+          The only type which uses this class to derive from is the interface.
+          All other types derive from
+          <codeEntityReference qualifyHint="true">T:NReflect.NREntities.NRSingleInheritanceType</codeEntityReference>.
+          These types can only have one other type to derive from which ars structs
+          and classes.
+        </para>
+        <para>
+          For more details about the used types, please refer to the reference
+          documentation of the namespace
+          <codeEntityReference qualifyHint="true">N:NReflect.NREntities</codeEntityReference>
+          in which you will find all mentioned types.
+        </para>
+      </content>
+    </section>
+    <relatedTopics>
+      <link xlink:href="8f080f07-d44c-44ac-b883-a0993850d183"/>
+      <link xlink:href="8345ab04-1135-4bba-84a6-6d9c851eb1f6"/>
+      <codeEntityReference>N:NReflect.NREntities</codeEntityReference>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>
