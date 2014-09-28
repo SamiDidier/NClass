@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ErrorInvalidDeclaration" xml:space="preserve">
     <value>Fehlerhafte Deklaration</value>
@@ -672,9 +672,6 @@
   <data name="Dependency" xml:space="preserve">
     <value>Abhängigkeit</value>
   </data>
-  <data name="CodeStyle" xml:space="preserve">
-    <value>Code formatieren</value>
-  </data>
   <data name="MenuEnum" xml:space="preserve">
     <value>&amp;Aufzählung</value>
   </data>
@@ -1071,7 +1068,7 @@
     <value>Neuer Wert</value>
   </data>
   <data name="RequiresNetFramework" xml:space="preserve">
-    <value>Dieses Programm benötigt das .NET Framwork ab Version 2.0. Bitte installieren Sie zuerst das .NET-Framwerk  und starten Sie dann diese Installation erneut.</value>
+    <value>Dieses Programm benötigt das .NET Framwork ab Version 4.0. Bitte installieren Sie zuerst das .NET-Framwerk  und starten Sie dann diese Installation erneut.</value>
     <comment>This text is used in the Installer program</comment>
   </data>
   <data name="StartMenuGroup" xml:space="preserve">

@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ErrorInvalidDeclaration" xml:space="preserve">
     <value>无效声明</value>
@@ -651,9 +651,6 @@
   <data name="Dependency" xml:space="preserve">
     <value>依赖</value>
   </data>
-  <data name="CodeStyle" xml:space="preserve">
-    <value>编码风格</value>
-  </data>
   <data name="MenuEnum" xml:space="preserve">
     <value>枚举(&amp;E)</value>
   </data>
@@ -829,7 +826,7 @@
     <value>新值</value>
   </data>
   <data name="RequiresNetFramework" xml:space="preserve">
-    <value>此程序需要.NET 2.0 框架。请下载并安装.NET 2.0 框架后再运行。</value>
+    <value>此程序需要.NET 4.0 框架。请下载并安装.NET 2.0 框架后再运行。</value>
   </data>
   <data name="StartMenuGroup" xml:space="preserve">
     <value>建立开始菜单组</value>

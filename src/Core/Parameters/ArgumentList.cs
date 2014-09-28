@@ -59,6 +59,15 @@ namespace NClass.Core
 			return false;
 		}
 
+        /// <exception cref="BadSyntaxException">
+        /// The <paramref name="name"/> does not fit to the syntax.
+        /// </exception>
+        /// <exception cref="ReservedNameException">
+        /// The parameter name is already exists.
+        /// </exception>
+        public abstract Parameter Add(string name, string type, ParameterModifier modifier, string defaultValue);
+
+
 		/// <exception cref="BadSyntaxException">
 		/// The <paramref name="declaration"/> does not fit to the syntax.
 		/// </exception>

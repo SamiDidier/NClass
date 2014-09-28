@@ -139,17 +139,24 @@ namespace NClass.Core
 			}
 		}
 
-		public string GetUmlDescription(bool getName)
+		public string GetUmlDescription(bool getName, bool initValue)
 		{
-			if (getName) {
-				if (Modifier == ParameterModifier.In)
-					return Name + ": " + Type;
-				else
-					return string.Format("{0} {1}: {2}", GetModifierString(Modifier), Name, Type);
-			}
-			else {
-				return Type;
-			}
+            string format = "{0} {1}: {2} = {3}";
+
+            if (getName == true)
+            {
+                if (Modifier != ParameterModifier.In)
+                    format = "{0} {1}: {2}";
+                else
+                    format = "{1}: {2}";
+            }
+            else
+                format = "{2}";
+
+            if (initValue == true && string.IsNullOrEmpty(defaultValue) == false)
+                format += " = {3}";
+
+            return string.Format(format, GetModifierString(Modifier), Name, Type, defaultValue);
 		}
 
 		public abstract Parameter Clone();

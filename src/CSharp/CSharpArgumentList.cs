@@ -20,7 +20,7 @@ using NClass.Translations;
 
 namespace NClass.CSharp
 {
-	internal class CSharpArgumentList : ArgumentList
+	public class CSharpArgumentList : ArgumentList
 	{
 		// [<modifiers>] <type> <name> [,]
 		const string ParameterPattern =
@@ -37,13 +37,27 @@ namespace NClass.CSharp
 		static Regex parameterStringRegex =
 			new Regex(ParameterStringPattern, RegexOptions.ExplicitCapture);
 
-		internal CSharpArgumentList()
+		public CSharpArgumentList()
 		{
 		}
 
 		private CSharpArgumentList(int capacity) : base(capacity)
 		{
 		}
+
+        /// <exception cref="ReservedNameException">
+        /// The parameter name is already exists.
+        /// </exception>
+        public override Parameter Add(string name, string type, ParameterModifier modifier, string defaultValue)
+        {
+            if (IsReservedName(name))
+                throw new ReservedNameException(name);
+
+            Parameter parameter = new CSharpParameter(name, type, modifier, defaultValue);
+            InnerList.Add(parameter);
+
+            return parameter;
+        }
 
 		/// <exception cref="BadSyntaxException">
 		/// The <paramref name="declaration"/> does not fit to the syntax.

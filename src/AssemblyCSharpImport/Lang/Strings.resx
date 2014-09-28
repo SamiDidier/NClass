@@ -154,22 +154,22 @@
     <value>struct</value>
   </data>
   <data name="Error_BadImageFormat" xml:space="preserve">
-    <value>Could not load assembly since it seems to be not an assembly...</value>
+    <value>Could not load assembly {0} since it seems to be not an assembly...</value>
   </data>
   <data name="Error_MessageBoxTitle" xml:space="preserve">
     <value>Error</value>
   </data>
   <data name="Error_MissingReferencedAssemblies" xml:space="preserve">
-    <value>Could not open assembly due to missing referenced assemblies.</value>
+    <value>Could not open assembly {0} due to missing referenced assemblies.</value>
   </data>
   <data name="Error_NoAssembly" xml:space="preserve">
     <value>No assembly file to import.</value>
   </data>
   <data name="Menu_Title" xml:space="preserve">
-    <value>&amp;Import an assembly...</value>
+    <value>&amp;Import an .NET assembly or C# source code...</value>
   </data>
   <data name="Menu_ToolTip" xml:space="preserve">
-    <value>.NET assembly importer by Malte Ried</value>
+    <value>.NET assembly importer by Malte Ried &amp; C# source code importer by Samuel DIDIER</value>
   </data>
   <data name="Modifier_All" xml:space="preserve">
     <value>all</value>
@@ -276,9 +276,6 @@
   <data name="Modifier_Default" xml:space="preserve">
     <value>default</value>
   </data>
-  <data name="OpenFileDialog_Filter" xml:space="preserve">
-    <value>Assemblies (*.exe, *.dll)|*.exe;*.dll</value>
-  </data>
   <data name="Error_GeneralException" xml:space="preserve">
     <value>Error while importing!
 
@@ -291,5 +288,22 @@ Note: Assemblys which are created with a fuscator might fail to import.</value>
   </data>
   <data name="WarningTitle" xml:space="preserve">
     <value>Warning</value>
+  </data>
+  <data name="Settings_Error_NoEntries" xml:space="preserve">
+    <value>No *.dll, *.exe, *.cs files or directory are available in the Files/Folders list!</value>
+  </data>
+  <data name="Error_NoCSharpFile" xml:space="preserve">
+    <value>No C# code source file to import.</value>
+  </data>
+  <data name="Settings_Error_AddCSharpFile" xml:space="preserve">
+    <value>Not allowed to add a C# source file {0} when a parent folder {1} is already in the list</value>
+  </data>
+  <data name="Settings_Error_AddSubFolder" xml:space="preserve">
+    <value>Not allowed to add a sub folder {0} when a parent folder {1} is already in the list</value>
+  </data>
+  <data name="Error_CSharpParsing" xml:space="preserve">
+    <value>Error(s) in the C# source code file {0} :
+
+{1}</value>
   </data>
 </root>

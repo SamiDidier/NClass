@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutNClass" xml:space="preserve">
     <value>Acerca de NClass</value>
@@ -231,9 +231,6 @@
   </data>
   <data name="CodeGenerationFailed" xml:space="preserve">
     <value>Generación de código fallida.</value>
-  </data>
-  <data name="CodeStyle" xml:space="preserve">
-    <value>Estilo de código</value>
   </data>
   <data name="CommandFailed" xml:space="preserve">
     <value>El comando falló.</value>
@@ -834,7 +831,7 @@
     <value>Alejar</value>
   </data>
   <data name="RequiresNetFramework" xml:space="preserve">
-    <value>Este programa requiere del Framework .NET 2.0.
+    <value>Este programa requiere del Framework .NET 4.0.
 Por favor descargué e instale el Framework .NET y ejecute este instalador de nuevo.
 Desea descargar el Framework ahora?</value>
   </data>

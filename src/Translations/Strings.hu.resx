@@ -250,9 +250,6 @@ Biztos, hogy folytatni akarja?</value>
   <data name="CodeGenerationFailed" xml:space="preserve">
     <value>A kódgenerálás sikertelen volt.</value>
   </data>
-  <data name="CodeStyle" xml:space="preserve">
-    <value>Kód stílus</value>
-  </data>
   <data name="CommandFailed" xml:space="preserve">
     <value>Nem lehetett végrehajtani a parancsot.</value>
   </data>
@@ -1040,7 +1037,7 @@ A hibát leíró fájl és a megnyitott projektek az Application Data könyvtár
     <value>Új érték</value>
   </data>
   <data name="RequiresNetFramework" xml:space="preserve">
-    <value>A telepítendő program Microsoft .NET 2.0 keretrendszert használ.
+    <value>A telepítendő program Microsoft .NET 4.0 keretrendszert használ.
 Kérem, töltse le és telepítse fel a .NET keretrendszert, majd indítsa újra a telepítőt.
 Szeretné most letölteni a szükséges keretrendszert a Microsoft honlapjáról?</value>
   </data>

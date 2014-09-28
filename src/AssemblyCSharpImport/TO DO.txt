@@ -1,0 +1,36 @@
+﻿ - Fonctionnalité :
+	- Lire le code source C# existant et générer un diagramme UML
+	- Appliquer modification sur code source C# existant
+		- Ajout nouvelle classe ...etc... 
+		- Modification classe ...etc... existant
+		- Suppression classe ...etc... existant
+	- Appliquer les modifications dans le diagramme UML
+		- Création de nouvelle classe
+		- Suppression de classe existante
+		- Modification de classe existante
+		- Mettre en forme le code soure
+		  - [A tester] Trier les using.
+		  - [A terminer] Appliquer un formatage au code source en C# (Voir fonctionnalité de NRefactoring)
+			- Appliquer TextEditorOptions aussi
+		  - [A terminer] Ajouter de Copyright header
+		  - Ajouter de commentaire de documentation
+			- Création de commentaire de documentation à compléter
+		    - Mise à jour de commentaire de documentation existant
+			- Récupération de commentaire pour alimenter les commentaires de documentation
+		 - [A terminer] Créer, supprimer et mise à jour des classes de tests NUNIT 
+		 - Tester la compilation du code
+		 - Lancer StyleCop, FxCop et Gendarme si nécessaire
+	- Intégrer dans MonoDevelop et Visual Studio si nécessaire
+	- [A finir]Lire un fichier Visual Studio solution ou projet
+	- [A finir] Gestion de paramètre en ligne de commande 
+	- [A finir] Gestion d'un mode batch 
+		- un fichier de log
+			    - implémenter log4net dans tous les codes sours NClass
+				  http://lutecefalco.developpez.com/tutoriels/dotnet/log4net/introduction/#LI.2
+		- [A tester ]une fenêtre listant les erreurs
+		  http://jeffbelback.me/posts/2010/12/15/OldBlog/Log4Net-WinForm-Appender/
+	- CodeGenerator
+		- [Fait] Boite de dialogue pour créer un style propre 
+			- [A faire] A traduire 
+		- Sauver les nouveaux settings dans un fichier à part
+	- Tester sous mono sous Windows, Linux et MacOs

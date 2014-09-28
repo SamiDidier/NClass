@@ -196,6 +196,17 @@ namespace NClass.AssemblyCSharpImport.Lang {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Error(s) in the C# source code file {0} :
+        ///
+        ///{1}.
+        /// </summary>
+        internal static string Error_CSharpParsing {
+            get {
+                return ResourceManager.GetString("Error_CSharpParsing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Error while importing!
         ///
         ///{0}
@@ -236,7 +247,16 @@ namespace NClass.AssemblyCSharpImport.Lang {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à &amp;Import an assembly....
+        ///   Recherche une chaîne localisée semblable à No C# code source file to import..
+        /// </summary>
+        internal static string Error_NoCSharpFile {
+            get {
+                return ResourceManager.GetString("Error_NoCSharpFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à &amp;Import an .NET assembly or C# source code....
         /// </summary>
         internal static string Menu_Title {
             get {
@@ -335,15 +355,6 @@ namespace NClass.AssemblyCSharpImport.Lang {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Assemblies (*.exe, *.dll)|*.exe;*.dll.
-        /// </summary>
-        internal static string OpenFileDialog_Filter {
-            get {
-                return ResourceManager.GetString("OpenFileDialog_Filter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Cancel.
         /// </summary>
         internal static string Settings_CancelButton {
@@ -407,11 +418,38 @@ namespace NClass.AssemblyCSharpImport.Lang {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Not allowed to add a C# source file {0} when a parent folder {1} is already in the list.
+        /// </summary>
+        internal static string Settings_Error_AddCSharpFile {
+            get {
+                return ResourceManager.GetString("Settings_Error_AddCSharpFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Not allowed to add a sub folder {0} when a parent folder {1} is already in the list.
+        /// </summary>
+        internal static string Settings_Error_AddSubFolder {
+            get {
+                return ResourceManager.GetString("Settings_Error_AddSubFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à &apos;&lt;&apos; is not allowed.
         /// </summary>
         internal static string Settings_Error_AngleBracketNotAllowed {
             get {
                 return ResourceManager.GetString("Settings_Error_AngleBracketNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à No *.dll, *.exe, *.cs files or directory are available in the Files/Folders list!.
+        /// </summary>
+        internal static string Settings_Error_NoEntries {
+            get {
+                return ResourceManager.GetString("Settings_Error_NoEntries", resourceCulture);
             }
         }
         

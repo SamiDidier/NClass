@@ -44,6 +44,20 @@ namespace NClass.Java
 		{
 		}
 
+        /// <exception cref="ReservedNameException">
+        /// The parameter name is already exists.
+        /// </exception>
+        public override Parameter Add(string name, string type, ParameterModifier modifier, string defaultValue)
+        {
+            if (IsReservedName(name))
+                throw new ReservedNameException(name);
+
+            Parameter parameter = new JavaParameter(name, type);
+            InnerList.Add(parameter);
+
+            return parameter;
+        }
+
 		/// <exception cref="BadSyntaxException">
 		/// The <paramref name="declaration"/> does not fit to the syntax.
 		/// </exception>

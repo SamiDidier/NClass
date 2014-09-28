@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ErrorInvalidDeclaration" xml:space="preserve">
     <value>Invalid declaration.</value>
@@ -679,9 +679,6 @@
   <data name="Dependency" xml:space="preserve">
     <value>Dependency</value>
   </data>
-  <data name="CodeStyle" xml:space="preserve">
-    <value>Code style</value>
-  </data>
   <data name="MenuEnum" xml:space="preserve">
     <value>&amp;Enum</value>
   </data>
@@ -1081,7 +1078,7 @@ A crash log and recovery files have been created in the Application Data directo
     <value>New Value</value>
   </data>
   <data name="RequiresNetFramework" xml:space="preserve">
-    <value>This program requires the .NET 2.0 Framework.
+    <value>This program requires the .NET 4.0 Framework.
 Please download and install the .NET Framework and run this setup again.
 Do you want to download the framework now?</value>
     <comment>This text is used in the Installer program</comment>
@@ -1154,5 +1151,38 @@ Do you want to download the framework now?</value>
   <data name="CodeGenerationOverwriteConfirmation" xml:space="preserve">
     <value>The output directory is not empty, the previous files will be overwritten.
 Do you still want to continue?</value>
+  </data>
+  <data name="GenerateNunitTests" xml:space="preserve">
+    <value>Generate NUnit test cases</value>
+  </data>
+  <data name="GenerateXMLDocFood" xml:space="preserve">
+    <value>Generate XML Documentation tags</value>
+  </data>
+  <data name="CSharpFormatStyle" xml:space="preserve">
+    <value>C# Format style</value>
+  </data>
+  <data name="SortUsing" xml:space="preserve">
+    <value>Trier les usings</value>
+  </data>
+  <data name="TemplateFile" xml:space="preserve">
+    <value>Template file:</value>
+  </data>
+  <data name="CopyrightHeader" xml:space="preserve">
+    <value>Copyright Header</value>
+  </data>
+  <data name="CustomFormatStyle" xml:space="preserve">
+    <value>Custom Format Style</value>
+  </data>
+  <data name="AuthorName" xml:space="preserve">
+    <value>Author name :</value>
+  </data>
+  <data name="CompagnyName" xml:space="preserve">
+    <value>Compagny name :</value>
+  </data>
+  <data name="FileDoesntExist" xml:space="preserve">
+    <value>File {0} doesn't exist</value>
+  </data>
+  <data name="MissingArgument" xml:space="preserve">
+    <value>Missing Argument for {0}</value>
   </data>
 </root>

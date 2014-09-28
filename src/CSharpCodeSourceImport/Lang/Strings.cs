@@ -13,12 +13,10 @@
 // this program; if not, write to the Free Software Foundation, Inc., 
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-using System;
-
-namespace NClass.Translations
+namespace NClass.CSharpCodeSourceImport.Lang
 {
 	// Empty partial class for a resgen hack.
-	public partial class Strings
+  internal partial class Strings
 	{
 	}
 }

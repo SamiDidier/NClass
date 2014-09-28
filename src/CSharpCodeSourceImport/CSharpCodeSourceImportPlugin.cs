@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Forms;
-using NClass.AssemblyCSharpImport.Lang;
+using NClass.CSharpCodeSourceImport.Lang;
 using NClass.CSharp;
 using NClass.DiagramEditor.ClassDiagram;
 using NClass.GUI;
 
-namespace NClass.AssemblyCSharpImport
+namespace NClass.CSharpCodeSourceImport
 {
   /// <summary>
   ///   Implements the PlugIn-Interface of NClass.
   /// </summary>
-  public class NETImportPlugin : Plugin
+  public class CSharpCodeSourceImportPlugin : Plugin
   {
     // ========================================================================
     // Fields
@@ -33,7 +33,7 @@ namespace NClass.AssemblyCSharpImport
     /// <summary>
     ///   Set up the current culture for the strings.
     /// </summary>
-    static NETImportPlugin()
+    static CSharpCodeSourceImportPlugin()
     {
       try
       {
@@ -46,10 +46,10 @@ namespace NClass.AssemblyCSharpImport
     }
 
     /// <summary>
-    ///   Constructs a new instance of NETImportPlugin.
+    ///   Constructs a new instance of CSharpCodeSourceImportPlugin.
     /// </summary>
     /// <param name = "environment">An instance of NClassEnvironment.</param>
-    public NETImportPlugin(NClassEnvironment environment)
+    public CSharpCodeSourceImportPlugin(NClassEnvironment environment)
       : base(environment)
     {
       menuItem = new ToolStripMenuItem
@@ -114,6 +114,7 @@ namespace NClass.AssemblyCSharpImport
     {
       if(Workspace.HasActiveProject)
       {
+        /*
         string fileName;
         using (OpenFileDialog dialog = new OpenFileDialog())
         {
@@ -122,16 +123,16 @@ namespace NClass.AssemblyCSharpImport
             return;
           fileName = dialog.FileName;
         }
-
-        ImportSettings settings = new ImportSettings();
+        */
+        NClass.CSharpCodeSourceImport.ImportSettings settings = new NClass.CSharpCodeSourceImport.ImportSettings();
         using(ImportSettingsForm settingsForm = new ImportSettingsForm(settings))
         {
           if(settingsForm.ShowDialog() == DialogResult.OK)
           {
             Diagram diagram = new Diagram(CSharpLanguage.Instance);
-            NETImport importer = new NETImport(diagram, settings);
+            CSharpCodeSourceImport importer = new CSharpCodeSourceImport(diagram, settings);
 
-            if(importer.ImportAssembly(fileName))
+            //if (importer.ImportCodeSource(fileName))
             {
               Workspace.ActiveProject.Add(diagram);
             }

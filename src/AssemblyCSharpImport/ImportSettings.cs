@@ -28,6 +28,16 @@ namespace NClass.AssemblyCSharpImport
     public string Name { get; set; }
 
     /// <summary>
+    /// Gets or sets the items to analyse (.NET Assemblies, C# source code files or folders).
+    /// </summary>
+    public List<string> Items { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating if it is needed to create a new diagram for each item.
+    /// </summary>
+    public bool NewDiagram { get; set; }
+
+    /// <summary>
     /// Gets or sets a value indicating if the rules should be used as a white list.
     /// </summary>
     public bool UseAsWhiteList { get; set; }

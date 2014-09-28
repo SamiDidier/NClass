@@ -52,7 +52,7 @@ namespace NClass.Core
 
 			if (getParameters) {
 				for (int i = 0; i < ArgumentList.Count; i++) {
-					builder.Append(ArgumentList[i].GetUmlDescription(getParameterNames));
+                    builder.Append(ArgumentList[i].GetUmlDescription(getParameterNames, getInitValue));
 					if (i < ArgumentList.Count - 1)
 						builder.Append(", ");
 				}

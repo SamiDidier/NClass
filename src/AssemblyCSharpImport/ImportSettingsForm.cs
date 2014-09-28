@@ -6,6 +6,7 @@ using NClass.AssemblyCSharpImport.Controls;
 using NClass.AssemblyCSharpImport.Lang;
 using NClass.AssemblyCSharpImport.Properties;
 using NReflect.Filter;
+using System.IO;
 
 namespace NClass.AssemblyCSharpImport
 {
@@ -167,6 +168,20 @@ namespace NClass.AssemblyCSharpImport
     /// <param name="e">Information about the event.</param>
     private void cmdOK_Click(object sender, EventArgs e)
     {
+      // Files or folders should be available
+      if (lbEntries.Items == null)
+      {
+          DialogResult = DialogResult.None;
+          MessageBox.Show(Strings.Settings_Error_NoEntries, Strings.Error_MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+          return;
+      }
+      if (lbEntries.Items.Count == 0)
+      {
+          DialogResult = DialogResult.None;
+          MessageBox.Show(Strings.Settings_Error_NoEntries, Strings.Error_MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+          return;
+      }
+
       Close();
     }
 
@@ -334,6 +349,50 @@ namespace NClass.AssemblyCSharpImport
       dgvFilter.CommitEdit(DataGridViewDataErrorContexts.Commit);
     }
 
+    /// <summary>
+    /// Gets called when the Add files-button is clicked. Display a dialogbox to select files by user.
+    /// </summary>
+    /// <param name="sender">The sender of the event.</param>
+    /// <param name="e">Information about the event.</param>
+    private void cmdAddFiles_Click(object sender, EventArgs e)
+    {
+        if(openFileDialogAssemblies.ShowDialog() == DialogResult.OK)
+        {
+            // Add entries into the list
+            foreach (string file in openFileDialogAssemblies.FileNames)
+                AddFile(file);
+        }
+    }
+
+    /// <summary>
+    /// Gets called when the Add folder-button is clicked. Display a dialogbox to select a folder by user.
+    /// </summary>
+    /// <param name="sender">The sender of the event.</param>
+    /// <param name="e">Information about the event.</param>
+    private void cmdAddFolder_Click(object sender, EventArgs e)
+    {
+        if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            AddFolder(folderBrowserDialog.SelectedPath);
+    }
+
+    /// <summary>
+    /// Gets called when the Delete-button is clicked. Deletes the items selected in the list.
+    /// </summary>
+    /// <param name="sender">The sender of the event.</param>
+    /// <param name="e">Information about the event.</param>
+    private void cmdDeleteFileFolder_Click(object sender, EventArgs e)
+    {
+        if (lbEntries.SelectedIndex == -1)
+            return;
+
+        ListBox.SelectedObjectCollection selectedItems = new ListBox.SelectedObjectCollection(lbEntries);
+        selectedItems = lbEntries.SelectedItems;
+
+        // Delete all items selected
+        for (int i = selectedItems.Count - 1; i >= 0; i--)
+            lbEntries.Items.Remove(selectedItems[i]);
+    }
+
     #endregion
 
     #region === Methods
@@ -344,6 +403,25 @@ namespace NClass.AssemblyCSharpImport
     /// <param name="settings">The Settings which shall be displayed.</param>
     private void DisplaySettings(ImportSettings settings)
     {
+      lbEntries.Items.Clear();
+
+      if (settings.Items != null)
+      {
+          if (settings.Items.Count != 0)
+          {
+              foreach (string item in settings.Items)
+              {
+                  // Check entries
+                  AddFile(item);
+                  AddFolder(item);
+              }
+
+              CopyItemsFromListToSettings(ref settings);
+          }
+      }
+
+      chkNewDiagram.Checked = settings.NewDiagram;
+
       dgvFilter.Rows.Clear();
 
       rdoWhiteList.Checked = settings.UseAsWhiteList;
@@ -371,6 +449,10 @@ namespace NClass.AssemblyCSharpImport
     /// <param name="settings">The destination of the store operation.</param>
     private void StoreSettings(ImportSettings settings)
     {
+      CopyItemsFromListToSettings(ref settings);
+
+      settings.NewDiagram = chkNewDiagram.Checked;
+      
       settings.UseAsWhiteList = rdoWhiteList.Checked;
       List<FilterRule> filterRules = new List<FilterRule>(dgvFilter.Rows.Count);
       foreach (DataGridViewRow row in dgvFilter.Rows)
@@ -396,6 +478,164 @@ namespace NClass.AssemblyCSharpImport
       settings.CreateNestings = chkCreateNesting.Checked;
     }
 
+    /// <summary>
+    /// Check if a parent directory in the pathName is already present in the list.
+    /// </summary>
+    /// <param name="pathName">pathName to check.</param>
+    /// <param name="isFile">if pathName is a file to check.</param>
+    /// <returns>A parent folder who is already present in the list or an empty string.</returns>
+    private string IsParentFolderAlreadyExits(string pathName, bool isFile)
+    {
+        if (string.IsNullOrEmpty(pathName) == true)
+            return string.Empty;
+
+        string pathRoot = Path.GetPathRoot(pathName);
+
+        if (string.IsNullOrEmpty(pathRoot) == true)
+            return string.Empty;
+
+        // Check all parent folders
+        string parentFolder = string.Empty;
+        string path = pathName;
+        do
+        {
+            parentFolder = Path.GetDirectoryName(path);
+
+            // Check List
+            foreach (string item in lbEntries.Items)
+            {
+                // When checking File
+                if (isFile == true)
+                {
+                    // if it is a file == false
+                    // Not checking file vs file
+                    if (String.IsNullOrEmpty(Path.GetExtension(item)) == false)
+                        continue;
+                }
+                // When checking folder
+                else
+                {
+                    // If it is a file == true
+                    // Not Checking a folder with a file
+                    if (String.IsNullOrEmpty(Path.GetExtension(item)) == true)
+                        continue;
+                }
+
+                if (parentFolder == item)
+                    return item;
+            }
+
+            path = parentFolder;
+        }
+        while (pathRoot != parentFolder);
+
+        return string.Empty;
+    }
+
+    /// <summary>
+    /// Add a C# source code file or an .NET assembly (.exe and .dll) into the listbox.
+    /// </summary>
+    /// <param name="fileName">fileName to add.</param>
+    private void AddFile(string fileName)
+    {
+        if (String.IsNullOrWhiteSpace(fileName) == true)
+            return;
+
+        string extension = Path.GetExtension(fileName);
+        // Only for C# file
+        if (extension == ".cs")
+        {
+            // Don't add the same files multiple times
+            if (lbEntries.Items.Contains(fileName) == false)
+            {
+                // Don't include a C# source code file if a parent folder is alreday present
+                string parentFolder = IsParentFolderAlreadyExits(fileName, true);
+                if (string.IsNullOrEmpty(parentFolder) == true)
+                    lbEntries.Items.Add(fileName);
+                else
+                    MessageBox.Show(string.Format(Strings.Settings_Error_AddCSharpFile, fileName, parentFolder), Strings.Error_MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        // For .exe and .dll assemblies and Visual Studio files
+        else if (extension == ".exe" || extension == ".dll" || extension == ".sln" || extension == ".csproj") 
+        {
+            // Don't add the same files multiple times
+            if (lbEntries.Items.Contains(fileName) == false)
+                lbEntries.Items.Add(fileName);
+        }
+    }
+
+    /// <summary>
+    /// Add a folder into the listbox.
+    /// </summary>
+    /// <param name="folderName">folderName to add.</param>
+    private void AddFolder(string folderName)
+    {
+        if (String.IsNullOrWhiteSpace(folderName) == true)
+            return;
+
+        // Only for folder
+        if (String.IsNullOrEmpty(Path.GetExtension(folderName)) == false)
+            return;
+
+        // Don't add the same folder multiple times
+        if (lbEntries.Items.Contains(folderName) == false)
+        {
+            string parentFolder = IsParentFolderAlreadyExits(folderName, false);
+
+            // Don't include a subfolder if parent folder is already present
+            if (string.IsNullOrEmpty(parentFolder) == true)
+            {
+                // Remove all subfolders and C# source code items if it is a parent folder included
+                for (int i = 0; i < lbEntries.Items.Count; i++)
+                {
+                    string item = lbEntries.Items[i].ToString();
+                    string extension = Path.GetExtension(item);
+                    string path = Path.GetDirectoryName(item);
+
+                    if (string.IsNullOrWhiteSpace(path) == true)
+                        continue;
+
+                    // A C# code source file or a directory
+                    if (extension != ".cs" && string.IsNullOrEmpty(extension) == false)
+                        continue;
+
+                    // Is it a file in a parent folder added?
+                    if (path.StartsWith(folderName) == false)
+                        continue;
+
+                    // This file is under the folderName added
+                    lbEntries.Items.RemoveAt(i);
+                    i--;
+                }
+                lbEntries.Items.Add(folderName);
+            }
+            else
+                MessageBox.Show(string.Format(Strings.Settings_Error_AddSubFolder, folderName, parentFolder), Strings.Error_MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+
+
+    /// <summary>
+    /// Copy items froml ListBox to Settigns.
+    /// </summary>
+    /// <param name="settings">settings to memorize.</param>
+    private void CopyItemsFromListToSettings(ref ImportSettings settings)
+    {
+        if (lbEntries.Items == null)
+            return;
+
+        if (lbEntries.Items.Count == 0)
+            return;
+
+        List<string> items = new List<string>(lbEntries.Items.Count);
+
+        foreach (string itemName in lbEntries.Items)
+            items.Add(itemName);
+
+        settings.Items = items;
+    }
+    
     #endregion
   }
 }

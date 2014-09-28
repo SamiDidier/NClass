@@ -46,9 +46,16 @@ namespace NClass.Core
 			}
 		}
 
-		protected ArgumentList ArgumentList
+		public ArgumentList ArgumentList
 		{
-			get { return argumentList; }
+			protected get { return argumentList; }
+            set 
+            {
+                if (argumentList.Equals(value) == true)
+                    return;
+
+                argumentList = value;
+            }
 		}
 
 		/// <exception cref="BadSyntaxException">

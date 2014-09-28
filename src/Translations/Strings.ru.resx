@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutNClass" xml:space="preserve">
     <value>О NClass</value>
@@ -230,9 +230,6 @@
   </data>
   <data name="CodeGenerationFailed" xml:space="preserve">
     <value>При генерация кода возникли ошибки.</value>
-  </data>
-  <data name="CodeStyle" xml:space="preserve">
-    <value>Стиль кода</value>
   </data>
   <data name="CommandFailed" xml:space="preserve">
     <value>Команда выполнена с ошибкой.</value>
@@ -813,7 +810,7 @@
     <value>Уменьшить</value>
   </data>
   <data name="RequiresNetFramework" xml:space="preserve">
-    <value>Для работы программы необходим .NET 2.0 Framework.
+    <value>Для работы программы необходим .NET 4.0 Framework.
 Пожалуста, загрузите и установите .NET Framework, а затем перезапустите установку прогаммы.
 Вы хотите загрузить .NET Framework сейчас?</value>
   </data>

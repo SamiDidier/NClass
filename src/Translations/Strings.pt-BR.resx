@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ErrorInvalidDeclaration" xml:space="preserve">
     <value>Declaração inválido.</value>
@@ -677,9 +677,6 @@ Não é possível definir o acesso modificador explícito em execução.</value>
   <data name="Dependency" xml:space="preserve">
     <value>Dependência</value>
   </data>
-  <data name="CodeStyle" xml:space="preserve">
-    <value>Estilo de código</value>
-  </data>
   <data name="MenuEnum" xml:space="preserve">
     <value>&amp;Enum</value>
   </data>
@@ -1074,7 +1071,7 @@ Um crash log e recuperação ficheiros foram criados no diretório Application D
     <value>Novo Valor</value>
   </data>
   <data name="RequiresNetFramework" xml:space="preserve">
-    <value>Este programa precisa do  .NET 2.0 Framework.
+    <value>Este programa precisa do  .NET 4.0 Framework.
 Please download and install the .NET Framework and run this setup again.
 Do you want to download the framework now?</value>
     <comment>This text is used in the Installer program</comment>

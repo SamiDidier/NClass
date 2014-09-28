@@ -189,15 +189,22 @@ namespace NClass.Core
 		{
 			if (item == null)
 				throw new ArgumentNullException("item");
-			if (items.Contains(item))
-				throw new ArgumentException("The project already contains this item.");
+            if (items.Contains(item) == true)
+            {
+                // TO DO
+                // Update diagram
+                // Or manage class splitted in various files
+                //throw new ArgumentException("The project already contains this item.");
+            }
+            else
+            {
+                item.Project = this;
+                item.Modified += new EventHandler(item_Modified);
+                items.Add(item);
 
-			item.Project = this;
-			item.Modified += new EventHandler(item_Modified);
-			items.Add(item);
-
-			OnItemAdded(new ProjectItemEventArgs(item));
-			OnModified(EventArgs.Empty);
+                OnItemAdded(new ProjectItemEventArgs(item));
+                OnModified(EventArgs.Empty);
+            }
 		}
 
 		public void Remove(IProjectItem item)
