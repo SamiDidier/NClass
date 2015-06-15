@@ -14,6 +14,7 @@
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using NClass.Core;
 using NClass.CSharp;
@@ -25,8 +26,8 @@ namespace NClass.CodeGenerator
 		/// <exception cref="NullReferenceException">
 		/// <paramref name="type"/> is null.
 		/// </exception>
-		public CSharpSourceFileGenerator(TypeBase type, string rootNamespace)
-			: base(type, rootNamespace)
+        public CSharpSourceFileGenerator(TypeBase type, string rootNamespace, bool sort_using, bool generate_document_comment, string compagny_name, string copyright_header, string author)
+            : base(type, rootNamespace, sort_using, generate_document_comment, compagny_name, copyright_header, author)
 		{
 		}
 
@@ -35,18 +36,38 @@ namespace NClass.CodeGenerator
 			get { return ".cs"; }
 		}
 
-		protected override void WriteFileContent()
+        protected override void WriteFileContent(string fileName)
 		{
+            WriteCopyrights(fileName);
 			WriteUsings();
 			OpenNamespace();
 			WriteType(Type);
 			CloseNamespace();
 		}
 
+        private void WriteCopyrights(string fileName)
+        {
+            WriteLine(string.Format("<copyright file=\"{0}\" company=\"{1}\">", fileName, compagny_name));
+            WriteLine(copyright_header);
+            WriteLine("</copyright>");
+
+            WriteLine(string.Format("<author>{0}</author>", author));
+            WriteLine(string.Format("<date></date>", DateTime.Now));
+        }
+
 		private void WriteUsings()
 		{
 			StringCollection importList = Settings.Default.CSharpImportList;
-			foreach (string usingElement in importList)
+
+            List<string> str = new List<string>();
+            foreach (string usingElement in importList)
+                str.Add(usingElement);
+
+            // Sort using
+            if (sort_using == true)
+                str.Sort();
+
+            foreach (string usingElement in str)
 				WriteLine("using " + usingElement + ";");
 
 			if (importList.Count > 0)

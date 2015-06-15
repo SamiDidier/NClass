@@ -23,8 +23,6 @@ using System.Reflection;
 using System.ComponentModel;
 using System.Windows.Forms;
 using NClass.Core;
-using NClass.CSharp;
-using NClass.Java;
 using NClass.DiagramEditor;
 using NClass.DiagramEditor.ClassDiagram;
 using NClass.GUI.Dialogs;
@@ -240,8 +238,7 @@ namespace NClass.GUI
 			mnuFile.Text = Strings.MenuFile;
 			mnuNew.Text = Strings.MenuNew;
 			mnuNewProject.Text = Strings.MenuProject;
-			mnuNewCSharpDiagram.Text = Strings.MenuCSharpDiagram;
-			mnuNewJavaDiagram.Text = Strings.MenuJavaDiagram;
+            mnuNewCodingLanguageDiagram.Text = Strings.MenuCodingLanguageDiagram;
 			mnuOpen.Text = Strings.MenuOpen;
 			mnuOpenFile.Text = Strings.MenuOpenFile;
 			mnuSave.Text = Strings.MenuSave;
@@ -281,8 +278,8 @@ namespace NClass.GUI
 			mnuAbout.Text = Strings.MenuAbout;
 
 			// Toolbar
-			toolNewCSharpDiagram.Text = Strings.MenuCSharpDiagram;
-			toolNewJavaDiagram.Text = Strings.MenuJavaDiagram;
+            toolNewCodingLanguageDiagram.Text = Strings.MenuCodingLanguageDiagram;
+            toolNewProject.Text = Strings.MenuProject;
 			toolSave.Text = Strings.Save;
 			toolPrint.Text = Strings.Print;
 			toolCut.Text = Strings.Cut;
@@ -353,8 +350,7 @@ namespace NClass.GUI
 
 		private void UpdateStandardToolStrip()
 		{
-			toolNewCSharpDiagram.Enabled = Workspace.Default.HasActiveProject;
-			toolNewJavaDiagram.Enabled = Workspace.Default.HasActiveProject;
+            toolNewCodingLanguageDiagram.Enabled = Workspace.Default.HasActiveProject;
 			toolSave.Enabled = Workspace.Default.HasActiveProject;
 			toolPrint.Enabled = docManager.HasDocument;
 			toolZoom.Enabled = docManager.HasDocument;
@@ -533,8 +529,7 @@ namespace NClass.GUI
 
 		private void mnuNew_DropDownOpening(object sender, EventArgs e)
 		{
-			mnuNewCSharpDiagram.Enabled = Workspace.Default.HasActiveProject;
-			mnuNewJavaDiagram.Enabled = Workspace.Default.HasActiveProject;
+            mnuNewCodingLanguageDiagram.Enabled = Workspace.Default.HasActiveProject;
 		}
 
 		private void mnuNewProject_Click(object sender, EventArgs e)
@@ -543,25 +538,23 @@ namespace NClass.GUI
 			Workspace.Default.ActiveProject = project;
 		}
 
-		private void mnuNewCSharpDiagram_Click(object sender, EventArgs e)
+        private void mnuNewCodingLanguageDiagram_Click(object sender, EventArgs e)
 		{
 			if (Workspace.Default.HasActiveProject)
 			{
-				ShowModelExplorer = true;
-				Diagram diagram = new Diagram(CSharpLanguage.Instance);
-				Workspace.Default.ActiveProject.Add(diagram);
-				Settings.Default.DefaultLanguageName = CSharpLanguage.Instance.AssemblyName;
-			}
-		}
+                using (CodingLanguageDialog dialog = new CodingLanguageDialog())
+                {
+                    if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        if (dialog.LanguageSelected == null)
+                            throw new NotSupportedException("No Programming Language instance");
 
-		private void mnuNewJavaDiagram_Click(object sender, EventArgs e)
-		{
-			if (Workspace.Default.HasActiveProject)
-			{
-				ShowModelExplorer = true;
-				Diagram diagram = new Diagram(JavaLanguage.Instance);
-				Workspace.Default.ActiveProject.Add(diagram);
-				Settings.Default.DefaultLanguageName = JavaLanguage.Instance.AssemblyName;
+                        ShowModelExplorer = true;
+                        Diagram diagram = new Diagram(dialog.LanguageSelected);
+                        Workspace.Default.ActiveProject.Add(diagram);
+                        Settings.Default.DefaultLanguageName = dialog.LanguageSelected.AssemblyName;
+                    }
+                }
 			}
 		}
 
@@ -854,8 +847,7 @@ namespace NClass.GUI
 
 		private void toolNew_DropDownOpening(object sender, EventArgs e)
 		{
-			toolNewCSharpDiagram.Enabled = Workspace.Default.HasActiveProject;
-			toolNewJavaDiagram.Enabled = Workspace.Default.HasActiveProject;
+            toolNewCodingLanguageDiagram.Enabled = Workspace.Default.HasActiveProject;
 		}
 
 		private void toolOpen_DropDownOpening(object sender, EventArgs e)

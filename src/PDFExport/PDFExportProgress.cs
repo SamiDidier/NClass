@@ -80,6 +80,8 @@ namespace PDFExport
                        IsBackground = true,
                        Name = "PDFExporterProgressDialogShowThread"
                      };
+      // Test samuel
+      showThread.SetApartmentState(ApartmentState.STA);
 
       Point point = parent == null
                       ? new Point(Screen.PrimaryScreen.WorkingArea.Width/2, Screen.PrimaryScreen.WorkingArea.Height/2)

@@ -24,241 +24,309 @@ using NClass.Translations;
 
 namespace NClass.CodeGenerator
 {
-	public partial class Dialog : Form
-	{
-		Project project = null;
+    public partial class Dialog : Form
+    {
+        Project project = null;
 
-		public Dialog()
-		{
-			InitializeComponent();
-			importToolStrip.Renderer = ToolStripSimplifiedRenderer.Default;
-		}
+        public Dialog()
+        {
+            InitializeComponent();
+            importToolStrip.Renderer = ToolStripSimplifiedRenderer.Default;
 
-		private void UpdateTexts()
-		{
-			this.Text = Strings.CodeGeneration;
-			lblDestination.Text = Strings.Destination;
-			btnAddItem.Text = Strings.ButtonAddItem;
-			btnBrowse.Text = Strings.ButtonBrowse;
-			btnGenerate.Text = Strings.ButtonGenerate;
-			btnCancel.Text = Strings.ButtonCancel;
-			toolImportList.Text = Strings.ImportList;
-			toolMoveUp.Text = Strings.MoveUp;
-			toolMoveDown.Text = Strings.MoveDown;
-			toolDelete.Text = Strings.Delete;
-			lblSolutionType.Text = Strings.SolutionType;
-			grpCodeStyle.Text = Strings.CodeStyle;
-			chkUseTabs.Text = Strings.UseTabs;
-			lblIndentSize.Text = Strings.IndentSize;
-			chkNotImplemented.Text = Strings.UseNotImplementedExceptions;
-		}
+            /*
+            this.cboLanguage.Items.AddRange(new object[] {
+            "C#",
+            "Java",
+            "C# extended"});
+            */
+        }
 
-		private void UpdateValues()
-		{
-			lstImportList.Items.Clear();
-			UpdateImportList();
+        private void UpdateTexts()
+        {
+            this.Text = Strings.CodeGeneration;
+            lblDestination.Text = Strings.Destination;
+            btnAddItem.Text = Strings.ButtonAddItem;
+            btnBrowse.Text = Strings.ButtonBrowse;
+            btnGenerate.Text = Strings.ButtonGenerate;
+            btnCancel.Text = Strings.ButtonCancel;
+            toolImportList.Text = Strings.ImportList;
+            toolMoveUp.Text = Strings.MoveUp;
+            toolMoveDown.Text = Strings.MoveDown;
+            toolDelete.Text = Strings.Delete;
+            lblSolutionType.Text = Strings.SolutionType;
+            chkUseTabs.Text = Strings.UseTabs;
+            lblIndentSize.Text = Strings.IndentSize;
+            chkNotImplemented.Text = Strings.UseNotImplementedExceptions;
+            chkXMLDocFood.Text = Strings.GenerateXMLDocFood;
+            chkGenerateNunitTests.Text = Strings.GenerateNunitTests;
+            lblCSharpFormatStyle.Text = Strings.CSharpFormatStyle;
+            chkSortUsing.Text = Strings.SortUsing;
+            lblTemplate.Text = Strings.TemplateFile;
+            btnCopyrightHeader.Text = Strings.CopyrightHeader;
+            btnCustomFormatStyle.Text = Strings.CustomFormatStyle;
+        }
 
-			txtDestination.Text = Settings.Default.DestinationPath;
-			chkUseTabs.Checked = Settings.Default.UseTabsForIndents;
-			updIndentSize.Value = Settings.Default.IndentSize;
-			cboSolutionType.SelectedIndex = (int) Settings.Default.SolutionType;
-			chkNotImplemented.Checked = Settings.Default.UseNotImplementedExceptions;
-			cboLanguage.SelectedIndex = 0;
-		}
+        private void UpdateValues()
+        {
+            lstImportList.Items.Clear();
+            UpdateImportList();
+            EnableCustomFormatStyleButton();
 
-		private void UpdateImportList()
-		{
-			Language language = null;
+            txtDestination.Text = Settings.Default.DestinationPath;
+            chkUseTabs.Checked = Settings.Default.UseTabsForIndents;
+            updIndentSize.Value = Settings.Default.IndentSize;
+            cboSolutionType.SelectedIndex = (int)Settings.Default.SolutionType;
+            chkNotImplemented.Checked = Settings.Default.UseNotImplementedExceptions;
+            cboLanguage.SelectedIndex = 0;
 
-			//TODO: ezt le kellene kérdezni egy LanguageManager-től
-			if (object.Equals(cboLanguage.SelectedItem, "C#"))
-				language = CSharpLanguage.Instance;
-			else if (object.Equals(cboLanguage.SelectedItem, "Java"))
-				language = JavaLanguage.Instance;
+            cboCSharpFormat.SelectedIndex = 0;
+            cboTemplateFile.SelectedIndex = 0;
+        }
 
-			if (language != null)
-			{
-				Settings.Default.Upgrade();
-				lstImportList.Items.Clear();
-				foreach (string importString in Settings.Default.ImportList[language])
-					lstImportList.Items.Add(importString);
-			}
-		}
+        private void UpdateImportList()
+        {
+            Language language = null;
 
-		private void SaveImportList()
-		{
-			StringCollection importList = new StringCollection();
-			foreach (object import in lstImportList.Items)
-				importList.Add(import.ToString());
+            // TO DO: include that in Language Manager
+            if (object.Equals(cboLanguage.SelectedItem, "C#"))
+                language = CSharpLanguage.Instance;
+            else if (object.Equals(cboLanguage.SelectedItem, "Java"))
+                language = JavaLanguage.Instance;
 
-			//TODO: ezt is másképp kéne
-			if (object.Equals(cboLanguage.SelectedItem, "C#"))
-				Settings.Default.CSharpImportList = importList;
-			else if (object.Equals(cboLanguage.SelectedItem, "Java"))
-				Settings.Default.JavaImportList = importList;
-		}
+            if (language != null)
+            {
+                Settings.Default.Upgrade();
+                lstImportList.Items.Clear();
+                foreach (string importString in Settings.Default.ImportList[language])
+                    lstImportList.Items.Add(importString);
+            }
 
-		public void ShowDialog(Project project)
-		{
-			this.project = project;
+            // Hide uneeded UI
+            if (object.Equals(cboLanguage.SelectedItem, "C# extended"))
+            {
+                tabPageCSharpExt.Enabled = true;
+                tabPageCSharpJava.Enabled = false;
+            }
+            else
+            {
+                tabPageCSharpExt.Enabled = false;
+                tabPageCSharpJava.Enabled = true;
+            }
+        }
 
-			UpdateTexts();
-			UpdateValues();
-			ShowDialog();
-			
-			if (DialogResult == DialogResult.OK)
-				Settings.Default.Save();
-			else
-				Settings.Default.Reload();
-		}
+        private void SaveImportList()
+        {
+            StringCollection importList = new StringCollection();
+            foreach (object import in lstImportList.Items)
+                importList.Add(import.ToString());
 
-		private void btnBrowse_Click(object sender, EventArgs e)
-		{
-			using (FolderBrowserDialog dialog = new FolderBrowserDialog())
-			{
-				dialog.Description = Strings.GeneratorTargetDir;
-				dialog.SelectedPath = txtDestination.Text;
-				if (dialog.ShowDialog() == DialogResult.OK)
-					txtDestination.Text = dialog.SelectedPath;
-			}
-		}
+            //TODO: ezt is másképp kéne
+            if (object.Equals(cboLanguage.SelectedItem, "C#"))
+                Settings.Default.CSharpImportList = importList;
+            else if (object.Equals(cboLanguage.SelectedItem, "Java"))
+                Settings.Default.JavaImportList = importList;
+            else if (object.Equals(cboLanguage.SelectedItem, "C# extented"))
+                Settings.Default.CSharpImportList = importList;
+        }
 
-		private void cboLanguage_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			UpdateImportList();
-		}
+        public void ShowDialog(Project project)
+        {
+            this.project = project;
 
-		private void toolMoveUp_Click(object sender, EventArgs e)
-		{
-			int index = lstImportList.SelectedIndex;
-			if (index > 0)
-			{
-				object temp = lstImportList.Items[index];
-				lstImportList.Items[index] = lstImportList.Items[index - 1];
-				lstImportList.Items[index - 1] = temp;
-				lstImportList.SelectedIndex--;
-				SaveImportList();
-			}
-		}
+            UpdateTexts();
+            UpdateValues();
+            ShowDialog();
 
-		private void toolMoveDown_Click(object sender, EventArgs e)
-		{
-			int index = lstImportList.SelectedIndex;
-			if (index < lstImportList.Items.Count - 1)
-			{
-				object temp = lstImportList.Items[index];
-				lstImportList.Items[index] = lstImportList.Items[index + 1];
-				lstImportList.Items[index + 1] = temp;
-				lstImportList.SelectedIndex++;
-				SaveImportList();
-			}
-		}
+            if (DialogResult == DialogResult.OK)
+                Settings.Default.Save();
+            else
+                Settings.Default.Reload();
+        }
 
-		private void toolDelete_Click(object sender, EventArgs e)
-		{
-			if (lstImportList.SelectedItem != null)
-			{
-				int selectedIndex = lstImportList.SelectedIndex;
-				lstImportList.Items.RemoveAt(selectedIndex);
-				if (lstImportList.Items.Count > selectedIndex)
-					lstImportList.SelectedIndex = selectedIndex;
-				else
-					lstImportList.SelectedIndex = lstImportList.Items.Count - 1;
-				SaveImportList();
-			}
-		}
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog dialog = new FolderBrowserDialog())
+            {
+                dialog.Description = Strings.GeneratorTargetDir;
+                dialog.SelectedPath = txtDestination.Text;
+                if (dialog.ShowDialog() == DialogResult.OK)
+                    txtDestination.Text = dialog.SelectedPath;
+            }
+        }
 
-		private void lstImportList_SelectedValueChanged(object sender, EventArgs e)
-		{
-			bool isSelected = (lstImportList.SelectedItem != null);
+        private void cboLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateImportList();
+        }
 
-			toolMoveUp.Enabled = isSelected && (lstImportList.SelectedIndex > 0);
-			toolMoveDown.Enabled = isSelected &&
-				(lstImportList.SelectedIndex < lstImportList.Items.Count - 1);
-			toolDelete.Enabled = isSelected;
-		}
+        private void toolMoveUp_Click(object sender, EventArgs e)
+        {
+            int index = lstImportList.SelectedIndex;
+            if (index > 0)
+            {
+                object temp = lstImportList.Items[index];
+                lstImportList.Items[index] = lstImportList.Items[index - 1];
+                lstImportList.Items[index - 1] = temp;
+                lstImportList.SelectedIndex--;
+                SaveImportList();
+            }
+        }
 
-		private void lstImportList_Leave(object sender, EventArgs e)
-		{
-			lstImportList.SelectedItem = null;
-		}
+        private void toolMoveDown_Click(object sender, EventArgs e)
+        {
+            int index = lstImportList.SelectedIndex;
+            if (index < lstImportList.Items.Count - 1)
+            {
+                object temp = lstImportList.Items[index];
+                lstImportList.Items[index] = lstImportList.Items[index + 1];
+                lstImportList.Items[index + 1] = temp;
+                lstImportList.SelectedIndex++;
+                SaveImportList();
+            }
+        }
 
-		private void txtNewImport_TextChanged(object sender, EventArgs e)
-		{
-			btnAddItem.Enabled = (txtNewImport.Text.Length > 0);
-		}
+        private void toolDelete_Click(object sender, EventArgs e)
+        {
+            if (lstImportList.SelectedItem != null)
+            {
+                int selectedIndex = lstImportList.SelectedIndex;
+                lstImportList.Items.RemoveAt(selectedIndex);
+                if (lstImportList.Items.Count > selectedIndex)
+                    lstImportList.SelectedIndex = selectedIndex;
+                else
+                    lstImportList.SelectedIndex = lstImportList.Items.Count - 1;
+                SaveImportList();
+            }
+        }
 
-		private void txtNewImport_KeyDown(object sender, KeyEventArgs e)
-		{
-			if (e.KeyCode == Keys.Enter && txtNewImport.Text.Length > 0)
-			{
-				lstImportList.Items.Add(txtNewImport.Text);
-				txtNewImport.Text = string.Empty;
-				SaveImportList();
-			}
-		}
+        private void lstImportList_SelectedValueChanged(object sender, EventArgs e)
+        {
+            bool isSelected = (lstImportList.SelectedItem != null);
 
-		private void btnAddItem_Click(object sender, EventArgs e)
-		{
-			lstImportList.Items.Add(txtNewImport.Text);
-			txtNewImport.Text = string.Empty;
-			txtNewImport.Focus();
-			SaveImportList();
-		}
+            toolMoveUp.Enabled = isSelected && (lstImportList.SelectedIndex > 0);
+            toolMoveDown.Enabled = isSelected &&
+                (lstImportList.SelectedIndex < lstImportList.Items.Count - 1);
+            toolDelete.Enabled = isSelected;
+        }
 
-		private void chkUseTabs_CheckedChanged(object sender, EventArgs e)
-		{
-			bool useTabs = chkUseTabs.Checked;
+        private void lstImportList_Leave(object sender, EventArgs e)
+        {
+            lstImportList.SelectedItem = null;
+        }
 
-			lblIndentSize.Enabled = !useTabs;
-			updIndentSize.Enabled = !useTabs;
-		}
+        private void txtNewImport_TextChanged(object sender, EventArgs e)
+        {
+            btnAddItem.Enabled = (txtNewImport.Text.Length > 0);
+        }
 
-		private void btnGenerate_Click(object sender, EventArgs e)
-		{
-			if (project != null)
-			{
-				ValidateSettings();
+        private void txtNewImport_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtNewImport.Text.Length > 0)
+            {
+                lstImportList.Items.Add(txtNewImport.Text);
+                txtNewImport.Text = string.Empty;
+                SaveImportList();
+            }
+        }
 
-				try
-				{
-					SolutionType solutionType = (SolutionType) cboSolutionType.SelectedIndex;
-					Generator generator = new Generator(project, solutionType);
-					string destination = txtDestination.Text;
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+            lstImportList.Items.Add(txtNewImport.Text);
+            txtNewImport.Text = string.Empty;
+            txtNewImport.Focus();
+            SaveImportList();
+        }
 
-					GenerationResult result = generator.Generate(destination);
-					if (result == GenerationResult.Success)
-					{
-						MessageBox.Show(Strings.CodeGenerationCompleted,
-							Strings.CodeGeneration, MessageBoxButtons.OK,
-							MessageBoxIcon.Information);
-					}
-					else if (result == GenerationResult.Error)
-					{
-						MessageBox.Show(Strings.CodeGenerationFailed,
-							Strings.Error, MessageBoxButtons.OK,
-							MessageBoxIcon.Error);
-					}
-					else // Cancelled
-					{
-						this.DialogResult = DialogResult.None;
-					}
-				}
-				catch (Exception ex)
-				{
-					MessageBox.Show(ex.Message, Strings.UnknownError,
-						MessageBoxButtons.OK, MessageBoxIcon.Error);
-				}
-			}
-		}
+        private void chkUseTabs_CheckedChanged(object sender, EventArgs e)
+        {
+            bool useTabs = chkUseTabs.Checked;
 
-		private void ValidateSettings()
-		{
-			Settings.Default.DestinationPath = txtDestination.Text;
-			Settings.Default.UseTabsForIndents = chkUseTabs.Checked;
-			Settings.Default.IndentSize = (int) updIndentSize.Value;
-			Settings.Default.SolutionType = (SolutionType) cboSolutionType.SelectedIndex;
-			Settings.Default.UseNotImplementedExceptions = chkNotImplemented.Checked;
-		}
-	}
+            lblIndentSize.Enabled = !useTabs;
+            updIndentSize.Enabled = !useTabs;
+        }
+
+        private void btnGenerate_Click(object sender, EventArgs e)
+        {
+            if (project != null)
+            {
+                ValidateSettings();
+
+                try
+                {
+                    SolutionType solutionType = (SolutionType)cboSolutionType.SelectedIndex;
+                    Generator generator = new Generator(project, solutionType);
+                    string destination = txtDestination.Text;
+
+                    GenerationResult result = generator.Generate(destination, chkSortUsing.Checked, chkXMLDocFood.Checked, Settings.Default.CompagnyName, Settings.Default.CopyrightHeader, Settings.Default.Author);
+                    if (result == GenerationResult.Success)
+                    {
+                        if (object.Equals(cboLanguage.SelectedItem, "C# extented"))
+                        {
+                            // TO DO : ICSharpCode.NRefactory.CSharp. FormattingOptionsFactory
+
+                            // TO DO : Merge old and new files!
+
+                        }
+
+                        MessageBox.Show(Strings.CodeGenerationCompleted,
+                            Strings.CodeGeneration, MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    }
+                    else if (result == GenerationResult.Error)
+                    {
+                        MessageBox.Show(Strings.CodeGenerationFailed,
+                            Strings.Error, MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                    }
+                    else // Cancelled
+                    {
+                        this.DialogResult = DialogResult.None;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, Strings.UnknownError,
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void ValidateSettings()
+        {
+            Settings.Default.DestinationPath = txtDestination.Text;
+            Settings.Default.UseTabsForIndents = chkUseTabs.Checked;
+            Settings.Default.IndentSize = (int)updIndentSize.Value;
+            Settings.Default.SolutionType = (SolutionType)cboSolutionType.SelectedIndex;
+            Settings.Default.UseNotImplementedExceptions = chkNotImplemented.Checked;
+            // TO DO - Add other settings
+
+        }
+
+        private void cboCSharpFormat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            EnableCustomFormatStyleButton();
+        }
+
+        private void EnableCustomFormatStyleButton()
+        {
+            if (object.Equals(cboCSharpFormat.SelectedItem, "Custom"))
+                btnCustomFormatStyle.Enabled = true;
+            else
+                btnCustomFormatStyle.Enabled = false;
+        }
+
+        private void btnCustomFormatStyle_Click(object sender, EventArgs e)
+        {
+            FormatStyleSettings dialogBox = new FormatStyleSettings();
+
+            dialogBox.ShowDialog();
+        }
+
+        private void btnCopyrightHeader_Click(object sender, EventArgs e)
+        {
+            CopyrightHeader dialogBox = new CopyrightHeader();
+
+            dialogBox.ShowDialog();
+        }
+    }
 }

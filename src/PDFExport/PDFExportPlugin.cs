@@ -13,8 +13,8 @@ namespace PDFExport
   /// <summary>
   /// A plugin to export a diagram to a pdf.
   /// </summary>
-  public class PDFExportPlugin : Plugin
-  {
+  public class PDFExportPlugin : NClass.GUI.Plugin
+    {
     // ========================================================================
     // Attributes
 

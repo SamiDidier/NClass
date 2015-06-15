@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NClass.Translations;
+using NClass.Common;
 
 
 namespace CommandLine
@@ -24,6 +25,10 @@ namespace CommandLine
                 return;
             }
 
+            // Run program with logger
+            App app = new App();
+            string result;
+
             for(int i = 0; i < args.Length; i++)
             {
                 switch (args[i])
@@ -31,14 +36,26 @@ namespace CommandLine
                     // NClass project to load if exist or to create
                     case "-project":
                     case "-p":
-                        if (FileExist(i, args.Length, args[i + 1], "-project", Strings.MissingArgument, Strings.FileDoesntExist) == false)
+                        result = App.FileExist(i, args.Length, args[i + 1], "-project");
+                        if (string.IsNullOrWhiteSpace(result) == false)
+                        {
+                            Console.WriteLine(result);
+                            DisplayHelp();
                             return;
+                        }
+                        // TO DO:
+                        // Workspace.Default.OpenProject(filePath);
                         break;
                     // NClass settings to load (file must exist)
                     case "-settings":
                     case "-s":
-                        if (FileExist(i, args.Length, args[i + 1], "-settings", Strings.MissingArgument, Strings.FileDoesntExist) == false)
+                        result = App.FileExist(i, args.Length, args[i + 1], "-settings");
+                        if (string.IsNullOrWhiteSpace(result) == false)
+                        {
+                            Console.WriteLine(result);
+                            DisplayHelp();
                             return;
+                        }
                         break;
                     case "-directory":
                     case "-d":
@@ -59,6 +76,10 @@ namespace CommandLine
                         workingDirectory = args[i + 1];
                         i++;
                         break;
+                    case "-log_cfg":
+                    case "-l":
+                        app.ArgumentLog(i, args.Length, args[i + 1]);
+                        break;
                     case "-batch":
                     case "-b":
                         runBatch = true;
@@ -74,34 +95,13 @@ namespace CommandLine
                     default:
                         DisplayHelp();
                         return;
-                } 
-
-                // Lancer le programme
-               
+                }
            }
-            
-        }
 
-        private static bool FileExist(int currentIndex, int length, string value, string arg, string missingArgument, string missingFolder)
-        {
-            if (currentIndex + 1 >= length)
-            {
-                Console.WriteLine(String.Format(missingArgument, arg));
-                DisplayHelp();
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomainOnUnhandledException);
 
-                return false;
-            }
-
-            // Check if the folder exists
-            if (Directory.Exists(value) == false)
-            {
-                Console.WriteLine(String.Format(missingFolder, value));
-                DisplayHelp();
-
-                return false;
-            }
-
-            return true;
+            // Run program with logger
+            app.Start();
         }
 
         private static void DisplayHelp()
@@ -114,6 +114,7 @@ namespace CommandLine
             Console.WriteLine("-p / -project          NClass project file to modify or create.");
             Console.WriteLine("-s / -setting          Settings file to load.");
             Console.WriteLine("-d / -directory        Working directory where to put log file.");
+            Console.WriteLine("-l / -log_cfg          Config log file.");
             Console.WriteLine("-b / -batch            To run in batch mode without any input from user.");
         }
 
@@ -121,6 +122,12 @@ namespace CommandLine
         {
             Console.WriteLine("NClass modified by Samuel Didier - Copyright - 2014 - Version 1.0 beta");
             Console.WriteLine("Software to add comments, regions and summary tags based on my custom style to C# source code");
+        }
+
+        private static void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Console.WriteLine(e.ExceptionObject.ToString());
+            Environment.Exit(0);
         }
     }
 }

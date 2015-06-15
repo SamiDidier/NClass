@@ -33,13 +33,14 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\bin\debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -50,7 +51,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\bin\release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -64,10 +65,13 @@
     <Compile Include="BadSyntaxException.cs" />
     <Compile Include="Entities\EntityType.cs" />
     <Compile Include="Members\MemberType.cs" />
+    <Compile Include="Parameters\ArgumentList.cs" />
+    <Compile Include="Parameters\Parameter.cs" />
+    <Compile Include="Parameters\ParameterModifier.cs" />
     <Compile Include="RelationshipEventArgs.cs" />
     <Compile Include="Relationships\AssociationType.cs" />
     <Compile Include="Relationships\RelationshipType.cs" />
-    <Compile Include="LangaugeManager.cs" />
+    <Compile Include="LanguageManager.cs" />
     <Compile Include="ProjectItemEventArgs.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="IModifiable.cs" />
@@ -84,7 +88,6 @@
     <Compile Include="DotNetLanguage.cs" />
     <Compile Include="EntityEventArgs.cs" />
     <Compile Include="Members\EnumValue.cs" />
-    <Compile Include="Parameters\ArgumentList.cs" />
     <Compile Include="Relationships\RelationshipException.cs" />
     <Compile Include="Relationships\TypeRelationship.cs" />
     <Compile Include="Relationships\Direction.cs" />
@@ -113,8 +116,6 @@
     <Compile Include="Members\Method.cs" />
     <Compile Include="Members\OperationModifier.cs" />
     <Compile Include="Members\Operation.cs" />
-    <Compile Include="Parameters\Parameter.cs" />
-    <Compile Include="Parameters\ParameterModifier.cs" />
     <Compile Include="Relationships\NestingRelationship.cs" />
     <Compile Include="Members\Property.cs" />
     <Compile Include="Entities\SortingMode.cs" />
@@ -153,6 +154,7 @@
     <ProjectReference Include="..\Translations\Translations.csproj">
       <Project>{B3B7D798-3D52-47F0-B1A7-A91BC5FE184F}</Project>
       <Name>Translations</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

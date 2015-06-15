@@ -478,7 +478,7 @@
     <value>Zoom</value>
   </data>
   <data name="MenuMembersFormat" xml:space="preserve">
-    <value>&amp;Member's Format</value>
+    <value>&amp;Format des membres</value>
   </data>
   <data name="NotImplemented" xml:space="preserve">
     <value>Cette fonction n'est pas encore implémentée.</value>
@@ -1172,5 +1172,11 @@ Do you still want to continue?</value>
   </data>
   <data name="CustomFormatStyle" xml:space="preserve">
     <value>Style personnalisé</value>
+  </data>
+  <data name="MenuCodingLanguageDiagram" xml:space="preserve">
+    <value>Diagrame language programmation</value>
+  </data>
+  <data name="ProgramingLanguage" xml:space="preserve">
+    <value>Language de programmation</value>
   </data>
 </root>

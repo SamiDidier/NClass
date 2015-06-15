@@ -33,13 +33,14 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\bin\debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -48,7 +49,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\bin\release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -56,12 +57,28 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CSharpExtendedGenerator.cs" />
+    <Compile Include="CopyrightHeader.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CopyrightHeader.Designer.cs">
+      <DependentUpon>CopyrightHeader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CSharpFormattingOptionsUI.cs" />
+    <Compile Include="FormatStyleSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormatStyleSettings.Designer.cs">
+      <DependentUpon>FormatStyleSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="GenerationResult.cs" />
+    <Compile Include="FormattingOptionsFactoryUI.cs" />
     <Compile Include="ToolStripSimplifiedRenderer.cs" />
     <Compile Include="VSSolutionGenerator.cs" />
     <Compile Include="SolutionType.cs" />
@@ -93,27 +110,57 @@
     <Compile Include="SourceFileGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\lib\NRefactory\ICSharpCode.NRefactory.CSharp\ICSharpCode.NRefactory.CSharp.csproj">
+      <Project>{53dca265-3c3c-42f9-b647-f72ba678122b}</Project>
+      <Name>ICSharpCode.NRefactory.CSharp</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib\NRefactory\ICSharpCode.NRefactory\ICSharpCode.NRefactory.csproj">
+      <Project>{3b2a5653-ec97-4001-bb9b-d90f1af2c371}</Project>
+      <Name>ICSharpCode.NRefactory</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib\NStub\NStub.Core\NStub.Core.csproj">
+      <Project>{7a2b767a-715c-480d-a4cf-0510a5052c7d}</Project>
+      <Name>NStub.Core</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib\NStub\NStub.CSharp\NStub.CSharp.csproj">
+      <Project>{20a2c8b8-3c1e-47c4-ac56-277476293b62}</Project>
+      <Name>NStub.CSharp</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{8CF10505-3C2E-4E45-AB90-21613237B412}</Project>
       <Name>Core</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\CSharp\CSharp.csproj">
       <Project>{755B2714-62DB-419C-9097-49C08439E7E3}</Project>
       <Name>CSharp</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Java\Java.csproj">
       <Project>{255565B1-3246-4184-9F71-19178FE0BA65}</Project>
       <Name>Java</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Translations\Translations.csproj">
       <Project>{B3B7D798-3D52-47F0-B1A7-A91BC5FE184F}</Project>
       <Name>Translations</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Dialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Dialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CopyrightHeader.resx">
+      <DependentUpon>CopyrightHeader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormatStyleSettings.resx">
+      <DependentUpon>FormatStyleSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <SubType>Designer</SubType>
@@ -150,6 +197,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

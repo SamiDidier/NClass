@@ -25,8 +25,8 @@ namespace NClass.CodeGenerator
 		/// <exception cref="NullReferenceException">
 		/// <paramref name="type"/> is null.
 		/// </exception>
-		public JavaSourceFileGenerator(TypeBase type, string rootNamespace)
-			: base(type, rootNamespace)
+        public JavaSourceFileGenerator(TypeBase type, string rootNamespace, bool sort_using, bool generate_document_comment, string compagny_name, string copyright_header, string author)
+            : base(type, rootNamespace, sort_using, generate_document_comment, compagny_name, copyright_header, author)
 		{
 		}
 
@@ -35,7 +35,7 @@ namespace NClass.CodeGenerator
 			get { return ".java"; }
 		}
 
-		protected override void WriteFileContent()
+        protected override void WriteFileContent(string fileName)
 		{
 			WritePackageDeclaration();
 			WriteImportList();

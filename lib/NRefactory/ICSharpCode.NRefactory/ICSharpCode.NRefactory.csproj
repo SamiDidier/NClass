@@ -48,13 +48,15 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
     <DebugSymbols>True</DebugSymbols>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>bin\Debug\ICSharpCode.NRefactory.xml</DocumentationFile>
+    <OutputPath>..\..\..\bin\debug\Libs\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>PdbOnly</DebugType>
-    <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>bin\Release\ICSharpCode.NRefactory.xml</DocumentationFile>
+    <OutputPath>..\..\..\bin\release\Libs\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'net_4_5_Debug' ">
     <Optimize>False</Optimize>

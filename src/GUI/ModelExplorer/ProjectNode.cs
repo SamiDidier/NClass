@@ -17,12 +17,12 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using NClass.Core;
-using NClass.Java;
-using NClass.CSharp;
 using NClass.DiagramEditor.ClassDiagram;
 using NClass.GUI.Properties;
+using NClass.GUI.Dialogs;
 using NClass.Translations;
 using NClass.DiagramEditor;
+
 
 namespace NClass.GUI.ModelExplorer
 {
@@ -35,8 +35,7 @@ namespace NClass.GUI.ModelExplorer
 		{
 			contextMenu.Items.AddRange(new ToolStripItem[] {
 				new ToolStripMenuItem(Strings.MenuAddNew, Resources.NewDocument,
-					new ToolStripMenuItem(Strings.MenuCSharpDiagram, null, newCSharpDiagram_Click),
-					new ToolStripMenuItem(Strings.MenuJavaDiagram, null, newJavaDiagram_Click)
+					new ToolStripMenuItem(Strings.MenuCodingLanguageDiagram, null, mnuNewCodingLanguageDiagram_Click)
 				),
 				new ToolStripSeparator(),
 				new ToolStripMenuItem(Strings.MenuSave, Resources.Save, save_Click),
@@ -180,24 +179,23 @@ namespace NClass.GUI.ModelExplorer
 			base.BeforeDelete();
 		}
 
-		private static void newCSharpDiagram_Click(object sender, EventArgs e)
+        private static void mnuNewCodingLanguageDiagram_Click(object sender, EventArgs e)
 		{
-			ToolStripItem menuItem = (ToolStripItem) sender;
-			Project project = ((ProjectNode) menuItem.OwnerItem.Owner.Tag).Project;
+            using (CodingLanguageDialog dialog = new CodingLanguageDialog())
+            {
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    if (dialog.LanguageSelected == null)
+                        throw new NotSupportedException("No Programming Language instance");
 
-			Diagram diagram = new Diagram(CSharpLanguage.Instance);
-			project.Add(diagram);
-			Settings.Default.DefaultLanguageName = CSharpLanguage.Instance.AssemblyName;
-		}
+                    ToolStripItem menuItem = (ToolStripItem)sender;
+                    Project project = ((ProjectNode)menuItem.OwnerItem.Owner.Tag).Project;
 
-		private static void newJavaDiagram_Click(object sender, EventArgs e)
-		{
-			ToolStripItem menuItem = (ToolStripItem) sender;
-			Project project = ((ProjectNode) menuItem.OwnerItem.Owner.Tag).Project;
-
-			Diagram diagram = new Diagram(JavaLanguage.Instance);
-			Settings.Default.DefaultLanguageName = JavaLanguage.Instance.AssemblyName;
-			project.Add(diagram);
+                    Diagram diagram = new Diagram(dialog.LanguageSelected);
+                    project.Add(diagram);
+                    Settings.Default.DefaultLanguageName = dialog.LanguageSelected.AssemblyName;
+                }
+            }
 		}
 
 		private static void rename_Click(object sender, EventArgs e)

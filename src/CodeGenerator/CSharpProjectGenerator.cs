@@ -48,9 +48,9 @@ namespace NClass.CodeGenerator
 			}
 		}
 
-		protected override SourceFileGenerator CreateSourceFileGenerator(TypeBase type)
+        protected override SourceFileGenerator CreateSourceFileGenerator(TypeBase type, bool sort_using, bool generate_document_comment, string compagny_name, string copyright_header, string author)
 		{
-			return new CSharpSourceFileGenerator(type, RootNamespace);
+            return new CSharpSourceFileGenerator(type, RootNamespace, sort_using, generate_document_comment, compagny_name, copyright_header, author);
 		}
 
 		protected override bool GenerateProjectFiles(string location)

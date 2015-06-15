@@ -1185,4 +1185,10 @@ Do you still want to continue?</value>
   <data name="MissingArgument" xml:space="preserve">
     <value>Missing Argument for {0}</value>
   </data>
+  <data name="MenuCodingLanguageDiagram" xml:space="preserve">
+    <value>Coding language diagram</value>
+  </data>
+  <data name="ProgramingLanguage" xml:space="preserve">
+    <value>Programing Language</value>
+  </data>
 </root>

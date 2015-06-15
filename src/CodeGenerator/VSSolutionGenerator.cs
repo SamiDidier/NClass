@@ -89,7 +89,7 @@ namespace NClass.CodeGenerator
 			throw new ArgumentException("The model has an unknown language.");
 		}
 
-		protected override bool GenerateSolutionFile(string location)
+        protected override bool GenerateSolutionFile(string location)
 		{
 			try
 			{

@@ -6,16 +6,15 @@ using NClass.CSharp;
 using NClass.DiagramEditor.ClassDiagram;
 using NClass.GUI;
 using System.IO;
-using ICSharpCode.NRefactory.CSharp;
 
 
 namespace NClass.AssemblyCSharpImport
 {
-  /// <summary>
-  ///   Implements the PlugIn-Interface of NClass.
-  /// </summary>
-  public class ImportPlugin : Plugin
-  {
+    /// <summary>
+    ///   Implements the PlugIn-Interface of NClass.
+    /// </summary>
+    public class ImportPlugin : NClass.GUI.Plugin
+    {
     // ========================================================================
     // Fields
 
@@ -40,7 +39,7 @@ namespace NClass.AssemblyCSharpImport
     {
       try
       {
-        Strings.Culture = CultureInfo.GetCultureInfo(Settings.Default.UILanguage);
+        Strings.Culture = CultureInfo.GetCultureInfo(NClass.GUI.Settings.Default.UILanguage);
       }
       catch(ArgumentException)
       {

@@ -183,3 +183,6 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 /src/Core/Parameters/*.bak
+
+#Winmerge backup
+*.bak

@@ -1673,7 +1673,8 @@ namespace NClass.DiagramEditor.ClassDiagram
 		protected override void AddInterface(InterfaceType newInterface)
 		{
 			base.AddInterface(newInterface);
-			AddShape(new InterfaceShape(newInterface));
+            InterfaceShape test = new InterfaceShape(newInterface);
+			AddShape(test);
 		}
 
 		protected override void AddEnum(EnumType newEnum)

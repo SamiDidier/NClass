@@ -45,13 +45,15 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>PdbOnly</DebugType>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-    <OutputPath>..\bin\Release\</OutputPath>
+    <OutputPath>..\..\..\bin\release\Libs\</OutputPath>
+    <DocumentationFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
     <DebugSymbols>True</DebugSymbols>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-    <OutputPath>..\bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\bin\debug\Libs\</OutputPath>
+    <DocumentationFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'net_4_5_Debug' ">
     <Optimize>False</Optimize>
@@ -413,8 +415,5 @@
   <ItemGroup>
     <None Include="Parser\mcs\cs-parser.jay" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="PatternMatching\" />
-    <Folder Include="IndentEngine\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

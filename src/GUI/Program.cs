@@ -16,9 +16,13 @@
 using System;
 using System.IO;
 using System.Reflection;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Windows.Forms;
+using CrashReporterDotNET;
 using NClass.Translations;
+using NClass.Common;
+
 
 namespace NClass.GUI
 {
@@ -36,7 +40,47 @@ namespace NClass.GUI
 		[STAThread]
 		private static void Main(string[] args)
 		{
-			CrashHandler.CreateGlobalErrorHandler();
+            // Run program with logger
+            App app = new App();
+            string result;
+            List<string> projectFiles = new List<string>();
+
+            for (int i = 0; i < args.Length; i++)
+            {
+                switch (args[i])
+                {
+                    case "-projects":
+                    case "-p":
+                        result = App.FileExist(i, args.Length, args[i + 1], "-projects");
+                        if (string.IsNullOrWhiteSpace(result) == false)
+                            return;
+
+                        // Do we have other project behind the fist one
+                        for (int j = i + 2; j < args.Length; j++)
+                        {
+                            // If another arg is present
+                            if (args[j].StartsWith("-") == true)
+                                break;
+
+                            result = App.FileExist(j, args.Length, args[j], "-projects");
+
+                            if (string.IsNullOrWhiteSpace(result) == false)
+                                continue;
+
+                            projectFiles.Add(args[j]);
+                        }
+                        break;
+                    case "-log_cfg":
+                    case "-l":
+                        app.ArgumentLog(i, args.Length, args[i + 1]);
+                        break;
+                }
+            }
+
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomainOnUnhandledException);
+            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(ApplicationThreadException);
+
+            app.Start();
 			UpdateSettings();
 
 			// Set the user interface language
@@ -47,10 +91,11 @@ namespace NClass.GUI
 			// Some GUI settings
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			ToolStripManager.VisualStylesEnabled = false;
+            Application.DoEvents();
+            ToolStripManager.VisualStylesEnabled = false;
 
 			// Launch the application
-			LoadFiles(args);
+            LoadProjects(projectFiles.ToArray());
 			Application.Run(new MainForm());
 
 			// Save application settings
@@ -85,7 +130,7 @@ namespace NClass.GUI
 			}
 		}
 
-		private static void LoadFiles(string[] args)
+        private static void LoadProjects(string[] args)
 		{
 			if (args.Length >= 1)
 			{
@@ -94,10 +139,33 @@ namespace NClass.GUI
 					Workspace.Default.OpenProject(filePath);
 				}
 			}
-			else if (Settings.Default.RememberOpenProjects)
-			{
-				Workspace.Default.Load();
-			}
+            else
+            {
+                if (Settings.Default.RememberOpenProjects)
+                    Workspace.Default.Load();
+            }
 		}
+
+        // Crash handling
+        private static void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            ReportCrash((Exception) e.ExceptionObject);
+            Environment.Exit(0);
+        }
+
+        private static void ApplicationThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        {
+            ReportCrash(e.Exception);
+        }
+
+        private static void ReportCrash(Exception exception)
+        {
+            var reportCrash = new ReportCrash
+            {
+                ToEmail = "13300sam@gmail.com"
+            };
+
+            reportCrash.Send(exception);
+        }
 	}
 }

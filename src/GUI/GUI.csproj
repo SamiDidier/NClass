@@ -10,7 +10,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NClass.GUI</RootNamespace>
     <AssemblyName>NClass</AssemblyName>
-    <StartupObject>NClass.GUI.Program</StartupObject>
+    <StartupObject>
+    </StartupObject>
     <ApplicationIcon>
     </ApplicationIcon>
     <FileUpgradeFlags>
@@ -34,23 +35,24 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\bin\debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\bin\release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -64,7 +66,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CrashHandler.cs" />
+    <Compile Include="Dialogs\CodingLanguageDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\CodingLanguageDialog.Designer.cs">
+      <DependentUpon>CodingLanguageDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="SimplePlugin.cs" />
     <Compile Include="NClassEnvironment.cs" />
     <Compile Include="Plugin.cs" />
@@ -103,6 +110,9 @@
     <EmbeddedResource Include="Dialogs\AboutDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AboutDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\CodingLanguageDialog.resx">
+      <DependentUpon>CodingLanguageDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\OptionsDialog.resx">
       <SubType>Designer</SubType>
@@ -154,6 +164,7 @@
     <Compile Include="TabbedWindow.Designer.cs">
       <DependentUpon>TabbedWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="TextBoxAppender.cs" />
     <Compile Include="UpdatesChecker.cs" />
     <Compile Include="WindowSettings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -166,29 +177,35 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CodeGenerator\CodeGenerator.csproj">
-      <Project>{BE60D62D-E757-44F4-A342-5388742F5986}</Project>
-      <Name>CodeGenerator</Name>
+    <ProjectReference Include="..\..\lib\CrashReporter.NET-1.5\CrashReporter.NET\CrashReporter.NET.csproj">
+      <Project>{67912bda-1572-46b0-8623-5872d9dadbc8}</Project>
+      <Name>CrashReporter.NET</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\lib\log4net-1.2.13\src\log4net.vs2010.csproj">
+      <Project>{181fe707-e161-4722-9f38-6aaab6faa106}</Project>
+      <Name>log4net.vs2010</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{582aeb3c-84e7-4052-a631-b4ea716c5f72}</Project>
+      <Name>Common</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{8CF10505-3C2E-4E45-AB90-21613237B412}</Project>
+      <Project>{8cf10505-3c2e-4e45-ab90-21613237b412}</Project>
       <Name>Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CSharp\CSharp.csproj">
-      <Project>{755B2714-62DB-419C-9097-49C08439E7E3}</Project>
-      <Name>CSharp</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\DiagramEditor\DiagramEditor.csproj">
-      <Project>{F52A7548-E60A-485B-9C84-1D2871416DB7}</Project>
+      <Project>{f52a7548-e60a-485b-9c84-1d2871416db7}</Project>
       <Name>DiagramEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Java\Java.csproj">
-      <Project>{255565B1-3246-4184-9F71-19178FE0BA65}</Project>
-      <Name>Java</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Translations\Translations.csproj">
       <Project>{B3B7D798-3D52-47F0-B1A7-A91BC5FE184F}</Project>
       <Name>Translations</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

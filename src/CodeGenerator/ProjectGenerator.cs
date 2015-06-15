@@ -78,17 +78,17 @@ namespace NClass.CodeGenerator
 		/// <exception cref="ArgumentException">
 		/// <paramref name="location"/> contains invalid path characters.
 		/// </exception>
-		internal bool Generate(string location)
+        internal bool Generate(string location, bool sort_using, bool generate_document_comment, string compagny_name, string copyright_header, string author)
 		{
 			bool success = true;
 
-			success &= GenerateSourceFiles(location);
+            success &= GenerateSourceFiles(location, sort_using, generate_document_comment, compagny_name, copyright_header, author);
 			success &= GenerateProjectFiles(location);
 
 			return success;
 		}
 
-		private bool GenerateSourceFiles(string location)
+        private bool GenerateSourceFiles(string location, bool sort_using, bool generate_document_comment, string compagny_name, string copyright_header, string author)
 		{
 			bool success = true;
 			location = Path.Combine(location, ProjectName);
@@ -100,7 +100,7 @@ namespace NClass.CodeGenerator
 
 				if (type != null && !type.IsNested)
 				{
-					SourceFileGenerator sourceFile = CreateSourceFileGenerator(type);
+                    SourceFileGenerator sourceFile = CreateSourceFileGenerator(type, sort_using, generate_document_comment, compagny_name, copyright_header, author);
 
 					try
 					{
@@ -117,7 +117,7 @@ namespace NClass.CodeGenerator
 			return success;
 		}
 
-		protected abstract SourceFileGenerator CreateSourceFileGenerator(TypeBase type);
+        protected abstract SourceFileGenerator CreateSourceFileGenerator(TypeBase type, bool sort_using, bool generate_document_comment, string compagny_name, string copyright_header, string author);
 
 		protected abstract bool GenerateProjectFiles(string location);
 	}

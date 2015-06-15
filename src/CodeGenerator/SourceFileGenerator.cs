@@ -30,17 +30,27 @@ namespace NClass.CodeGenerator
 		TypeBase type;
 		string rootNamespace;
 		int indentLevel = 0;
+        protected bool sort_using;
+        protected bool generate_document_comment;
+        protected string compagny_name;
+        protected string copyright_header;
+        protected string author;
 
 		/// <exception cref="ArgumentNullException">
 		/// <paramref name="type"/> is null.
 		/// </exception>
-		protected SourceFileGenerator(TypeBase type, string rootNamespace)
+        protected SourceFileGenerator(TypeBase type, string rootNamespace, bool sort_using, bool generate_document_comment, string compagny_name, string copyright_header, string author)
 		{
 			if (type == null)
 				throw new ArgumentNullException("type");
 
 			this.type = type;
 			this.rootNamespace = rootNamespace;
+            this.sort_using = sort_using;
+            this.generate_document_comment = generate_document_comment;
+            this.compagny_name = compagny_name;
+            this.copyright_header = copyright_header;
+            this.author = author;
 		}
 
 		protected TypeBase Type
@@ -87,7 +97,7 @@ namespace NClass.CodeGenerator
 
 				using (StreamWriter writer = new StreamWriter(path, false))
 				{
-					WriteFileContent(writer);
+                    WriteFileContent(fileName, writer);
 				}
 				return fileName;
 			}
@@ -103,18 +113,18 @@ namespace NClass.CodeGenerator
 		/// <exception cref="ObjectDisposedException">
 		/// The <see cref="TextWriter"/> is closed.
 		/// </exception>
-		private void WriteFileContent(TextWriter writer)
+		private void WriteFileContent(string fileName, TextWriter writer)
 		{
 			if (codeBuilder == null)
 				codeBuilder = new StringBuilder(DefaultBuilderCapacity);
 			else
 				codeBuilder.Length = 0;
 
-			WriteFileContent();
+            WriteFileContent(fileName);
 			writer.Write(codeBuilder.ToString());
 		}
 
-		protected abstract void WriteFileContent();
+        protected abstract void WriteFileContent(string fileName);
 
 		internal static void FinishWork()
 		{

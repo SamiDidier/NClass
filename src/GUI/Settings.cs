@@ -18,7 +18,6 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Configuration;
 using NClass.Core;
-using NClass.CSharp;
 using NClass.Translations;
 
 namespace NClass.GUI
@@ -29,9 +28,19 @@ namespace NClass.GUI
 
 		public Language GetDefaultLanguage()
 		{
+            /*
+            // TO DO: Manage an exception if are loaded
 			Language defaultLanguage = Language.GetLanguage(DefaultLanguageName);
 
 			return defaultLanguage ?? CSharpLanguage.Instance;
+            */
+            Language defaultLanguage = Language.GetLanguage(DefaultLanguageName);
+
+            if (defaultLanguage == null)
+                // TO DO: Select a default language available!
+                throw new InvalidDataException("Invalid project language.");
+
+            return defaultLanguage;
 		}
 
 		public void AddRecentFile(string recentFile)

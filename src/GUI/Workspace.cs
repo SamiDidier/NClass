@@ -110,8 +110,8 @@ namespace NClass.GUI
 				projects.Add(project);
 				project.Modified += new EventHandler(project_StateChanged);
 				project.FileStateChanged += new EventHandler(project_StateChanged);
-				if (project.FilePath != null)
-					Settings.Default.AddRecentFile(project.FilePath);
+				//if (project.FilePath != null)
+					//Settings.Default.AddRecentFile(project.FilePath);
 				OnProjectAdded(new ProjectEventArgs(project));
 			}
 		}
@@ -225,6 +225,8 @@ namespace NClass.GUI
 				else 
 					return null;
 			}
+
+            //return null;
 		}
 
 		public Project OpenProject(string fileName)

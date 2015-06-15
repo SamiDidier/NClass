@@ -153,7 +153,7 @@ namespace NClass.Core
             else
                 format = "{2}";
 
-            if (initValue == true && string.IsNullOrEmpty(defaultValue) == false)
+            if (initValue == true)
                 format += " = {3}";
 
             return string.Format(format, GetModifierString(Modifier), Name, Type, defaultValue);
