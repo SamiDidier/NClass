@@ -13,42 +13,40 @@
 // this program; if not, write to the Free Software Foundation, Inc., 
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-using System;
-
 namespace NClass.Core
 {
-	public enum AccessModifier
-	{
-		/// <summary>
-		/// The default access in the context of the element's scope.
-		/// </summary>
-		Default,
+    public enum AccessModifier
+    {
+        /// <summary>
+        ///     The default access in the context of the element's scope.
+        /// </summary>
+        Default,
 
-		/// <summary>
-		/// Access is not restricted.
-		/// </summary>
-		Public,
+        /// <summary>
+        ///     Access is not restricted.
+        /// </summary>
+        Public,
 
-		/// <summary>
-		/// Access is limited to the current assembly or types 
-		/// derived from the containing class.
-		/// </summary>
-		ProtectedInternal,
+        /// <summary>
+        ///     Access is limited to the current assembly or types
+        ///     derived from the containing class.
+        /// </summary>
+        ProtectedInternal,
 
-		/// <summary>
-		/// Access is limited to the current assembly.
-		/// </summary>
-		Internal,
+        /// <summary>
+        ///     Access is limited to the current assembly.
+        /// </summary>
+        Internal,
 
-		/// <summary>
-		/// Access is limited to the containing class or types 
-		/// derived from the containing class.
-		/// </summary>
-		Protected,
+        /// <summary>
+        ///     Access is limited to the containing class or types
+        ///     derived from the containing class.
+        /// </summary>
+        Protected,
 
-		/// <summary>
-		/// Access is limited to the containing type.
-		/// </summary>
-		Private
-	}
+        /// <summary>
+        ///     Access is limited to the containing type.
+        /// </summary>
+        Private
+    }
 }

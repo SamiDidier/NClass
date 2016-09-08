@@ -18,20 +18,15 @@ using System.Drawing;
 
 namespace NClass.DiagramEditor.ClassDiagram
 {
-	public delegate void MoveEventHandler(object sender, MoveEventArgs e);
+    public delegate void MoveEventHandler(object sender, MoveEventArgs e);
 
-	public class MoveEventArgs : EventArgs
-	{
-		Size offset;
+    public class MoveEventArgs : EventArgs
+    {
+        public MoveEventArgs(Size offset)
+        {
+            Offset = offset;
+        }
 
-		public MoveEventArgs(Size offset)
-		{
-			this.offset = offset;
-		}
-
-		public Size Offset
-		{
-			get { return offset; }
-		}
-	}
+        public Size Offset { get; }
+    }
 }

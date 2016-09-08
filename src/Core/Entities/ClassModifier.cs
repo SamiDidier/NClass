@@ -13,27 +13,25 @@
 // this program; if not, write to the Free Software Foundation, Inc., 
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-using System;
-
 namespace NClass.Core
 {
-	public enum ClassModifier
-	{
-		None,
+    public enum ClassModifier
+    {
+        None,
 
-		/// <summary>
-		/// Indicates that a class is intended only to be a base class of other classes.
-		/// </summary>
-		Abstract,
+        /// <summary>
+        ///     Indicates that a class is intended only to be a base class of other classes.
+        /// </summary>
+        Abstract,
 
-		/// <summary>
-		/// Specifies that a class cannot be inherited.
-		/// </summary>
-		Sealed,
+        /// <summary>
+        ///     Specifies that a class cannot be inherited.
+        /// </summary>
+        Sealed,
 
-		/// <summary>
-		/// Indicates that a class contains only static members.
-		/// </summary>
-		Static
-	}
+        /// <summary>
+        ///     Indicates that a class contains only static members.
+        /// </summary>
+        Static
+    }
 }

@@ -18,35 +18,45 @@ using NClass.Core;
 
 namespace NClass.CodeGenerator
 {
-	public class Generator
-	{
-		SolutionGenerator solutionGenerator;
+    public class Generator
+    {
+        private readonly SolutionGenerator solutionGenerator;
 
-		/// <exception cref="ArgumentNullException">
-		/// <paramref name="project"/> is null.
-		/// </exception>
-		public Generator(Project project, SolutionType type)
-		{
-			if (project == null)
-				throw new ArgumentNullException("project");
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="project" /> is null.
+        /// </exception>
+        public Generator(Project project, SolutionType type)
+        {
+            if (project == null)
+                throw new ArgumentNullException("project");
 
-			solutionGenerator = CreateSolutionGenerator(project, type);
-		}
+            solutionGenerator = CreateSolutionGenerator(project, type);
+        }
 
-		protected virtual SolutionGenerator CreateSolutionGenerator(Project project, SolutionType type)
-		{
-			return new VSSolutionGenerator(project, type);
-		}
+        protected virtual SolutionGenerator CreateSolutionGenerator(Project project, SolutionType type)
+        {
+            return new VSSolutionGenerator(project, type);
+        }
 
-		/// <exception cref="ArgumentException">
-		/// <paramref name="location"/> contains invalid path characters.
-		/// </exception>
-        public GenerationResult Generate(string location, bool sort_using, bool generate_document_comment, string compagny_name, string copyright_header, string author)
-		{
-            GenerationResult result = solutionGenerator.Generate(location, sort_using, generate_document_comment, compagny_name, copyright_header, author);
-			SourceFileGenerator.FinishWork();
+        /// <exception cref="ArgumentException">
+        ///     <paramref name="location" /> contains invalid path characters.
+        /// </exception>
+        public GenerationResult Generate(string location,
+                                         bool sort_using,
+                                         bool generate_document_comment,
+                                         string compagny_name,
+                                         string copyright_header,
+                                         string author)
+        {
+            var result = solutionGenerator.Generate(location,
+                                                    sort_using,
+                                                    generate_document_comment,
+                                                    compagny_name,
+                                                    copyright_header,
+                                                    author);
+            SourceFileGenerator.FinishWork();
 
-			return result;
-		}
-	}
+            return result;
+        }
+    }
 }

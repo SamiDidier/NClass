@@ -14,273 +14,247 @@
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using System;
-using System.Xml;
 using System.Collections;
-using System.Text.RegularExpressions;
+using System.Xml;
 using NClass.Translations;
 
 namespace NClass.Core
 {
-	public abstract class TypeBase : LanguageElement, IEntity
-	{
-		string name;
-		AccessModifier access = AccessModifier.Public;
-		CompositeType nestingParent = null;
+    public abstract class TypeBase : LanguageElement, IEntity
+    {
+        private AccessModifier access = AccessModifier.Public;
+        private string name;
+        private CompositeType nestingParent;
 
-		public event SerializeEventHandler Serializing;
-		public event SerializeEventHandler Deserializing;
+        /// <exception cref="BadSyntaxException">
+        ///     The <paramref name="name" /> does not fit to the syntax.
+        /// </exception>
+        protected TypeBase(string name)
+        {
+            Initializing = true;
+            Name = name;
+            Initializing = false;
+        }
 
-		/// <exception cref="BadSyntaxException">
-		/// The <paramref name="name"/> does not fit to the syntax.
-		/// </exception>
-		protected TypeBase(string name)
-		{
-			Initializing = true;
-			Name = name;
-			Initializing = false;
-		}
+        /// <exception cref="BadSyntaxException">
+        ///     The type visibility is not valid in the current context.
+        /// </exception>
+        public virtual AccessModifier AccessModifier
+        {
+            get { return access; }
+            set
+            {
+                if (!Language.IsValidModifier(value))
+                    throw new BadSyntaxException(Strings.ErrorInvalidModifier);
 
-		/// <exception cref="BadSyntaxException">
-		/// The <paramref name="value"/> does not fit to the syntax.
-		/// </exception>
-		public virtual string Name
-		{
-			get
-			{
-				return name;
-			}
-			set
-			{
-				string newName = Language.GetValidName(value, true);
+                if (access != value)
+                {
+                    access = value;
+                    Changed();
+                }
+            }
+        }
 
-				if (newName != name) {
-					name = newName;
-					Changed();
-				}
-			}
-		}
+        public abstract AccessModifier DefaultAccess { get; }
 
-		public abstract EntityType EntityType
-		{
-			get;
-		}
+        public AccessModifier Access
+        {
+            get
+            {
+                if (AccessModifier == AccessModifier.Default)
+                    return DefaultAccess;
+                return AccessModifier;
+            }
+        }
 
-		/// <exception cref="BadSyntaxException">
-		/// The type visibility is not valid in the current context.
-		/// </exception>
-		public virtual AccessModifier AccessModifier
-		{
-			get
-			{
-				return access;
-			}
-			set
-			{
-				if (!Language.IsValidModifier(value))
-					throw new BadSyntaxException(Strings.ErrorInvalidModifier);
+        /// <exception cref="RelationshipException">
+        ///     Parent type does not support nesting.-or-
+        ///     The inner type is already nested.-or-
+        ///     The parent type is already a child member of the type.
+        /// </exception>
+        public virtual CompositeType NestingParent
+        {
+            get { return nestingParent; }
+            protected internal set
+            {
+                if (nestingParent != value)
+                {
+                    if (value == this)
+                    {
+                        throw new RelationshipException(Strings.ErrorRecursiveNesting);
+                    }
+                    if (value != null && !value.SupportsNesting)
+                    {
+                        throw new RelationshipException(Strings.ErrorNestingNotSupported);
+                    }
+                    if (value != null && value.IsNestedAncestor(this))
+                    {
+                        throw new RelationshipException(Strings.ErrorCyclicNesting);
+                    }
 
-				if (access != value) {
-					access = value;
-					Changed();
-				}
-			}
-		}
+                    if (nestingParent != null)
+                        nestingParent.RemoveNestedChild(this);
+                    nestingParent = value;
+                    if (nestingParent != null)
+                        nestingParent.AddNestedChild(this);
+                    Changed();
+                }
+            }
+        }
 
-		public abstract AccessModifier DefaultAccess
-		{
-			get;
-		}
+        public bool IsNested { get { return NestingParent != null; } }
 
-		public AccessModifier Access
-		{
-			get
-			{
-				if (AccessModifier == AccessModifier.Default)
-					return DefaultAccess;
-				else
-					return AccessModifier;
-			}
-		}
+        public abstract Language Language { get; }
 
-		/// <exception cref="RelationshipException">
-		/// Parent type does not support nesting.-or-
-		/// The inner type is already nested.-or-
-		/// The parent type is already a child member of the type.
-		/// </exception>
-		public virtual CompositeType NestingParent
-		{
-			get
-			{
-				return nestingParent;
-			}
-			protected internal set
-			{
-				if (nestingParent != value) {
-					if (value == this) {
-						throw new RelationshipException(Strings.ErrorRecursiveNesting);
-					}
-					if (value != null && !value.SupportsNesting) {
-						throw new RelationshipException(Strings.ErrorNestingNotSupported);
-					}
-					if (value != null && value.IsNestedAncestor(this)) {
-						throw new RelationshipException(Strings.ErrorCyclicNesting);
-					}
+        public abstract string Stereotype { get; }
 
-					if (nestingParent != null)
-						nestingParent.RemoveNestedChild(this);
-					nestingParent = value;
-					if (nestingParent != null)
-						nestingParent.AddNestedChild(this);
-					Changed();
-				}
-			}
-		}
+        public abstract string Signature { get; }
 
-		public bool IsNested
-		{
-			get { return (NestingParent != null); }
-		}
+        public event SerializeEventHandler Serializing;
+        public event SerializeEventHandler Deserializing;
 
-		public abstract Language Language
-		{
-			get;
-		}
+        /// <exception cref="BadSyntaxException">
+        ///     The <paramref name="value" /> does not fit to the syntax.
+        /// </exception>
+        public virtual string Name
+        {
+            get { return name; }
+            set
+            {
+                var newName = Language.GetValidName(value, true);
 
-		public abstract string Stereotype
-		{
-			get;
-		}
+                if (newName != name)
+                {
+                    name = newName;
+                    Changed();
+                }
+            }
+        }
 
-		public abstract string Signature
-		{
-			get;
-		}
+        public abstract EntityType EntityType { get; }
 
-		private bool IsNestedAncestor(TypeBase type)
-		{
-			if (NestingParent != null && NestingParent.IsNestedAncestor(type))
-				return true;
-			else
-				return (type == this);
-		}
+        void ISerializableElement.Serialize(XmlElement node)
+        {
+            Serialize(node);
+        }
 
-		public abstract bool MoveUpItem(object item);
+        void ISerializableElement.Deserialize(XmlElement node)
+        {
+            Deserialize(node);
+        }
 
-		public abstract bool MoveDownItem(object item);
+        private bool IsNestedAncestor(TypeBase type)
+        {
+            if (NestingParent != null && NestingParent.IsNestedAncestor(type))
+                return true;
+            return type == this;
+        }
 
-		protected static bool MoveUp(IList list, object item)
-		{
-			if (item == null)
-				return false;
+        public abstract bool MoveUpItem(object item);
 
-			int index = list.IndexOf(item);
-			if (index > 0) {
-				object temp = list[index - 1];
-				list[index - 1] = list[index];
-				list[index] = temp;
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
+        public abstract bool MoveDownItem(object item);
 
-		protected static bool MoveDown(IList list, object item)
-		{
-			if (item == null)
-				return false;
+        protected static bool MoveUp(IList list, object item)
+        {
+            if (item == null)
+                return false;
 
-			int index = list.IndexOf(item);
-			if (index >= 0 && index < list.Count - 1) {
-				object temp = list[index + 1];
-				list[index + 1] = list[index];
-				list[index] = temp;
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
+            var index = list.IndexOf(item);
+            if (index > 0)
+            {
+                var temp = list[index - 1];
+                list[index - 1] = list[index];
+                list[index] = temp;
+                return true;
+            }
+            return false;
+        }
 
-		protected virtual void CopyFrom(TypeBase type)
-		{
-			name = type.name;
-			access = type.access;
-		}
+        protected static bool MoveDown(IList list, object item)
+        {
+            if (item == null)
+                return false;
 
-		void ISerializableElement.Serialize(XmlElement node)
-		{
-			Serialize(node);
-		}
+            var index = list.IndexOf(item);
+            if (index >= 0 && index < list.Count - 1)
+            {
+                var temp = list[index + 1];
+                list[index + 1] = list[index];
+                list[index] = temp;
+                return true;
+            }
+            return false;
+        }
 
-		void ISerializableElement.Deserialize(XmlElement node)
-		{
-			Deserialize(node);
-		}
+        protected virtual void CopyFrom(TypeBase type)
+        {
+            name = type.name;
+            access = type.access;
+        }
 
-		/// <exception cref="ArgumentNullException">
-		/// <paramref name="node"/> is null.
-		/// </exception>
-		protected internal virtual void Serialize(XmlElement node)
-		{
-			if (node == null)
-				throw new ArgumentNullException("node");
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="node" /> is null.
+        /// </exception>
+        protected internal virtual void Serialize(XmlElement node)
+        {
+            if (node == null)
+                throw new ArgumentNullException("node");
 
-			XmlElement child;
+            XmlElement child;
 
-			child = node.OwnerDocument.CreateElement("Name");
-			child.InnerText = Name;
-			node.AppendChild(child);
+            child = node.OwnerDocument.CreateElement("Name");
+            child.InnerText = Name;
+            node.AppendChild(child);
 
-			child = node.OwnerDocument.CreateElement("Access");
-			child.InnerText = AccessModifier.ToString();
-			node.AppendChild(child);
+            child = node.OwnerDocument.CreateElement("Access");
+            child.InnerText = AccessModifier.ToString();
+            node.AppendChild(child);
 
-			OnSerializing(new SerializeEventArgs(node));
-		}
+            OnSerializing(new SerializeEventArgs(node));
+        }
 
-		/// <exception cref="BadSyntaxException">
-		/// An error occured whiledeserializing.
-		/// </exception>
-		/// <exception cref="InvalidOperationException">
-		/// The XML document is corrupt.
-		/// </exception>
-		/// <exception cref="ArgumentNullException">
-		/// <paramref name="node"/> is null.
-		/// </exception>
-		protected internal virtual void Deserialize(XmlElement node)
-		{
-			if (node == null)
-				throw new ArgumentNullException("node");
+        /// <exception cref="BadSyntaxException">
+        ///     An error occured whiledeserializing.
+        /// </exception>
+        /// <exception cref="InvalidOperationException">
+        ///     The XML document is corrupt.
+        /// </exception>
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="node" /> is null.
+        /// </exception>
+        protected internal virtual void Deserialize(XmlElement node)
+        {
+            if (node == null)
+                throw new ArgumentNullException("node");
 
-			RaiseChangedEvent = false;
-			XmlElement nameChild = node["Name"];
-			if (nameChild != null)
-				Name = nameChild.InnerText;
+            RaiseChangedEvent = false;
+            var nameChild = node["Name"];
+            if (nameChild != null)
+                Name = nameChild.InnerText;
 
-			XmlElement accessChild = node["Access"];
-			if (accessChild != null)
-				AccessModifier = Language.TryParseAccessModifier(accessChild.InnerText);
+            var accessChild = node["Access"];
+            if (accessChild != null)
+                AccessModifier = Language.TryParseAccessModifier(accessChild.InnerText);
 
-			RaiseChangedEvent = true;
-			OnDeserializing(new SerializeEventArgs(node));
-		}
+            RaiseChangedEvent = true;
+            OnDeserializing(new SerializeEventArgs(node));
+        }
 
-		private void OnSerializing(SerializeEventArgs e)
-		{
-			if (Serializing != null)
-				Serializing(this, e);
-		}
+        private void OnSerializing(SerializeEventArgs e)
+        {
+            if (Serializing != null)
+                Serializing(this, e);
+        }
 
-		private void OnDeserializing(SerializeEventArgs e)
-		{
-			if (Deserializing != null)
-				Deserializing(this, e);
-		}
+        private void OnDeserializing(SerializeEventArgs e)
+        {
+            if (Deserializing != null)
+                Deserializing(this, e);
+        }
 
-		public override string ToString()
-		{
-			return Name + ": " + Signature;
-		}
-	}
+        public override string ToString()
+        {
+            return Name + ": " + Signature;
+        }
+    }
 }

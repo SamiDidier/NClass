@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
+﻿using System.IO;
 using log4net;
 using log4net.Config;
-using NClass.Translations;
 using NClass.Core;
-
+using NClass.Translations;
 
 namespace NClass.Common
 {
@@ -16,26 +10,26 @@ namespace NClass.Common
     {
         // Log config file
         private const string DefaultCfgLogFile = "NClass_log_cfg";
-        private string config_log_file = string.Empty;
 
         // Logger for the NClass program
-        private static readonly ILog Logger = LogManager.GetLogger(typeof(App));
+        private static readonly ILog Logger = LogManager.GetLogger(typeof (App));
+        private string config_log_file = string.Empty;
 
         public LanguageManager LngMg;
 
         public App()
         {
-            LanguageManager LngMg = new LanguageManager();
+            var LngMg = new LanguageManager();
         }
 
         public bool ArgumentLog(int i, int length, string nextArg)
         {
-            if (String.IsNullOrWhiteSpace(FileExist(i, length, nextArg, "-log_cfg")) == true)
+            if (string.IsNullOrWhiteSpace(FileExist(i, length, nextArg, "-log_cfg")))
                 return false;
             config_log_file = nextArg;
 
-            if (string.IsNullOrWhiteSpace(config_log_file) == true)
-                config_log_file = App.DefaultCfgLogFile;
+            if (string.IsNullOrWhiteSpace(config_log_file))
+                config_log_file = DefaultCfgLogFile;
 
             return true;
         }
@@ -58,7 +52,7 @@ namespace NClass.Common
         {
             if (currentIndex + 1 >= length)
             {
-                string errMsg = String.Format(Strings.MissingArgument, arg);
+                var errMsg = string.Format(Strings.MissingArgument, arg);
                 Logger.Error(errMsg);
                 return errMsg;
             }
@@ -66,7 +60,7 @@ namespace NClass.Common
             // Check if the folder exists
             if (File.Exists(value) == false)
             {
-                string errMsg = String.Format(Strings.FileDoesntExist, value);
+                var errMsg = string.Format(Strings.FileDoesntExist, value);
                 Logger.Error(errMsg);
                 return errMsg;
             }

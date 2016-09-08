@@ -13,21 +13,15 @@
 // this program; if not, write to the Free Software Foundation, Inc., 
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using NClass.Core;
 
 namespace NClass.GUI.ModelExplorer
 {
-	public abstract class ProjectItemNode : ModelNode
-	{
-		protected ProjectItemNode()
-		{
-		}
+    public abstract class ProjectItemNode : ModelNode
+    {
+        public abstract IProjectItem ProjectItem { get; }
 
-		public abstract IProjectItem ProjectItem { get; }
-
-		public abstract override void LabelModified(NodeLabelEditEventArgs e);
-	}
+        public abstract override void LabelModified(NodeLabelEditEventArgs e);
+    }
 }

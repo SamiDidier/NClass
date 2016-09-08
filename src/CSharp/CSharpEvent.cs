@@ -21,244 +21,234 @@ using NClass.Translations;
 
 namespace NClass.CSharp
 {
-	internal sealed class CSharpEvent : Event
-	{
-		// [<access>] [<modifiers>] event <type> <name>
-		const string EventPattern =
-			@"^\s*" + CSharpLanguage.AccessPattern + CSharpLanguage.OperationModifiersPattern +
-			@"event\s+" +
-			@"(?<type>" + CSharpLanguage.GenericTypePattern2 + @")\s+" +
-			@"(?<name>" + CSharpLanguage.GenericOperationNamePattern + ")" +
-			CSharpLanguage.DeclarationEnding;
+    internal sealed class CSharpEvent : Event
+    {
+        // [<access>] [<modifiers>] event <type> <name>
+        private const string EventPattern =
+            @"^\s*" + CSharpLanguage.AccessPattern + CSharpLanguage.OperationModifiersPattern +
+            @"event\s+" +
+            @"(?<type>" + CSharpLanguage.GenericTypePattern2 + @")\s+" +
+            @"(?<name>" + CSharpLanguage.GenericOperationNamePattern + ")" +
+            CSharpLanguage.DeclarationEnding;
 
-		const string EventNamePattern =
-			@"^\s*(?<name>" + CSharpLanguage.GenericOperationNamePattern + @")\s*$";
+        private const string EventNamePattern =
+            @"^\s*(?<name>" + CSharpLanguage.GenericOperationNamePattern + @")\s*$";
 
-		static Regex eventRegex = new Regex(EventPattern, RegexOptions.ExplicitCapture);
-		static Regex nameRegex = new Regex(EventNamePattern, RegexOptions.ExplicitCapture);
+        private static readonly Regex eventRegex = new Regex(EventPattern, RegexOptions.ExplicitCapture);
+        private static readonly Regex nameRegex = new Regex(EventNamePattern, RegexOptions.ExplicitCapture);
 
-		bool isExplicitImplementation = false;
-		
-		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parent"/> is null.
-		/// </exception>
-		internal CSharpEvent(CompositeType parent) : this("NewEvent", parent)
-		{
-		}
+        private bool isExplicitImplementation;
 
-		/// <exception cref="BadSyntaxException">
-		/// The <paramref name="name"/> does not fit to the syntax.
-		/// </exception>
-		/// <exception cref="ArgumentException">
-		/// The language of <paramref name="parent"/> does not equal.
-		/// </exception>
-		/// <exception cref="ArgumentNullException">
-		/// <paramref name="parent"/> is null.
-		/// </exception>
-		internal CSharpEvent(string name, CompositeType parent) : base(name, parent)
-		{
-		}
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="parent" /> is null.
+        /// </exception>
+        internal CSharpEvent(CompositeType parent)
+            : this("NewEvent", parent)
+        {
+        }
 
-		/// <exception cref="BadSyntaxException">
-		/// The <paramref name="value"/> does not fit to the syntax.
-		/// </exception>
-		public override string Name
-		{
-			get
-			{
-				return base.Name;
-			}
-			set
-			{
-				Match match = nameRegex.Match(value);
+        /// <exception cref="BadSyntaxException">
+        ///     The <paramref name="name" /> does not fit to the syntax.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        ///     The language of <paramref name="parent" /> does not equal.
+        /// </exception>
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="parent" /> is null.
+        /// </exception>
+        internal CSharpEvent(string name, CompositeType parent)
+            : base(name, parent)
+        {
+        }
 
-				if (match.Success) {
-					try {
-						RaiseChangedEvent = false;
-						ValidName = match.Groups["name"].Value;
-						IsExplicitImplementation = match.Groups["namedot"].Success;
-					}
-					finally {
-						RaiseChangedEvent = true;
-					}
-				}
-				else {
-					throw new BadSyntaxException(Strings.ErrorInvalidName);
-				}
-			}
-		}
+        /// <exception cref="BadSyntaxException">
+        ///     The <paramref name="value" /> does not fit to the syntax.
+        /// </exception>
+        public override string Name
+        {
+            get { return base.Name; }
+            set
+            {
+                var match = nameRegex.Match(value);
 
-		protected override string DefaultType
-		{
-			get { return "EventHandler"; }
-		}
+                if (match.Success)
+                {
+                    try
+                    {
+                        RaiseChangedEvent = false;
+                        ValidName = match.Groups["name"].Value;
+                        IsExplicitImplementation = match.Groups["namedot"].Success;
+                    }
+                    finally
+                    {
+                        RaiseChangedEvent = true;
+                    }
+                }
+                else
+                {
+                    throw new BadSyntaxException(Strings.ErrorInvalidName);
+                }
+            }
+        }
 
-		/// <exception cref="BadSyntaxException">
-		/// Cannot set access visibility.
-		/// </exception>
-		public override AccessModifier AccessModifier
-		{
-			get
-			{
-				return base.AccessModifier;
-			}
-			set
-			{
-				if (value != AccessModifier.Default && IsExplicitImplementation) {
-					throw new BadSyntaxException(
-						Strings.ErrorExplicitImplementationAccess);
-				}
-				if (value != AccessModifier.Default && Parent is InterfaceType) {
-					throw new BadSyntaxException(
-						Strings.ErrorInterfaceMemberAccess);
-				}
+        protected override string DefaultType { get { return "EventHandler"; } }
 
-				base.AccessModifier = value;
-			}
-		}
+        /// <exception cref="BadSyntaxException">
+        ///     Cannot set access visibility.
+        /// </exception>
+        public override AccessModifier AccessModifier
+        {
+            get { return base.AccessModifier; }
+            set
+            {
+                if (value != AccessModifier.Default && IsExplicitImplementation)
+                {
+                    throw new BadSyntaxException(
+                        Strings.ErrorExplicitImplementationAccess);
+                }
+                if (value != AccessModifier.Default && Parent is InterfaceType)
+                {
+                    throw new BadSyntaxException(
+                        Strings.ErrorInterfaceMemberAccess);
+                }
 
-		public override bool IsAccessModifiable
-		{
-			get
-			{
-				return (base.IsAccessModifiable && !IsExplicitImplementation);
-			}
-		}
+                base.AccessModifier = value;
+            }
+        }
 
-		public bool IsExplicitImplementation
-		{
-			get
-			{
-				return isExplicitImplementation;
-			}
-			private set
-			{
-				if (isExplicitImplementation != value) {
-					try {
-						RaiseChangedEvent = false;
+        public override bool IsAccessModifiable { get { return base.IsAccessModifiable && !IsExplicitImplementation; } }
 
-						if (value)
-							AccessModifier = AccessModifier.Default;
-						isExplicitImplementation = value;
-						Changed();
-					}
-					finally {
-						RaiseChangedEvent = true;
-					}
-				}
-			}
-		}
+        public bool IsExplicitImplementation
+        {
+            get { return isExplicitImplementation; }
+            private set
+            {
+                if (isExplicitImplementation != value)
+                {
+                    try
+                    {
+                        RaiseChangedEvent = false;
 
-		public override bool HasBody
-		{
-			get
-			{
-				return IsExplicitImplementation;
-			}
-		}
+                        if (value)
+                            AccessModifier = AccessModifier.Default;
+                        isExplicitImplementation = value;
+                        Changed();
+                    }
+                    finally
+                    {
+                        RaiseChangedEvent = true;
+                    }
+                }
+            }
+        }
 
-		public override Language Language
-		{
-			get { return CSharpLanguage.Instance; }
-		}
+        public override bool HasBody { get { return IsExplicitImplementation; } }
 
-		/// <exception cref="BadSyntaxException">
-		/// The <paramref name="declaration"/> does not fit to the syntax.
-		/// </exception>
-		public override void InitFromString(string declaration)
-		{
-			Match match = eventRegex.Match(declaration);
-			RaiseChangedEvent = false;
+        public override Language Language { get { return CSharpLanguage.Instance; } }
 
-			try {
-				if (match.Success) {
-					ClearModifiers();
-					Group nameGroup = match.Groups["name"];
-					Group typeGroup = match.Groups["type"];
-					Group accessGroup = match.Groups["access"];
-					Group modifierGroup = match.Groups["modifier"];
-					Group nameDotGroup = match.Groups["namedot"];
+        /// <exception cref="BadSyntaxException">
+        ///     The <paramref name="declaration" /> does not fit to the syntax.
+        /// </exception>
+        public override void InitFromString(string declaration)
+        {
+            var match = eventRegex.Match(declaration);
+            RaiseChangedEvent = false;
 
-					if (CSharpLanguage.Instance.IsForbiddenName(nameGroup.Value))
-						throw new BadSyntaxException(Strings.ErrorInvalidName);
-					if (CSharpLanguage.Instance.IsForbiddenTypeName(typeGroup.Value))
-						throw new BadSyntaxException(Strings.ErrorInvalidTypeName);
+            try
+            {
+                if (match.Success)
+                {
+                    ClearModifiers();
+                    var nameGroup = match.Groups["name"];
+                    var typeGroup = match.Groups["type"];
+                    var accessGroup = match.Groups["access"];
+                    var modifierGroup = match.Groups["modifier"];
+                    var nameDotGroup = match.Groups["namedot"];
 
-					ValidName = nameGroup.Value;
-					ValidType = typeGroup.Value;
-					IsExplicitImplementation = nameDotGroup.Success;
-					AccessModifier = Language.TryParseAccessModifier(accessGroup.Value);
+                    if (CSharpLanguage.Instance.IsForbiddenName(nameGroup.Value))
+                        throw new BadSyntaxException(Strings.ErrorInvalidName);
+                    if (CSharpLanguage.Instance.IsForbiddenTypeName(typeGroup.Value))
+                        throw new BadSyntaxException(Strings.ErrorInvalidTypeName);
 
-					foreach (Capture modifierCapture in modifierGroup.Captures) {
-						if (modifierCapture.Value == "static")
-							IsStatic = true;
-						if (modifierCapture.Value == "virtual")
-							IsVirtual = true;
-						if (modifierCapture.Value == "abstract")
-							IsAbstract = true;
-						if (modifierCapture.Value == "override")
-							IsOverride = true;
-						if (modifierCapture.Value == "sealed")
-							IsSealed = true;
-						if (modifierCapture.Value == "new")
-							IsHider = true;
-					}
-				}
-				else {
-					throw new BadSyntaxException(Strings.ErrorInvalidDeclaration);
-				}
-			}
-			finally {
-				RaiseChangedEvent = true;
-			}
-		}
+                    ValidName = nameGroup.Value;
+                    ValidType = typeGroup.Value;
+                    IsExplicitImplementation = nameDotGroup.Success;
+                    AccessModifier = Language.TryParseAccessModifier(accessGroup.Value);
 
-		public override string GetDeclaration()
-		{
-			bool needsSemicolon = !IsExplicitImplementation;
-			return GetDeclarationLine(needsSemicolon);
-		}
+                    foreach (Capture modifierCapture in modifierGroup.Captures)
+                    {
+                        if (modifierCapture.Value == "static")
+                            IsStatic = true;
+                        if (modifierCapture.Value == "virtual")
+                            IsVirtual = true;
+                        if (modifierCapture.Value == "abstract")
+                            IsAbstract = true;
+                        if (modifierCapture.Value == "override")
+                            IsOverride = true;
+                        if (modifierCapture.Value == "sealed")
+                            IsSealed = true;
+                        if (modifierCapture.Value == "new")
+                            IsHider = true;
+                    }
+                }
+                else
+                {
+                    throw new BadSyntaxException(Strings.ErrorInvalidDeclaration);
+                }
+            }
+            finally
+            {
+                RaiseChangedEvent = true;
+            }
+        }
 
-		public string GetDeclarationLine(bool withSemicolon)
-		{
-			StringBuilder builder = new StringBuilder(50);
+        public override string GetDeclaration()
+        {
+            var needsSemicolon = !IsExplicitImplementation;
+            return GetDeclarationLine(needsSemicolon);
+        }
 
-			if (AccessModifier != AccessModifier.Default) {
-				builder.Append(Language.GetAccessString(AccessModifier, true));
-				builder.Append(" ");
-			}
-			
-			if (IsHider)
-				builder.Append("new ");
-			if (IsStatic)
-				builder.Append("static ");
-			if (IsVirtual)
-				builder.Append("virtual ");
-			if (IsAbstract)
-				builder.Append("abstract ");
-			if (IsSealed)
-				builder.Append("sealed ");
-			if (IsOverride)
-				builder.Append("override ");
+        public string GetDeclarationLine(bool withSemicolon)
+        {
+            var builder = new StringBuilder(50);
 
-			builder.AppendFormat("event {0} {1}", Type, Name);
+            if (AccessModifier != AccessModifier.Default)
+            {
+                builder.Append(Language.GetAccessString(AccessModifier, true));
+                builder.Append(" ");
+            }
 
-			if (withSemicolon && !HasBody)
-				builder.Append(";");
+            if (IsHider)
+                builder.Append("new ");
+            if (IsStatic)
+                builder.Append("static ");
+            if (IsVirtual)
+                builder.Append("virtual ");
+            if (IsAbstract)
+                builder.Append("abstract ");
+            if (IsSealed)
+                builder.Append("sealed ");
+            if (IsOverride)
+                builder.Append("override ");
 
-			return builder.ToString();
-		}
+            builder.AppendFormat("event {0} {1}", Type, Name);
 
-		public override Operation Clone(CompositeType newParent)
-		{
-			CSharpEvent newEvent = new CSharpEvent(newParent);
-			newEvent.CopyFrom(this);
-			return newEvent;
-		}
+            if (withSemicolon && !HasBody)
+                builder.Append(";");
 
-		public override string ToString()
-		{
-			return GetDeclarationLine(false);
-		}
-	}
+            return builder.ToString();
+        }
+
+        public override Operation Clone(CompositeType newParent)
+        {
+            var newEvent = new CSharpEvent(newParent);
+            newEvent.CopyFrom(this);
+            return newEvent;
+        }
+
+        public override string ToString()
+        {
+            return GetDeclarationLine(false);
+        }
+    }
 }

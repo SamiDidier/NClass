@@ -15,74 +15,73 @@
 
 using System;
 using System.Drawing;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using NClass.Core;
-using NClass.Translations;
 using NClass.DiagramEditor.ClassDiagram;
+using NClass.Translations;
 
 namespace NClass.GUI.ModelExplorer
 {
-	public sealed class EmptyProjectNode : ModelNode
-	{
-		Project project;
+    public sealed class EmptyProjectNode : ModelNode
+    {
+        private readonly Project project;
 
-		/// <exception cref="ArgumentNullException">
-		/// <paramref name="project"/> is null.
-		/// </exception>
-		public EmptyProjectNode(Project project)
-		{
-			if (project == null)
-				throw new ArgumentNullException("project");
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="project" /> is null.
+        /// </exception>
+        public EmptyProjectNode(Project project)
+        {
+            if (project == null)
+                throw new ArgumentNullException("project");
 
-			this.project = project;
-			project.ItemAdded += new ProjectItemEventHandler(project_ItemAdded);
+            this.project = project;
+            project.ItemAdded += project_ItemAdded;
 
-			this.Text = Strings.DoubleClickToAddDiagram;
-			this.ImageKey = "diagram";
-			this.SelectedImageKey = "diagram";
-		}
+            Text = Strings.DoubleClickToAddDiagram;
+            ImageKey = "diagram";
+            SelectedImageKey = "diagram";
+        }
 
-		protected internal override void AfterInitialized()
-		{
-			base.AfterInitialized();
-			NodeFont = new Font(TreeView.Font, FontStyle.Italic);
-		}
+        protected internal override void AfterInitialized()
+        {
+            base.AfterInitialized();
+            NodeFont = new Font(TreeView.Font, FontStyle.Italic);
+        }
 
-		private void project_ItemAdded(object sender, ProjectItemEventArgs e)
-		{
-			this.Delete();
-		}
+        private void project_ItemAdded(object sender, ProjectItemEventArgs e)
+        {
+            Delete();
+        }
 
-		public override void LabelModified(NodeLabelEditEventArgs e)
-		{
-			e.CancelEdit = true;
-		}
+        public override void LabelModified(NodeLabelEditEventArgs e)
+        {
+            e.CancelEdit = true;
+        }
 
-		private void AddEmptyDiagram()
-		{
-			TreeNode parent = Parent;
+        private void AddEmptyDiagram()
+        {
+            var parent = Parent;
 
-			this.Delete();
-			Diagram diagram = new Diagram(Settings.Default.GetDefaultLanguage());
-			project.Add(diagram);
-		}
+            Delete();
+            var diagram = new Diagram(Settings.Default.GetDefaultLanguage());
+            project.Add(diagram);
+        }
 
-		public override void DoubleClick()
-		{
-			AddEmptyDiagram();
-		}
+        public override void DoubleClick()
+        {
+            AddEmptyDiagram();
+        }
 
-		public override void EnterPressed()
-		{
-			AddEmptyDiagram();
-		}
+        public override void EnterPressed()
+        {
+            AddEmptyDiagram();
+        }
 
-		public override void BeforeDelete()
-		{
-			project.ItemAdded -= new ProjectItemEventHandler(project_ItemAdded);
-			NodeFont.Dispose();
-			base.BeforeDelete();
-		}
-	}
+        public override void BeforeDelete()
+        {
+            project.ItemAdded -= project_ItemAdded;
+            NodeFont.Dispose();
+            base.BeforeDelete();
+        }
+    }
 }

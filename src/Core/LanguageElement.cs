@@ -17,23 +17,22 @@ using System;
 
 namespace NClass.Core
 {
-	public abstract class LanguageElement : Element
-	{
-		public abstract string GetDeclaration();
+    public abstract class LanguageElement : Element
+    {
+        public abstract string GetDeclaration();
 
-		public override string ToString()
-		{
-			return GetDeclaration();
-		}
+        public override string ToString()
+        {
+            return GetDeclaration();
+        }
 
-		[Obsolete] //TODO: ezt a metódust meg kell szüntetni
-		protected static string GetNameWithoutGeneric(string name)
-		{
-			int index = name.IndexOf('<');
-			if (index > 0)
-				return name.Substring(0, index);
-			else
-				return name;
-		}
-	}
+        [Obsolete] //TODO: ezt a metódust meg kell szüntetni
+        protected static string GetNameWithoutGeneric(string name)
+        {
+            var index = name.IndexOf('<');
+            if (index > 0)
+                return name.Substring(0, index);
+            return name;
+        }
+    }
 }

@@ -14,124 +14,131 @@
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 using NClass.Core;
 using NClass.Translations;
 
 namespace NClass.CodeGenerator
 {
-	public abstract class SolutionGenerator
-	{
-		Project project;
-		List<ProjectGenerator> projectGenerators = new List<ProjectGenerator>();
+    public abstract class SolutionGenerator
+    {
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="project" /> is null.
+        /// </exception>
+        protected SolutionGenerator(Project project)
+        {
+            if (project == null)
+                throw new ArgumentNullException("project");
 
-		/// <exception cref="ArgumentNullException">
-		/// <paramref name="project"/> is null.
-		/// </exception>
-		protected SolutionGenerator(Project project)
-		{
-			if (project == null)
-				throw new ArgumentNullException("project");
+            Project = project;
+        }
 
-			this.project = project;
-		}
+        public string SolutionName { get { return Project.Name; } }
 
-		public string SolutionName
-		{
-			get { return project.Name; }
-		}
+        protected Project Project { get; }
 
-		protected Project Project
-		{
-			get { return project; }
-		}
+        protected List<ProjectGenerator> ProjectGenerators { get; } = new List<ProjectGenerator>();
 
-		protected List<ProjectGenerator> ProjectGenerators
-		{
-			get { return projectGenerators; }
-		}
+        /// <exception cref="ArgumentException">
+        ///     <paramref name="location" /> contains invalid path characters.
+        /// </exception>
+        internal GenerationResult Generate(string location,
+                                           bool sort_using,
+                                           bool generate_document_comment,
+                                           string compagny_name,
+                                           string copyright_header,
+                                           string author)
+        {
+            var result = CheckDestination(location);
+            if (result != GenerationResult.Success)
+                return result;
 
-		/// <exception cref="ArgumentException">
-		/// <paramref name="location"/> contains invalid path characters.
-		/// </exception>
-        internal GenerationResult Generate(string location, bool sort_using, bool generate_document_comment, string compagny_name, string copyright_header, string author)
-		{
-			GenerationResult result = CheckDestination(location);
-			if (result != GenerationResult.Success)
-				return result;
-
-            if (!GenerateProjectFiles(location, sort_using, generate_document_comment, compagny_name, copyright_header, author))
-				return GenerationResult.Error;
+            if (
+                !GenerateProjectFiles(location,
+                                      sort_using,
+                                      generate_document_comment,
+                                      compagny_name,
+                                      copyright_header,
+                                      author))
+                return GenerationResult.Error;
             if (!GenerateSolutionFile(location))
-				return GenerationResult.Error;
+                return GenerationResult.Error;
 
-			return GenerationResult.Success;
-		}
+            return GenerationResult.Success;
+        }
 
-		private GenerationResult CheckDestination(string location)
-		{
-			try
-			{
-				location = Path.Combine(location, SolutionName);
-				if (Directory.Exists(location))
-				{
-					DialogResult result = MessageBox.Show(
-						Strings.CodeGenerationOverwriteConfirmation, Strings.Confirmation,
-						MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        private GenerationResult CheckDestination(string location)
+        {
+            try
+            {
+                location = Path.Combine(location, SolutionName);
+                if (Directory.Exists(location))
+                {
+                    var result = MessageBox.Show(
+                        Strings.CodeGenerationOverwriteConfirmation,
+                        Strings.Confirmation,
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning);
 
-					if (result == DialogResult.Yes)
-						return GenerationResult.Success;
-					else
-						return GenerationResult.Cancelled;
-				}
-				else
-				{
-					Directory.CreateDirectory(location);
-					return GenerationResult.Success;
-				}
-			}
-			catch
-			{
-				return GenerationResult.Error;
-			}
-		}
+                    if (result == DialogResult.Yes)
+                        return GenerationResult.Success;
+                    return GenerationResult.Cancelled;
+                }
+                Directory.CreateDirectory(location);
+                return GenerationResult.Success;
+            }
+            catch
+            {
+                return GenerationResult.Error;
+            }
+        }
 
-        private bool GenerateProjectFiles(string location, bool sort_using, bool generate_document_comment, string compagny_name, string copyright_header, string author)
-		{
-			bool success = true;
-			location = Path.Combine(location, project.Name);
+        private bool GenerateProjectFiles(string location,
+                                          bool sort_using,
+                                          bool generate_document_comment,
+                                          string compagny_name,
+                                          string copyright_header,
+                                          string author)
+        {
+            var success = true;
+            location = Path.Combine(location, Project.Name);
 
-			projectGenerators.Clear();
-			foreach (IProjectItem projectItem in project.Items)
-			{
-				Model model = projectItem as Model;
+            ProjectGenerators.Clear();
+            foreach (var projectItem in Project.Items)
+            {
+                var model = projectItem as Model;
 
-				if (model != null)
-				{
-					ProjectGenerator projectGenerator = CreateProjectGenerator(model);
-					projectGenerators.Add(projectGenerator);
+                if (model != null)
+                {
+                    var projectGenerator = CreateProjectGenerator(model);
+                    ProjectGenerators.Add(projectGenerator);
 
-					try
-					{
-                        projectGenerator.Generate(location, sort_using, generate_document_comment, compagny_name, copyright_header, author);
-					}
-					catch (FileGenerationException)
-					{
-						success = false;
-					}
-				}
-			}
+                    try
+                    {
+                        projectGenerator.Generate(location,
+                                                  sort_using,
+                                                  generate_document_comment,
+                                                  compagny_name,
+                                                  copyright_header,
+                                                  author);
+                    }
+                    catch (FileGenerationException)
+                    {
+                        success = false;
+                    }
+                }
+            }
 
-			return success;
-		}
+            return success;
+        }
 
-		/// <exception cref="ArgumentException">
-		/// The <paramref name="model"/> is invalid.
-		/// </exception>
-		protected abstract ProjectGenerator CreateProjectGenerator(Model model);
+        /// <exception cref="ArgumentException">
+        ///     The <paramref name="model" /> is invalid.
+        /// </exception>
+        protected abstract ProjectGenerator CreateProjectGenerator(Model model);
 
         protected abstract bool GenerateSolutionFile(string location);
-	}
+    }
 }

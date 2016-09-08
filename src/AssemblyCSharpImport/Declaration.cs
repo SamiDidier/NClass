@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ICSharpCode.NRefactory
+﻿namespace ICSharpCode.NRefactory
 {
-    class Declaration
+    internal class Declaration
     {
     }
 }

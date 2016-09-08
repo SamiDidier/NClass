@@ -1,22 +1,17 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NClass.Translations;
 using NClass.Common;
-
+using NClass.Translations;
 
 namespace CommandLine
 {
-    class Program
+    internal class Program
     {
         // Le dossier de travail
         private static string workingDirectory = string.Empty;
-        private static bool runBatch = false;
+        private static bool runBatch;
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             // Arguments
             if (args == null || args.Length == 0)
@@ -26,10 +21,10 @@ namespace CommandLine
             }
 
             // Run program with logger
-            App app = new App();
+            var app = new App();
             string result;
 
-            for(int i = 0; i < args.Length; i++)
+            for (var i = 0; i < args.Length; i++)
             {
                 switch (args[i])
                 {
@@ -61,14 +56,14 @@ namespace CommandLine
                     case "-d":
                         if (i + 1 >= args.Length)
                         {
-                            Console.WriteLine(String.Format(Strings.MissingArgument, "-directory"));
+                            Console.WriteLine(Strings.MissingArgument, "-directory");
                             return;
                         }
 
                         // Check if the folder exists
                         if (Directory.Exists(args[i + 1]) == false)
                         {
-                            Console.WriteLine(String.Format(Strings.MissingArgument, "-directory"));
+                            Console.WriteLine(Strings.MissingArgument, "-directory");
                             return;
                         }
 
@@ -96,9 +91,9 @@ namespace CommandLine
                         DisplayHelp();
                         return;
                 }
-           }
+            }
 
-            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomainOnUnhandledException);
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
 
             // Run program with logger
             app.Start();
@@ -121,7 +116,8 @@ namespace CommandLine
         private static void DisplayVersion()
         {
             Console.WriteLine("NClass modified by Samuel Didier - Copyright - 2014 - Version 1.0 beta");
-            Console.WriteLine("Software to add comments, regions and summary tags based on my custom style to C# source code");
+            Console.WriteLine(
+                "Software to add comments, regions and summary tags based on my custom style to C# source code");
         }
 
         private static void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs e)

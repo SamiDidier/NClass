@@ -15,10 +15,10 @@
 
 namespace NClass.CodeGenerator
 {
-	public enum GenerationResult
-	{
-		Success,
-		Error,
-		Cancelled
-	}
+    public enum GenerationResult
+    {
+        Success,
+        Error,
+        Cancelled
+    }
 }

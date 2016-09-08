@@ -15,37 +15,34 @@
 
 using System;
 using System.Drawing;
-using System.Windows.Forms;
 
 namespace NClass.DiagramEditor
 {
-	public interface IDocumentVisualizer
-	{
-		event EventHandler DocumentRedrawed;
-		event EventHandler VisibleAreaChanged;
+    public interface IDocumentVisualizer
+    {
+        bool HasDocument { get; }
+
+        IDocument Document { get; }
+
+        Point Offset { get; set; }
+
+        Size DocumentSize { get; }
+
+        Rectangle VisibleArea { get; }
+
+        float Zoom { get; }
+        event EventHandler DocumentRedrawed;
+        event EventHandler VisibleAreaChanged;
 
 
-		bool HasDocument { get; }
+        void ChangeZoom(bool enlarge);
 
-		IDocument Document { get; }
+        void ChangeZoom(float zoom);
 
-		Point Offset { get; set; }
+        void AutoZoom();
 
-		Size DocumentSize { get; }
+        void AutoZoom(bool selectedOnly);
 
-		Rectangle VisibleArea { get; }
-
-		float Zoom { get; }
-
-
-		void ChangeZoom(bool enlarge);
-		
-		void ChangeZoom(float zoom);
-
-		void AutoZoom();
-
-		void AutoZoom(bool selectedOnly);
-
-		void DrawDocument(Graphics g);
-	}
+        void DrawDocument(Graphics g);
+    }
 }

@@ -13,51 +13,45 @@
 // this program; if not, write to the Free Software Foundation, Inc., 
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-using System;
-using System.Text.RegularExpressions;
-
 namespace NClass.Core
 {
-	public abstract class EnumValue : LanguageElement
-	{
-		string name = null;
+    public abstract class EnumValue : LanguageElement
+    {
+        private string name;
 
-		/// <exception cref="BadSyntaxException">
-		/// The <paramref name="declaration"/> does not fit to the syntax.
-		/// </exception>
-		protected EnumValue(string declaration)
-		{
-			Initializing = true;
-			InitFromString(declaration);
-			Initializing = false;
-		}
+        /// <exception cref="BadSyntaxException">
+        ///     The <paramref name="declaration" /> does not fit to the syntax.
+        /// </exception>
+        protected EnumValue(string declaration)
+        {
+            Initializing = true;
+            InitFromString(declaration);
+            Initializing = false;
+        }
 
-		public string Name
-		{
-			get
-			{
-				return name;
-			}
-			protected set
-			{
-				if (name != value)
-				{
-					name = value;
-					Changed();
-				}
-			}
-		}
+        public string Name
+        {
+            get { return name; }
+            protected set
+            {
+                if (name != value)
+                {
+                    name = value;
+                    Changed();
+                }
+            }
+        }
 
-		/// <exception cref="BadSyntaxException">
-		/// The <paramref name="declaration"/> does not fit to the syntax.
-		/// </exception>
-		public abstract void InitFromString(string declaration);
+        /// <exception cref="BadSyntaxException">
+        ///     The <paramref name="declaration" /> does not fit to the syntax.
+        /// </exception>
+        public abstract void InitFromString(string declaration);
 
-		protected internal abstract EnumValue Clone();
+        protected internal abstract EnumValue Clone();
 
-		public override string ToString()
-		{
-			return GetDeclaration();
-		}
-	}
+        public override string ToString()
+        {
+            return GetDeclaration();
+        }
+    }
 }

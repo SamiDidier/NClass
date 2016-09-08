@@ -28,49 +28,45 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.canvas = new NClass.DiagramEditor.Canvas();
-			this.tabBar = new NClass.GUI.TabBar();
+			this.Canvas = new NClass.DiagramEditor.Canvas();
+			this.TabBar = new NClass.GUI.TabBar();
 			this.SuspendLayout();
 			// 
 			// canvas
 			// 
-			this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.canvas.Document = null;
-			this.canvas.Location = new System.Drawing.Point(0, 25);
-			this.canvas.Margin = new System.Windows.Forms.Padding(0);
-			this.canvas.Name = "canvas";
-			this.canvas.Offset = new System.Drawing.Point(0, 0);
-			this.canvas.Size = new System.Drawing.Size(150, 125);
-			this.canvas.TabIndex = 3;
-			this.canvas.Zoom = 1F;
+			this.Canvas.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.Canvas.Document = null;
+			this.Canvas.Location = new System.Drawing.Point(0, 25);
+			this.Canvas.Margin = new System.Windows.Forms.Padding(0);
+			this.Canvas.Name = "Canvas";
+			this.Canvas.Offset = new System.Drawing.Point(0, 0);
+			this.Canvas.Size = new System.Drawing.Size(150, 125);
+			this.Canvas.TabIndex = 3;
+			this.Canvas.Zoom = 1F;
 			// 
 			// tabBar
 			// 
-			this.tabBar.Dock = System.Windows.Forms.DockStyle.Top;
-			this.tabBar.DocumentManager = null;
-			this.tabBar.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (238)));
-			this.tabBar.Location = new System.Drawing.Point(0, 0);
-			this.tabBar.Margin = new System.Windows.Forms.Padding(0);
-			this.tabBar.Name = "tabBar";
-			this.tabBar.Size = new System.Drawing.Size(150, 25);
-			this.tabBar.TabIndex = 2;
+			this.TabBar.Dock = System.Windows.Forms.DockStyle.Top;
+			this.TabBar.DocumentManager = null;
+			this.TabBar.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (238)));
+			this.TabBar.Location = new System.Drawing.Point(0, 0);
+			this.TabBar.Margin = new System.Windows.Forms.Padding(0);
+			this.TabBar.Name = "TabBar";
+			this.TabBar.Size = new System.Drawing.Size(150, 25);
+			this.TabBar.TabIndex = 2;
 			// 
 			// TabbedWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.ControlDark;
-			this.Controls.Add(this.canvas);
-			this.Controls.Add(this.tabBar);
+			this.Controls.Add(this.Canvas);
+			this.Controls.Add(this.TabBar);
 			this.Name = "TabbedWindow";
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
-
-		private TabBar tabBar;
-		private NClass.DiagramEditor.Canvas canvas;
-
 	}
 }

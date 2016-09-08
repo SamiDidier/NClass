@@ -29,7 +29,7 @@
 		{
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.btnOK = new System.Windows.Forms.Button();
-			this.treOperations = new System.Windows.Forms.TreeView();
+			this.OperationTree = new System.Windows.Forms.TreeView();
 			this.SuspendLayout();
 			// 
 			// btnCancel
@@ -56,17 +56,17 @@
 			// 
 			// treOperations
 			// 
-			this.treOperations.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			this.OperationTree.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.treOperations.CheckBoxes = true;
-			this.treOperations.Location = new System.Drawing.Point(12, 12);
-			this.treOperations.Name = "treMembers";
-			this.treOperations.ShowLines = false;
-			this.treOperations.ShowNodeToolTips = true;
-			this.treOperations.Size = new System.Drawing.Size(288, 270);
-			this.treOperations.TabIndex = 0;
-			this.treOperations.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treMembers_AfterCheck);
+			this.OperationTree.CheckBoxes = true;
+			this.OperationTree.Location = new System.Drawing.Point(12, 12);
+			this.OperationTree.Name = "treMembers";
+			this.OperationTree.ShowLines = false;
+			this.OperationTree.ShowNodeToolTips = true;
+			this.OperationTree.Size = new System.Drawing.Size(288, 270);
+			this.OperationTree.TabIndex = 0;
+			this.OperationTree.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treMembers_AfterCheck);
 			// 
 			// ImplementDialog
 			// 
@@ -75,7 +75,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnCancel;
 			this.ClientSize = new System.Drawing.Size(312, 323);
-			this.Controls.Add(this.treOperations);
+			this.Controls.Add(this.OperationTree);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnOK);
 			this.MaximizeBox = false;
@@ -95,6 +95,5 @@
 
 		private System.Windows.Forms.Button btnCancel;
 		private System.Windows.Forms.Button btnOK;
-		private System.Windows.Forms.TreeView treOperations;
 	}
 }

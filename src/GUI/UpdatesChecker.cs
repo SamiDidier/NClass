@@ -14,234 +14,213 @@
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
-using System.Xml;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml;
 using NClass.Translations;
 
 namespace NClass.GUI
 {
-	public static class UpdatesChecker
-	{
-		const string VersionUrl = "http://nclass.sourceforge.net/version.xml";
+    public static class UpdatesChecker
+    {
+        private const string VersionUrl = "http://nclass.sourceforge.net/version.xml";
 
-		private class VersionInfo
-		{
-			Version mainVersion;
-			string translationVersion;
-			string versionName;
-			string notes;
-			string downloadPageUrl;
+        /// <exception cref="WebException">
+        ///     Could not connect to the server.
+        /// </exception>
+        /// <exception cref="InvalidDataException">
+        ///     Could not read the version informations.
+        /// </exception>
+        private static VersionInfo GetVersionManifestInfo()
+        {
+            try
+            {
+                var document = new XmlDocument();
+                document.Load(VersionUrl);
+                var root = document.DocumentElement;
 
-			/// <exception cref="ArgumentException">
-			/// <paramref name="version"/> is an invalid value.
-			/// </exception>
-			/// <exception cref="ArgumentNullException">
-			/// <paramref name="version"/>, <paramref name="translationVersion"/>, 
-			/// <paramref name="versionName"/>, <paramref name="downloadPageUrl"/>, or
-			/// <paramref name="notes"/> is null.
-			/// </exception>
-			public VersionInfo(string version, string translationVersion, string versionName,
-				string downloadPageUrl, string notes)
-			{
-				if (version == null)
-					throw new ArgumentNullException("version");
-				if (translationVersion == null)
-					throw new ArgumentNullException("translationVersion");
-				if (versionName == null)
-					throw new ArgumentNullException("versionName");
-				if (downloadPageUrl == null)
-					throw new ArgumentNullException("downloadPageUrl");
-				if (notes == null)
-					throw new ArgumentNullException("notes");
+                // Get main version information
+                var versionElement = root["Version"];
+                var version = versionElement.InnerText;
 
-				try
-				{
-					this.mainVersion = new Version(version);
-				}
-				catch
-				{
-					throw new ArgumentException("Version string is invalid.", "version");
-				}
-				this.translationVersion = translationVersion;
-				this.versionName = versionName;
-				this.downloadPageUrl = downloadPageUrl;
-				this.notes = notes;
-			}
+                // Get translation version information
+                var translationElements = root.SelectNodes(
+                    "TranslationVersions/" + Strings.TranslationName);
+                string translationVersion;
+                if (translationElements.Count == 0)
+                    translationVersion = Strings.TranslationVersion;
+                else
+                    translationVersion = translationElements[0].InnerText;
 
-			public Version MainVersion
-			{
-				get { return mainVersion; }
-			}
+                // Get other informations
+                var name = root["VersionName"].InnerText;
+                var url = root["DownloadPageUrl"].InnerText;
+                var notes = root["Notes"].InnerText.Trim();
 
-			public string TranslationVersion
-			{
-				get { return translationVersion; }
-			}
+                return new VersionInfo(version, translationVersion, name, url, notes);
+            }
+            catch (WebException)
+            {
+                throw;
+            }
+            catch
+            {
+                throw new InvalidDataException();
+            }
+        }
 
-			public string VersionName
-			{
-				get { return versionName; }
-			}
+        private static void OpenUrl(string url)
+        {
+            Process.Start(url);
+        }
 
-			public string DownloadPageUrl
-			{
-				get { return downloadPageUrl; }
-			}
+        public static void CheckForUpdates()
+        {
+            try
+            {
+                var info = GetVersionManifestInfo();
+                ShowNewVersionInfo(info);
+            }
+            catch (WebException)
+            {
+                MessageBox.Show(Strings.ErrorConnectToServer,
+                                Strings.Error,
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            }
+            catch (InvalidDataException)
+            {
+                MessageBox.Show(Strings.ErrorReadVersionData,
+                                Strings.Error,
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            }
+        }
 
-			public string Notes
-			{
-				get { return notes; }
-			}
+        private static void ShowNewVersionInfo(VersionInfo info)
+        {
+            if (info.IsUpdated)
+            {
+                var text = GetVersionDescription(info);
+                var caption = Strings.CheckingForUpdates;
 
-			public bool IsUpdated
-			{
-				get
-				{
-					return (IsMainProgramUpdated || IsTranslationUpdated);
-				}
-			}
+                var result = MessageBox.Show(text,
+                                             caption,
+                                             MessageBoxButtons.YesNo,
+                                             MessageBoxIcon.Information);
 
-			public bool IsMainProgramUpdated
-			{
-				get
-				{
-					return (MainVersion.CompareTo(Program.CurrentVersion) > 0);
-				}
-			}
+                if (result == DialogResult.Yes)
+                    OpenUrl(info.DownloadPageUrl);
+            }
+            else
+            {
+                MessageBox.Show(
+                    Strings.NoUpdates,
+                    Strings.CheckingForUpdates,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+        }
 
-			public bool IsTranslationUpdated
-			{
-				get
-				{
-					string currentTranslationVersion = Strings.TranslationVersion;
-					return (TranslationVersion.CompareTo(currentTranslationVersion) > 0);
-				}
-			}
+        private static string GetVersionDescription(VersionInfo info)
+        {
+            var builder = new StringBuilder(512);
 
-			public override string ToString()
-			{
-				if (VersionName == null)
-					return MainVersion.ToString();
-				else
-					return string.Format("{0} ({1})", VersionName, MainVersion);
-			}
-		}
+            if (info.IsMainProgramUpdated)
+            {
+                // Header text
+                builder.AppendFormat("{0}: {1}\n\n",
+                                     Strings.NewVersion,
+                                     info.VersionName);
 
-		/// <exception cref="WebException">
-		/// Could not connect to the server.
-		/// </exception>
-		/// <exception cref="InvalidDataException">
-		/// Could not read the version informations.
-		/// </exception>
-		private static VersionInfo GetVersionManifestInfo()
-		{
-			try
-			{
-				XmlDocument document = new XmlDocument();
-				document.Load(VersionUrl);
-				XmlElement root = document.DocumentElement;
+                // Main program's changes
+                builder.Append(info.Notes);
+                builder.Append("\n\n");
+            }
+            else if (info.IsTranslationUpdated)
+            {
+                builder.AppendFormat("{0}\n\n", Strings.TranslationUpdated);
+            }
 
-				// Get main version information
-				XmlElement versionElement = root["Version"];
-				string version = versionElement.InnerText;
+            // Download text
+            builder.Append(Strings.ProgramDownload);
 
-				// Get translation version information
-				XmlNodeList translationElements = root.SelectNodes(
-					"TranslationVersions/" + Strings.TranslationName);
-				string translationVersion;
-				if (translationElements.Count == 0)
-					translationVersion = Strings.TranslationVersion;
-				else
-					translationVersion = translationElements[0].InnerText;
+            return builder.ToString();
+        }
 
-				// Get other informations
-				string name = root["VersionName"].InnerText;
-				string url = root["DownloadPageUrl"].InnerText;
-				string notes = root["Notes"].InnerText.Trim();
+        private class VersionInfo
+        {
+            /// <exception cref="ArgumentException">
+            ///     <paramref name="version" /> is an invalid value.
+            /// </exception>
+            /// <exception cref="ArgumentNullException">
+            ///     <paramref name="version" />, <paramref name="translationVersion" />,
+            ///     <paramref name="versionName" />, <paramref name="downloadPageUrl" />, or
+            ///     <paramref name="notes" /> is null.
+            /// </exception>
+            public VersionInfo(string version,
+                               string translationVersion,
+                               string versionName,
+                               string downloadPageUrl,
+                               string notes)
+            {
+                if (version == null)
+                    throw new ArgumentNullException("version");
+                if (translationVersion == null)
+                    throw new ArgumentNullException("translationVersion");
+                if (versionName == null)
+                    throw new ArgumentNullException("versionName");
+                if (downloadPageUrl == null)
+                    throw new ArgumentNullException("downloadPageUrl");
+                if (notes == null)
+                    throw new ArgumentNullException("notes");
 
-				return new VersionInfo(version, translationVersion, name, url, notes);
-			}
-			catch (WebException)
-			{
-				throw;
-			}
-			catch
-			{
-				throw new InvalidDataException();
-			}
-		}
+                try
+                {
+                    MainVersion = new Version(version);
+                }
+                catch
+                {
+                    throw new ArgumentException("Version string is invalid.", "version");
+                }
+                TranslationVersion = translationVersion;
+                VersionName = versionName;
+                DownloadPageUrl = downloadPageUrl;
+                Notes = notes;
+            }
 
-		private static void OpenUrl(string url)
-		{
-			System.Diagnostics.Process.Start(url);
-		}
+            public Version MainVersion { get; }
 
-		public static void CheckForUpdates()
-		{
-			try
-			{
-				VersionInfo info = GetVersionManifestInfo();
-				ShowNewVersionInfo(info);
-			}
-			catch (WebException)
-			{
-				MessageBox.Show(Strings.ErrorConnectToServer,
-					Strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-			catch (InvalidDataException)
-			{
-				MessageBox.Show(Strings.ErrorReadVersionData, Strings.Error,
-					MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		}
+            public string TranslationVersion { get; }
 
-		private static void ShowNewVersionInfo(VersionInfo info)
-		{
-			if (info.IsUpdated)
-			{
-				string text = GetVersionDescription(info);
-				string caption = Strings.CheckingForUpdates;
+            public string VersionName { get; }
 
-				DialogResult result = MessageBox.Show(text, caption,
-					MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            public string DownloadPageUrl { get; }
 
-				if (result == DialogResult.Yes)
-					OpenUrl(info.DownloadPageUrl);
-			}
-			else
-			{
-				MessageBox.Show(
-					Strings.NoUpdates, Strings.CheckingForUpdates,
-					MessageBoxButtons.OK, MessageBoxIcon.Information);
-			}
-		}
+            public string Notes { get; }
 
-		private static string GetVersionDescription(VersionInfo info)
-		{
-			StringBuilder builder = new StringBuilder(512);
+            public bool IsUpdated { get { return IsMainProgramUpdated || IsTranslationUpdated; } }
 
-			if (info.IsMainProgramUpdated)
-			{
-				// Header text
-				builder.AppendFormat("{0}: {1}\n\n",
-					Strings.NewVersion, info.VersionName);
+            public bool IsMainProgramUpdated { get { return MainVersion.CompareTo(Program.CurrentVersion) > 0; } }
 
-				// Main program's changes
-				builder.Append(info.Notes);
-				builder.Append("\n\n");
-			}
-			else if (info.IsTranslationUpdated)
-			{
-				builder.AppendFormat("{0}\n\n", Strings.TranslationUpdated);
-			}
+            public bool IsTranslationUpdated
+            {
+                get
+                {
+                    var currentTranslationVersion = Strings.TranslationVersion;
+                    return TranslationVersion.CompareTo(currentTranslationVersion) > 0;
+                }
+            }
 
-			// Download text
-			builder.Append(Strings.ProgramDownload);
-
-			return builder.ToString();
-		}
-	}
+            public override string ToString()
+            {
+                if (VersionName == null)
+                    return MainVersion.ToString();
+                return string.Format("{0} ({1})", VersionName, MainVersion);
+            }
+        }
+    }
 }

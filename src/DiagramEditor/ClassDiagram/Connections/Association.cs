@@ -14,411 +14,438 @@
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using System.Collections.Generic;
 using NClass.Core;
-using NClass.DiagramEditor.ClassDiagram.Shapes;
 using NClass.DiagramEditor.ClassDiagram.ContextMenus;
 using NClass.DiagramEditor.ClassDiagram.Dialogs;
+using NClass.DiagramEditor.ClassDiagram.Shapes;
 
 namespace NClass.DiagramEditor.ClassDiagram.Connections
 {
-	internal sealed class Association : Connection
-	{
-		const int DiamondWidth = 10;
-		const int DiamondHeight = 18;
-		static readonly Point[] diamondPoints =  {
-			new Point(0, 0),
-			new Point(DiamondWidth / 2, DiamondHeight / 2),
-			new Point(0, DiamondHeight),
-			new Point(-DiamondWidth / 2, DiamondHeight / 2)
-		};
-		static Pen linePen = new Pen(Color.Black);
-		static SolidBrush lineBrush = new SolidBrush(Color.Black);
-		static SolidBrush textBrush = new SolidBrush(Color.Black);
-		static StringFormat stringFormat = new StringFormat(StringFormat.GenericTypographic);
+    internal sealed class Association : Connection
+    {
+        private const int DiamondWidth = 10;
+        private const int DiamondHeight = 18;
 
-		AssociationRelationship association;
+        private static readonly Point[] diamondPoints =
+        {
+            new Point(0, 0),
+            new Point(DiamondWidth/2, DiamondHeight/2),
+            new Point(0, DiamondHeight),
+            new Point(-DiamondWidth/2, DiamondHeight/2)
+        };
 
-		static Association()
-		{
-			linePen.MiterLimit = 2.0F;
-			linePen.LineJoin = LineJoin.MiterClipped;
-		}
+        private static readonly Pen linePen = new Pen(Color.Black);
+        private static readonly SolidBrush lineBrush = new SolidBrush(Color.Black);
+        private static readonly SolidBrush textBrush = new SolidBrush(Color.Black);
+        private static readonly StringFormat stringFormat = new StringFormat(StringFormat.GenericTypographic);
 
-		/// <exception cref="ArgumentNullException">
-		/// <paramref name="association"/> is null.-or-
-		/// <paramref name="startShape"/> is null.-or-
-		/// <paramref name="endShape"/> is null.
-		/// </exception>
-		public Association(AssociationRelationship association, Shape startShape, Shape endShape)
-			: base(association, startShape, endShape)
-		{
-			this.association = association;
-			association.Reversed += new EventHandler(association_Reversed);
-		}
+        static Association()
+        {
+            linePen.MiterLimit = 2.0F;
+            linePen.LineJoin = LineJoin.MiterClipped;
+        }
 
-		internal AssociationRelationship AssociationRelationship
-		{
-			get { return association; }
-		}
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="association" /> is null.-or-
+        ///     <paramref name="startShape" /> is null.-or-
+        ///     <paramref name="endShape" /> is null.
+        /// </exception>
+        public Association(AssociationRelationship association, Shape startShape, Shape endShape)
+            : base(association, startShape, endShape)
+        {
+            AssociationRelationship = association;
+            association.Reversed += association_Reversed;
+        }
 
-		protected internal override Relationship Relationship
-		{
-			get { return association; }
-		}
+        internal AssociationRelationship AssociationRelationship { get; }
 
-		protected override Size StartCapSize
-		{
-			get
-			{
-				if (AssociationRelationship.AssociationType != AssociationType.Association)
-					return new Size(DiamondWidth, DiamondHeight);
-				else
-					return Size.Empty;
-			}
-		}
+        protected internal override Relationship Relationship { get { return AssociationRelationship; } }
 
-		protected override Size EndCapSize
-		{
-			get
-			{
-				if (AssociationRelationship.Direction == Direction.Unidirectional)
-					return Arrowhead.OpenArrowSize;
-				else
-					return Size.Empty;
-			}
-		}
+        protected override Size StartCapSize
+        {
+            get
+            {
+                if (AssociationRelationship.AssociationType != AssociationType.Association)
+                    return new Size(DiamondWidth, DiamondHeight);
+                return Size.Empty;
+            }
+        }
 
-		protected override int StartSelectionOffset
-		{
-			get
-			{
-				if (AssociationRelationship.AssociationType != AssociationType.Association)
-					return DiamondHeight;
-				else
-					return 0;
-			}
-		}
+        protected override Size EndCapSize
+        {
+            get
+            {
+                if (AssociationRelationship.Direction == Direction.Unidirectional)
+                    return Arrowhead.OpenArrowSize;
+                return Size.Empty;
+            }
+        }
 
-		protected internal override IEnumerable<ToolStripItem> GetContextMenuItems(Diagram diagram)
-		{
-			return AssociationContextMenu.Default.GetMenuItems(diagram);
-		}
+        protected override int StartSelectionOffset
+        {
+            get
+            {
+                if (AssociationRelationship.AssociationType != AssociationType.Association)
+                    return DiamondHeight;
+                return 0;
+            }
+        }
 
-		protected override void OnDoubleClick(AbsoluteMouseEventArgs e)
-		{
-			base.OnDoubleClick(e);
+        protected internal override IEnumerable<ToolStripItem> GetContextMenuItems(Diagram diagram)
+        {
+            return AssociationContextMenu.Default.GetMenuItems(diagram);
+        }
 
-			if (!e.Handled)
-			{
-				ShowEditDialog();
-			}
-		}
+        protected override void OnDoubleClick(AbsoluteMouseEventArgs e)
+        {
+            base.OnDoubleClick(e);
 
-		protected internal override void ShowEditor()
-		{
-			ShowEditDialog();
-		}
+            if (!e.Handled)
+            {
+                ShowEditDialog();
+            }
+        }
 
-		public void ShowEditDialog()
-		{
-			using (AssociationDialog dialog = new AssociationDialog())
-			{
-				dialog.Association = AssociationRelationship;
-				dialog.ShowDialog();
-			}
-		}
+        protected internal override void ShowEditor()
+        {
+            ShowEditDialog();
+        }
 
-		private void association_Reversed(object sender, EventArgs e)
-		{
-			Reverse();
-		}
+        public void ShowEditDialog()
+        {
+            using (var dialog = new AssociationDialog())
+            {
+                dialog.Association = AssociationRelationship;
+                dialog.ShowDialog();
+            }
+        }
 
-		protected override bool CloneRelationship(Diagram diagram, Shape first, Shape second)
-		{
-			TypeBase firstType = first.Entity as TypeBase;
-			TypeBase secondType = second.Entity as TypeBase;
+        private void association_Reversed(object sender, EventArgs e)
+        {
+            Reverse();
+        }
 
-			if (firstType != null && secondType != null)
-			{
-				AssociationRelationship clone = association.Clone(firstType, secondType);
-				return diagram.InsertAssociation(clone);
-			}
-			else
-			{
-				return false;
-			}
-		}
+        protected override bool CloneRelationship(Diagram diagram, Shape first, Shape second)
+        {
+            var firstType = first.Entity as TypeBase;
+            var secondType = second.Entity as TypeBase;
 
-		public override void Draw(IGraphics g, bool onScreen, Style style)
-		{
-			base.Draw(g, onScreen, style);
+            if (firstType != null && secondType != null)
+            {
+                var clone = AssociationRelationship.Clone(firstType, secondType);
+                return diagram.InsertAssociation(clone);
+            }
+            return false;
+        }
 
-			DrawStartRole(g, style);
-			DrawEndRole(g, style);
-			DrawStartMultiplicity(g, style);
-			DrawEndMultiplicity(g, style);
-		}
+        public override void Draw(IGraphics g, bool onScreen, Style style)
+        {
+            base.Draw(g, onScreen, style);
 
-		private void DrawStartRole(IGraphics g, Style style)
-		{
-			string startRole = AssociationRelationship.StartRole;
-			if (startRole != null)
-			{
-				DrawRole(g, style, startRole, RouteCache[0], RouteCache[1], StartCapSize);
-			}
-		}
+            DrawStartRole(g, style);
+            DrawEndRole(g, style);
+            DrawStartMultiplicity(g, style);
+            DrawEndMultiplicity(g, style);
+        }
 
-		private void DrawEndRole(IGraphics g, Style style)
-		{
-			string endRole = AssociationRelationship.EndRole;
-			if (endRole != null)
-			{
-				int last = RouteCache.Count - 1;
-				DrawRole(g, style, endRole, RouteCache[last], RouteCache[last - 1], EndCapSize);
-			}
-		}
+        private void DrawStartRole(IGraphics g, Style style)
+        {
+            var startRole = AssociationRelationship.StartRole;
+            if (startRole != null)
+            {
+                DrawRole(g, style, startRole, RouteCache[0], RouteCache[1], StartCapSize);
+            }
+        }
 
-		private void DrawRole(IGraphics g, Style style, string text, Point firstPoint,
-			Point secondPoint, Size capSize)
-		{
-			float angle = GetAngle(firstPoint, secondPoint);
-			Point point = firstPoint;
+        private void DrawEndRole(IGraphics g, Style style)
+        {
+            var endRole = AssociationRelationship.EndRole;
+            if (endRole != null)
+            {
+                var last = RouteCache.Count - 1;
+                DrawRole(g, style, endRole, RouteCache[last], RouteCache[last - 1], EndCapSize);
+            }
+        }
 
-			if (angle == 0) // Down
-			{
-				point.X -= capSize.Width / 2 + TextMargin.Width;
-				point.Y += style.ShadowOffset.Height + TextMargin.Height;
-				stringFormat.Alignment = StringAlignment.Far;
-				stringFormat.LineAlignment = StringAlignment.Near;
-			}
-			else if (angle == 90) // Left
-			{
-				point.X -= TextMargin.Width;
-				point.Y += capSize.Width / 2 + TextMargin.Height;
-				stringFormat.Alignment = StringAlignment.Far;
-				stringFormat.LineAlignment = StringAlignment.Near;
-			}
-			else if (angle == 180) // Up
-			{
-				point.X -= capSize.Width / 2 + TextMargin.Width;
-				point.Y -= TextMargin.Height;
-				stringFormat.Alignment = StringAlignment.Far;
-				stringFormat.LineAlignment = StringAlignment.Far;
-			}
-			else // Right
-			{
-				point.X += style.ShadowOffset.Width + TextMargin.Width;
-				point.Y += capSize.Width / 2 + TextMargin.Height;
-				stringFormat.Alignment = StringAlignment.Near;
-				stringFormat.LineAlignment = StringAlignment.Near;
-			}
+        private void DrawRole(IGraphics g,
+                              Style style,
+                              string text,
+                              Point firstPoint,
+                              Point secondPoint,
+                              Size capSize)
+        {
+            var angle = GetAngle(firstPoint, secondPoint);
+            var point = firstPoint;
 
-			textBrush.Color = style.RelationshipTextColor;
-			g.DrawString(text, style.RelationshipTextFont, textBrush, point, stringFormat);
-		}
+            if (angle == 0) // Down
+            {
+                point.X -= capSize.Width/2 + TextMargin.Width;
+                point.Y += style.ShadowOffset.Height + TextMargin.Height;
+                stringFormat.Alignment = StringAlignment.Far;
+                stringFormat.LineAlignment = StringAlignment.Near;
+            }
+            else if (angle == 90) // Left
+            {
+                point.X -= TextMargin.Width;
+                point.Y += capSize.Width/2 + TextMargin.Height;
+                stringFormat.Alignment = StringAlignment.Far;
+                stringFormat.LineAlignment = StringAlignment.Near;
+            }
+            else if (angle == 180) // Up
+            {
+                point.X -= capSize.Width/2 + TextMargin.Width;
+                point.Y -= TextMargin.Height;
+                stringFormat.Alignment = StringAlignment.Far;
+                stringFormat.LineAlignment = StringAlignment.Far;
+            }
+            else // Right
+            {
+                point.X += style.ShadowOffset.Width + TextMargin.Width;
+                point.Y += capSize.Width/2 + TextMargin.Height;
+                stringFormat.Alignment = StringAlignment.Near;
+                stringFormat.LineAlignment = StringAlignment.Near;
+            }
 
-		private void DrawStartMultiplicity(IGraphics g, Style style)
-		{
-			string startMultiplicity = AssociationRelationship.StartMultiplicity;
-			if (startMultiplicity != null)
-			{
-				DrawMultiplicity(g, style, startMultiplicity, RouteCache[0],
-					RouteCache[1], StartCapSize);
-			}
-		}
+            textBrush.Color = style.RelationshipTextColor;
+            g.DrawString(text, style.RelationshipTextFont, textBrush, point, stringFormat);
+        }
 
-		private void DrawEndMultiplicity(IGraphics g, Style style)
-		{
-			string endMultiplicity = AssociationRelationship.EndMultiplicity;
-			if (endMultiplicity != null)
-			{
-				int last = RouteCache.Count - 1;
-				DrawMultiplicity(g, style, endMultiplicity, RouteCache[last],
-					RouteCache[last - 1], EndCapSize);
-			}
-		}
+        private void DrawStartMultiplicity(IGraphics g, Style style)
+        {
+            var startMultiplicity = AssociationRelationship.StartMultiplicity;
+            if (startMultiplicity != null)
+            {
+                DrawMultiplicity(g,
+                                 style,
+                                 startMultiplicity,
+                                 RouteCache[0],
+                                 RouteCache[1],
+                                 StartCapSize);
+            }
+        }
 
-		private void DrawMultiplicity(IGraphics g, Style style, string text, Point firstPoint,
-			Point secondPoint, Size capSize)
-		{
-			float angle = GetAngle(firstPoint, secondPoint);
-			Point point = firstPoint;
+        private void DrawEndMultiplicity(IGraphics g, Style style)
+        {
+            var endMultiplicity = AssociationRelationship.EndMultiplicity;
+            if (endMultiplicity != null)
+            {
+                var last = RouteCache.Count - 1;
+                DrawMultiplicity(g,
+                                 style,
+                                 endMultiplicity,
+                                 RouteCache[last],
+                                 RouteCache[last - 1],
+                                 EndCapSize);
+            }
+        }
 
-			if (angle == 0) // Down
-			{
-				point.X += capSize.Width / 2 + TextMargin.Width;
-				point.Y += style.ShadowOffset.Height + TextMargin.Height;
-				stringFormat.Alignment = StringAlignment.Near;
-				stringFormat.LineAlignment = StringAlignment.Near;
-			}
-			else if (angle == 90) // Left
-			{
-				point.X -= TextMargin.Width;
-				point.Y -= capSize.Width / 2 + TextMargin.Height;
-				stringFormat.Alignment = StringAlignment.Far;
-				stringFormat.LineAlignment = StringAlignment.Far;
-			}
-			else if (angle == 180) // Up
-			{
-				point.X += capSize.Width / 2 + TextMargin.Width;
-				point.Y -= TextMargin.Height;
-				stringFormat.Alignment = StringAlignment.Near;
-				stringFormat.LineAlignment = StringAlignment.Far;
-			}
-			else // Right
-			{
-				point.X += style.ShadowOffset.Width + TextMargin.Width;
-				point.Y -= capSize.Width / 2 + TextMargin.Height;
-				stringFormat.Alignment = StringAlignment.Near;
-				stringFormat.LineAlignment = StringAlignment.Far;
-			}
+        private void DrawMultiplicity(IGraphics g,
+                                      Style style,
+                                      string text,
+                                      Point firstPoint,
+                                      Point secondPoint,
+                                      Size capSize)
+        {
+            var angle = GetAngle(firstPoint, secondPoint);
+            var point = firstPoint;
 
-			textBrush.Color = style.RelationshipTextColor;
-			g.DrawString(text, style.RelationshipTextFont, textBrush, point, stringFormat);
-		}
+            if (angle == 0) // Down
+            {
+                point.X += capSize.Width/2 + TextMargin.Width;
+                point.Y += style.ShadowOffset.Height + TextMargin.Height;
+                stringFormat.Alignment = StringAlignment.Near;
+                stringFormat.LineAlignment = StringAlignment.Near;
+            }
+            else if (angle == 90) // Left
+            {
+                point.X -= TextMargin.Width;
+                point.Y -= capSize.Width/2 + TextMargin.Height;
+                stringFormat.Alignment = StringAlignment.Far;
+                stringFormat.LineAlignment = StringAlignment.Far;
+            }
+            else if (angle == 180) // Up
+            {
+                point.X += capSize.Width/2 + TextMargin.Width;
+                point.Y -= TextMargin.Height;
+                stringFormat.Alignment = StringAlignment.Near;
+                stringFormat.LineAlignment = StringAlignment.Far;
+            }
+            else // Right
+            {
+                point.X += style.ShadowOffset.Width + TextMargin.Width;
+                point.Y -= capSize.Width/2 + TextMargin.Height;
+                stringFormat.Alignment = StringAlignment.Near;
+                stringFormat.LineAlignment = StringAlignment.Far;
+            }
 
-		protected override void DrawStartCap(IGraphics g, bool onScreen, Style style)
-		{
-			linePen.Color = style.RelationshipColor;
-			linePen.Width = style.RelationshipWidth;
+            textBrush.Color = style.RelationshipTextColor;
+            g.DrawString(text, style.RelationshipTextFont, textBrush, point, stringFormat);
+        }
 
-			if (association.IsAggregation)
-			{
-				g.FillPolygon(Brushes.White, diamondPoints);
-				g.DrawPolygon(linePen, diamondPoints);
-			}
-			else if (association.IsComposition)
-			{
-				lineBrush.Color = style.RelationshipColor;
+        protected override void DrawStartCap(IGraphics g, bool onScreen, Style style)
+        {
+            linePen.Color = style.RelationshipColor;
+            linePen.Width = style.RelationshipWidth;
 
-				g.FillPolygon(lineBrush, diamondPoints);
-				g.DrawPolygon(linePen, diamondPoints);
-			}
-		}
+            if (AssociationRelationship.IsAggregation)
+            {
+                g.FillPolygon(Brushes.White, diamondPoints);
+                g.DrawPolygon(linePen, diamondPoints);
+            }
+            else if (AssociationRelationship.IsComposition)
+            {
+                lineBrush.Color = style.RelationshipColor;
 
-		protected override void DrawEndCap(IGraphics g, bool onScreen, Style style)
-		{
-			if (association.Direction == Direction.Unidirectional)
-			{
-				linePen.Color = style.RelationshipColor;
-				linePen.Width = style.RelationshipWidth;
-				g.DrawLines(linePen, Arrowhead.OpenArrowPoints);
-			}
-		}
+                g.FillPolygon(lineBrush, diamondPoints);
+                g.DrawPolygon(linePen, diamondPoints);
+            }
+        }
 
-		protected override RectangleF CalculateDrawingArea(Style style, bool printing, float zoom)
-		{
-			RectangleF area = base.CalculateDrawingArea(style, printing, zoom);
+        protected override void DrawEndCap(IGraphics g, bool onScreen, Style style)
+        {
+            if (AssociationRelationship.Direction == Direction.Unidirectional)
+            {
+                linePen.Color = style.RelationshipColor;
+                linePen.Width = style.RelationshipWidth;
+                g.DrawLines(linePen, Arrowhead.OpenArrowPoints);
+            }
+        }
 
-			if (AssociationRelationship.StartRole != null)
-				area = RectangleF.Union(area, GetStartRoleArea(style));
+        protected override RectangleF CalculateDrawingArea(Style style, bool printing, float zoom)
+        {
+            var area = base.CalculateDrawingArea(style, printing, zoom);
 
-			if (AssociationRelationship.EndRole != null)
-				area = RectangleF.Union(area, GetEndRoleArea(style));
+            if (AssociationRelationship.StartRole != null)
+                area = RectangleF.Union(area, GetStartRoleArea(style));
 
-			if (AssociationRelationship.StartMultiplicity != null)
-				area = RectangleF.Union(area, GetStartMultiplicityArea(style));
+            if (AssociationRelationship.EndRole != null)
+                area = RectangleF.Union(area, GetEndRoleArea(style));
 
-			if (AssociationRelationship.EndMultiplicity != null)
-				area = RectangleF.Union(area, GetEndMultiplicityArea(style));
+            if (AssociationRelationship.StartMultiplicity != null)
+                area = RectangleF.Union(area, GetStartMultiplicityArea(style));
 
-			return area;
-		}
+            if (AssociationRelationship.EndMultiplicity != null)
+                area = RectangleF.Union(area, GetEndMultiplicityArea(style));
 
-		private RectangleF GetStartRoleArea(Style style)
-		{
-			return GetRoleArea(style, AssociationRelationship.StartRole,
-				RouteCache[0], RouteCache[1], StartCapSize);
-		}
+            return area;
+        }
 
-		private RectangleF GetEndRoleArea(Style style)
-		{
-			int last = RouteCache.Count - 1;
-			return GetRoleArea(style, AssociationRelationship.EndRole,
-				RouteCache[last], RouteCache[last - 1], EndCapSize);
-		}
+        private RectangleF GetStartRoleArea(Style style)
+        {
+            return GetRoleArea(style,
+                               AssociationRelationship.StartRole,
+                               RouteCache[0],
+                               RouteCache[1],
+                               StartCapSize);
+        }
 
-		private RectangleF GetRoleArea(Style style, string text, Point firstPoint,
-			Point secondPoint, Size capSize)
-		{
-			float angle = GetAngle(firstPoint, secondPoint);
+        private RectangleF GetEndRoleArea(Style style)
+        {
+            var last = RouteCache.Count - 1;
+            return GetRoleArea(style,
+                               AssociationRelationship.EndRole,
+                               RouteCache[last],
+                               RouteCache[last - 1],
+                               EndCapSize);
+        }
 
-			SizeF textSize = Graphics.MeasureString(text, style.RelationshipTextFont,
-				PointF.Empty, stringFormat);
-			RectangleF area = new RectangleF(firstPoint, textSize);
+        private RectangleF GetRoleArea(Style style,
+                                       string text,
+                                       Point firstPoint,
+                                       Point secondPoint,
+                                       Size capSize)
+        {
+            var angle = GetAngle(firstPoint, secondPoint);
 
-			if (angle == 0) // Down
-			{
-				area.X -= textSize.Width + capSize.Width / 2 + TextMargin.Width;
-				area.Y += style.ShadowOffset.Height + TextMargin.Height;
-			}
-			else if (angle == 90) // Left
-			{
-				area.X -= textSize.Width + TextMargin.Width;
-				area.Y += capSize.Width / 2 + TextMargin.Height;
-			}
-			else if (angle == 180) // Up
-			{
-				area.X -= textSize.Width + capSize.Width / 2 + TextMargin.Width;
-				area.Y -= textSize.Height + TextMargin.Height;
-			}
-			else // Right
-			{
-				area.X += style.ShadowOffset.Width + TextMargin.Width;
-				area.Y += capSize.Width / 2 + TextMargin.Height;
-			}
+            var textSize = Graphics.MeasureString(text,
+                                                  style.RelationshipTextFont,
+                                                  PointF.Empty,
+                                                  stringFormat);
+            var area = new RectangleF(firstPoint, textSize);
 
-			return area;
-		}
+            if (angle == 0) // Down
+            {
+                area.X -= textSize.Width + capSize.Width/2 + TextMargin.Width;
+                area.Y += style.ShadowOffset.Height + TextMargin.Height;
+            }
+            else if (angle == 90) // Left
+            {
+                area.X -= textSize.Width + TextMargin.Width;
+                area.Y += capSize.Width/2 + TextMargin.Height;
+            }
+            else if (angle == 180) // Up
+            {
+                area.X -= textSize.Width + capSize.Width/2 + TextMargin.Width;
+                area.Y -= textSize.Height + TextMargin.Height;
+            }
+            else // Right
+            {
+                area.X += style.ShadowOffset.Width + TextMargin.Width;
+                area.Y += capSize.Width/2 + TextMargin.Height;
+            }
 
-		private RectangleF GetStartMultiplicityArea(Style style)
-		{
-			return MultiplicityArea(style, AssociationRelationship.StartMultiplicity,
-				RouteCache[0], RouteCache[1], StartCapSize);
-		}
+            return area;
+        }
 
-		private RectangleF GetEndMultiplicityArea(Style style)
-		{
-			int last = RouteCache.Count - 1;
-			return MultiplicityArea(style, AssociationRelationship.EndMultiplicity,
-				RouteCache[last], RouteCache[last - 1], EndCapSize);
-		}
+        private RectangleF GetStartMultiplicityArea(Style style)
+        {
+            return MultiplicityArea(style,
+                                    AssociationRelationship.StartMultiplicity,
+                                    RouteCache[0],
+                                    RouteCache[1],
+                                    StartCapSize);
+        }
 
-		private RectangleF MultiplicityArea(Style style, string text, Point firstPoint,
-			Point secondPoint, Size capSize)
-		{
-			float angle = GetAngle(firstPoint, secondPoint);
+        private RectangleF GetEndMultiplicityArea(Style style)
+        {
+            var last = RouteCache.Count - 1;
+            return MultiplicityArea(style,
+                                    AssociationRelationship.EndMultiplicity,
+                                    RouteCache[last],
+                                    RouteCache[last - 1],
+                                    EndCapSize);
+        }
 
-			SizeF textSize = Graphics.MeasureString(text, style.RelationshipTextFont,
-				PointF.Empty, stringFormat);
-			RectangleF area = new RectangleF(firstPoint, textSize);
+        private RectangleF MultiplicityArea(Style style,
+                                            string text,
+                                            Point firstPoint,
+                                            Point secondPoint,
+                                            Size capSize)
+        {
+            var angle = GetAngle(firstPoint, secondPoint);
 
-			if (angle == 0) // Down
-			{
-				area.X += capSize.Width / 2 + TextMargin.Width;
-				area.Y += style.ShadowOffset.Height + TextMargin.Height;
-			}
-			else if (angle == 90) // Left
-			{
-				area.X -= textSize.Width + TextMargin.Width;
-				area.Y -= textSize.Height + capSize.Width / 2 + TextMargin.Height;
-			}
-			else if (angle == 180) // Up
-			{
-				area.X += capSize.Width / 2 + TextMargin.Width;
-				area.Y -= textSize.Height + TextMargin.Height;
-			}
-			else // Right
-			{
-				area.X += style.ShadowOffset.Width + TextMargin.Width;
-				area.Y -= textSize.Height + capSize.Width / 2 + TextMargin.Height;
-			}
+            var textSize = Graphics.MeasureString(text,
+                                                  style.RelationshipTextFont,
+                                                  PointF.Empty,
+                                                  stringFormat);
+            var area = new RectangleF(firstPoint, textSize);
 
-			return area;
-		}
-	}
+            if (angle == 0) // Down
+            {
+                area.X += capSize.Width/2 + TextMargin.Width;
+                area.Y += style.ShadowOffset.Height + TextMargin.Height;
+            }
+            else if (angle == 90) // Left
+            {
+                area.X -= textSize.Width + TextMargin.Width;
+                area.Y -= textSize.Height + capSize.Width/2 + TextMargin.Height;
+            }
+            else if (angle == 180) // Up
+            {
+                area.X += capSize.Width/2 + TextMargin.Width;
+                area.Y -= textSize.Height + TextMargin.Height;
+            }
+            else // Right
+            {
+                area.X += style.ShadowOffset.Width + TextMargin.Width;
+                area.Y -= textSize.Height + capSize.Width/2 + TextMargin.Height;
+            }
+
+            return area;
+        }
+    }
 }

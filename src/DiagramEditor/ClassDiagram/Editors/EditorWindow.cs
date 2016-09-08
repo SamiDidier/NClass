@@ -13,26 +13,19 @@
 // this program; if not, write to the Free Software Foundation, Inc., 
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Windows.Forms;
-using NClass.DiagramEditor.ClassDiagram.Shapes;
-using NClass.Core;
-
 namespace NClass.DiagramEditor.ClassDiagram.Editors
 {
-	public abstract class EditorWindow : PopupWindow
-	{
-		internal abstract void Init(DiagramElement element);
+    public abstract class EditorWindow : PopupWindow
+    {
+        internal abstract void Init(DiagramElement element);
 
-		internal abstract void Relocate(DiagramElement element);
+        internal abstract void Relocate(DiagramElement element);
 
-		public abstract void ValidateData();
+        public abstract void ValidateData();
 
-		public override void Closing()
-		{
-			ValidateData();
-		}
-	}
+        public override void Closing()
+        {
+            ValidateData();
+        }
+    }
 }

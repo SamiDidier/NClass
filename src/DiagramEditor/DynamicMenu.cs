@@ -13,45 +13,40 @@
 // this program; if not, write to the Free Software Foundation, Inc., 
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace NClass.DiagramEditor
 {
-	public abstract class DynamicMenu : IEnumerable<ToolStripMenuItem>
-	{
-		int preferredIndex;
+    public abstract class DynamicMenu : IEnumerable<ToolStripMenuItem>
+    {
+        public DynamicMenu()
+        {
+            PreferredIndex = -1;
+        }
 
-		public DynamicMenu()
-		{
-			this.preferredIndex = -1;
-		}
+        public DynamicMenu(int preferredIndex)
+        {
+            PreferredIndex = preferredIndex;
+        }
 
-		public DynamicMenu(int preferredIndex)
-		{
-			this.preferredIndex = preferredIndex;
-		}
+        public int PreferredIndex { get; }
 
-		public int PreferredIndex
-		{
-			get { return preferredIndex; }
-		}
+        public IEnumerator<ToolStripMenuItem> GetEnumerator()
+        {
+            return GetMenuItems().GetEnumerator();
+        }
 
-		public IEnumerator<ToolStripMenuItem> GetEnumerator()
-		{
-			return GetMenuItems().GetEnumerator();
-		}
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
 
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-		{
-			return GetEnumerator();
-		}
+        public abstract IEnumerable<ToolStripMenuItem> GetMenuItems();
 
-		public abstract IEnumerable<ToolStripMenuItem> GetMenuItems();
+        public abstract ToolStrip GetToolStrip();
 
-		public abstract ToolStrip GetToolStrip();
-
-		public abstract void SetReference(IDocument document);
-	}
+        public abstract void SetReference(IDocument document);
+    }
 }

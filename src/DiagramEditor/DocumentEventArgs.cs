@@ -13,24 +13,17 @@
 // this program; if not, write to the Free Software Foundation, Inc., 
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-using System;
-
 namespace NClass.DiagramEditor
 {
-	public delegate void DocumentEventHandler(object sender, DocumentEventArgs e);
+    public delegate void DocumentEventHandler(object sender, DocumentEventArgs e);
 
-	public class DocumentEventArgs
-	{
-		IDocument document;
+    public class DocumentEventArgs
+    {
+        public DocumentEventArgs(IDocument document)
+        {
+            Document = document;
+        }
 
-		public DocumentEventArgs(IDocument document)
-		{
-			this.document = document;
-		}
-
-		public IDocument Document
-		{
-			get { return document; }
-		}
-	}
+        public IDocument Document { get; }
+    }
 }

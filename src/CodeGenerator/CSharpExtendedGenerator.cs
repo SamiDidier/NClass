@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-//using NClass.CodeGenerator.Templates;
+﻿using System.IO;
 using ICSharpCode.NRefactory.CSharp;
-using NStub.CSharp;
-using System.Windows.Forms;
-using NClass.Core;
+//using NClass.CodeGenerator.Templates;
 
 
 namespace NClass.CodeGenerator
@@ -23,14 +16,20 @@ namespace NClass.CodeGenerator
         Custom
     }
 
-    class CSharpExtendedGenerator
+    internal class CSharpExtendedGenerator
     {
         public void Generate()
         {
-            
         }
 
-        private void GenerateCSharpFile(string projectName, string outputDirectory, bool xmlDocFood, bool generetaNUnit, FormatStyleEnum formatIndex, string formatFile, bool sortUsing, int templateIndex)
+        private void GenerateCSharpFile(string projectName,
+                                        string outputDirectory,
+                                        bool xmlDocFood,
+                                        bool generetaNUnit,
+                                        FormatStyleEnum formatIndex,
+                                        string formatFile,
+                                        bool sortUsing,
+                                        int templateIndex)
         {
             // To DO
             // For each file
@@ -72,12 +71,13 @@ namespace NClass.CodeGenerator
             }
 
             // Genereta NUnit test class
-            if (generetaNUnit == true)
+            if (generetaNUnit)
             {
                 // Generate the project
-                NStub.CSharp.CSharpProjectGenerator gen = new NStub.CSharp.CSharpProjectGenerator(String.Format("{0}_unitary_tests", projectName), outputDirectory);
+                var gen = new NStub.CSharp.CSharpProjectGenerator(string.Format("{0}_unitary_tests", projectName),
+                                                                  outputDirectory);
                 // gen.ReferencedAssemblies
-                
+
                 gen.GenerateProjectFile();
 
                 /*
@@ -93,17 +93,16 @@ namespace NClass.CodeGenerator
 
         private void FormatSourceCode(string fileName, CSharpFormattingOptions formatStyle)
         {
-            CSharpParser parser = new CSharpParser();
+            var parser = new CSharpParser();
 
             // Open the C# source file to read
             using (TextReader sr = new StreamReader(fileName))
             {
                 // TO DO: TextEditorOptions
-                CSharpFormatter formater = new CSharpFormatter (formatStyle);
+                var formater = new CSharpFormatter(formatStyle);
                 formater.Format(sr.ReadToEnd());
 
                 // Write the new C# source file if modified
-
             }
         }
     }

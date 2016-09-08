@@ -13,34 +13,28 @@
 // this program; if not, write to the Free Software Foundation, Inc., 
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-using System;
 using System.Windows.Forms;
 
 namespace NClass.CodeGenerator
 {
-	public class ToolStripSimplifiedRenderer : ToolStripProfessionalRenderer
-	{
-		static ToolStripSimplifiedRenderer renderer = new ToolStripSimplifiedRenderer();
+    public class ToolStripSimplifiedRenderer : ToolStripProfessionalRenderer
+    {
+        private ToolStripSimplifiedRenderer()
+        {
+        }
 
-		private ToolStripSimplifiedRenderer()
-		{
-		}
+        public static ToolStripSimplifiedRenderer Default { get; } = new ToolStripSimplifiedRenderer();
 
-		public static ToolStripSimplifiedRenderer Default
-		{
-			get { return renderer; }
-		}
+        protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
+        {
+            if (e.ToolStrip is ToolStripDropDown)
+                base.OnRenderToolStripBackground(e);
+        }
 
-		protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
-		{
-			if (e.ToolStrip is ToolStripDropDown)
-				base.OnRenderToolStripBackground(e);
-		}
-
-		protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e)
-		{
-			if (e.ToolStrip is ToolStripDropDown)
-				base.OnRenderToolStripBorder(e);
-		}
-	}
+        protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e)
+        {
+            if (e.ToolStrip is ToolStripDropDown)
+                base.OnRenderToolStripBorder(e);
+        }
+    }
 }

@@ -13,48 +13,41 @@
 // this program; if not, write to the Free Software Foundation, Inc., 
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
 namespace NClass.DiagramEditor.ClassDiagram.Connections
 {
-	internal static class Arrowhead
-	{
-		public const int ClosedArrowWidth = 12;
-		public const int ClosedArrowHeight = 17;
-		public static readonly Size ClosedArrowSize = new Size(ClosedArrowWidth, ClosedArrowHeight);
-		static readonly GraphicsPath closedArrowPath = new GraphicsPath();
+    internal static class Arrowhead
+    {
+        public const int ClosedArrowWidth = 12;
+        public const int ClosedArrowHeight = 17;
 
-		public const int OpenArrowWidth = 10;
-		public const int OpenArrowHeight = 16;
-		public static readonly Size OpenArrowSize = new Size(OpenArrowWidth, OpenArrowHeight);
-		static readonly Point[] openArrowPoints;
+        public const int OpenArrowWidth = 10;
+        public const int OpenArrowHeight = 16;
+        public static readonly Size ClosedArrowSize = new Size(ClosedArrowWidth, ClosedArrowHeight);
+        public static readonly Size OpenArrowSize = new Size(OpenArrowWidth, OpenArrowHeight);
 
-		static Arrowhead()
-		{
-			openArrowPoints = new Point[] {
-				new Point(-OpenArrowWidth / 2, OpenArrowHeight),
-				new Point(0, 0),
-				new Point(OpenArrowWidth / 2, OpenArrowHeight)
-			};
+        static Arrowhead()
+        {
+            OpenArrowPoints = new[]
+            {
+                new Point(-OpenArrowWidth/2, OpenArrowHeight),
+                new Point(0, 0),
+                new Point(OpenArrowWidth/2, OpenArrowHeight)
+            };
 
-			closedArrowPath.AddLines(new Point[] {
-				new Point(0, 0),
-				new Point(ClosedArrowWidth / 2, ClosedArrowHeight),
-				new Point(-ClosedArrowWidth / 2, ClosedArrowHeight)
-			});
-			closedArrowPath.CloseFigure();
-		}
+            ClosedArrowPath.AddLines(new[]
+            {
+                new Point(0, 0),
+                new Point(ClosedArrowWidth/2, ClosedArrowHeight),
+                new Point(-ClosedArrowWidth/2, ClosedArrowHeight)
+            });
+            ClosedArrowPath.CloseFigure();
+        }
 
-		public static GraphicsPath ClosedArrowPath
-		{
-			get { return closedArrowPath; }
-		}
+        public static GraphicsPath ClosedArrowPath { get; } = new GraphicsPath();
 
-		public static Point[] OpenArrowPoints
-		{
-			get { return openArrowPoints; }
-		}
-	}
+        public static Point[] OpenArrowPoints { get; }
+    }
 }

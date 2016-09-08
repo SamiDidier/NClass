@@ -19,129 +19,121 @@ using NClass.Translations;
 
 namespace NClass.Core
 {
-	public sealed class Comment : Element, IEntity
-	{
-		string text = string.Empty;
+    public sealed class Comment : Element, IEntity
+    {
+        private string text = string.Empty;
 
-		public event SerializeEventHandler Serializing;
-		public event SerializeEventHandler Deserializing;
+        internal Comment()
+        {
+        }
 
-		internal Comment()
-		{
-		}
-	
-		internal Comment(string text)
-		{
-			this.text = text;
-		}
+        internal Comment(string text)
+        {
+            this.text = text;
+        }
 
-		public EntityType EntityType
-		{
-			get { return EntityType.Comment; }
-		}
+        public string Text
+        {
+            get { return text; }
+            set
+            {
+                if (value == null)
+                    value = string.Empty;
 
-		public string Name
-		{
-			get { return Strings.Comment; }
-		}
+                if (text != value)
+                {
+                    text = value;
+                    Changed();
+                }
+            }
+        }
 
-		public string Text
-		{
-			get
-			{
-				return text;
-			}
-			set
-			{
-				if (value == null)
-					value = string.Empty;
+        public event SerializeEventHandler Serializing;
+        public event SerializeEventHandler Deserializing;
 
-				if (text != value) {
-					text = value;
-					Changed();
-				}
-			}
-		}
+        public EntityType EntityType { get { return EntityType.Comment; } }
 
-		public Comment Clone()
-		{
-			return new Comment(this.text);
-		}
+        public string Name { get { return Strings.Comment; } }
 
-		void ISerializableElement.Serialize(XmlElement node)
-		{
-			Serialize(node);
-		}
+        void ISerializableElement.Serialize(XmlElement node)
+        {
+            Serialize(node);
+        }
 
-		void ISerializableElement.Deserialize(XmlElement node)
-		{
-			Deserialize(node);
-		}
+        void ISerializableElement.Deserialize(XmlElement node)
+        {
+            Deserialize(node);
+        }
 
-		/// <exception cref="ArgumentNullException">
-		/// <paramref name="node"/> is null.
-		/// </exception>
-		internal void Serialize(XmlElement node)
-		{
-			if (node == null)
-				throw new ArgumentNullException("node");
+        public Comment Clone()
+        {
+            return new Comment(text);
+        }
 
-			XmlElement child = node.OwnerDocument.CreateElement("Text");
-			child.InnerText = Text;
-			node.AppendChild(child);
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="node" /> is null.
+        /// </exception>
+        internal void Serialize(XmlElement node)
+        {
+            if (node == null)
+                throw new ArgumentNullException("node");
 
-			OnSerializing(new SerializeEventArgs(node));
-		}
+            var child = node.OwnerDocument.CreateElement("Text");
+            child.InnerText = Text;
+            node.AppendChild(child);
 
-		/// <exception cref="BadSyntaxException">
-		/// An error occured while deserializing.
-		/// </exception>
-		/// <exception cref="InvalidOperationException">
-		/// The XML document is corrupt.
-		/// </exception>
-		/// <exception cref="ArgumentNullException">
-		/// <paramref name="node"/> is null.
-		/// </exception>
-		internal void Deserialize(XmlElement node)
-		{
-			if (node == null)
-				throw new ArgumentNullException("node");
+            OnSerializing(new SerializeEventArgs(node));
+        }
 
-			XmlElement textNode = node["Text"];
+        /// <exception cref="BadSyntaxException">
+        ///     An error occured while deserializing.
+        /// </exception>
+        /// <exception cref="InvalidOperationException">
+        ///     The XML document is corrupt.
+        /// </exception>
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="node" /> is null.
+        /// </exception>
+        internal void Deserialize(XmlElement node)
+        {
+            if (node == null)
+                throw new ArgumentNullException("node");
 
-			if (textNode != null)
-				Text = textNode.InnerText;
-			else
-				Text = null;
+            var textNode = node["Text"];
 
-			OnDeserializing(new SerializeEventArgs(node));
-		}
+            if (textNode != null)
+                Text = textNode.InnerText;
+            else
+                Text = null;
 
-		private void OnSerializing(SerializeEventArgs e)
-		{
-			if (Serializing != null)
-				Serializing(this, e);
-		}
+            OnDeserializing(new SerializeEventArgs(node));
+        }
 
-		private void OnDeserializing(SerializeEventArgs e)
-		{
-			if (Deserializing != null)
-				Deserializing(this, e);
-		}
+        private void OnSerializing(SerializeEventArgs e)
+        {
+            if (Serializing != null)
+                Serializing(this, e);
+        }
 
-		public override string ToString()
-		{
-			const int MaxLength = 50;
+        private void OnDeserializing(SerializeEventArgs e)
+        {
+            if (Deserializing != null)
+                Deserializing(this, e);
+        }
 
-			if (Text == null) {
-				return Strings.Comment;
-			}
-			else if (Text.Length > MaxLength) {
-				return '"' + Text.Substring(0, MaxLength) + "...\"";
-			}
-			else {
-				return '"' + Text + '"';
-			}
-		}
-	}
+        public override string ToString()
+        {
+            const int MaxLength = 50;
+
+            if (Text == null)
+            {
+                return Strings.Comment;
+            }
+            if (Text.Length > MaxLength)
+            {
+                return '"' + Text.Substring(0, MaxLength) + "...\"";
+            }
+            return '"' + Text + '"';
+        }
+    }
 }

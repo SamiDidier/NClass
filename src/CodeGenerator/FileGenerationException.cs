@@ -14,48 +14,41 @@
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace NClass.CodeGenerator
 {
-	public class FileGenerationException : Exception
-	{
-		string filePath;
+    public class FileGenerationException : Exception
+    {
+        public FileGenerationException(string filePath)
+            : base(@"Could not generate the file\n" + filePath)
+        {
+            FilePath = filePath;
+        }
 
-		public FileGenerationException(string filePath)
-			: base(@"Could not generate the file\n" + filePath)
-		{
-			this.filePath = filePath;
-		}
+        public FileGenerationException(string filePath, string message)
+            : base(message)
+        {
+            FilePath = filePath;
+        }
 
-		public FileGenerationException(string filePath, string message)
-			: base(message)
-		{
-			this.filePath = filePath;
-		}
+        public FileGenerationException(string filePath, Exception innerException)
+            : base(@"Could not generate the file\n" + filePath, innerException)
+        {
+            FilePath = filePath;
+        }
 
-		public FileGenerationException(string filePath, Exception innerException)
-			: base(@"Could not generate the file\n" + filePath, innerException)
-		{
-			this.filePath = filePath;
-		}
+        public FileGenerationException(string filePath, string message, Exception innerException)
+            : base(message, innerException)
+        {
+            FilePath = filePath;
+        }
 
-		public FileGenerationException(string filePath, string message, Exception innerException)
-			: base(message, innerException)
-		{
-			this.filePath = filePath;
-		}
+        protected FileGenerationException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
 
-		protected FileGenerationException(SerializationInfo info, StreamingContext context)
-			: base(info, context)
-		{
-		}
-
-		public string FilePath
-		{
-			get { return filePath; }
-		}
-	}
+        public string FilePath { get; }
+    }
 }

@@ -21,70 +21,53 @@ using NClass.DiagramEditor.ClassDiagram.Shapes;
 
 namespace NClass.DiagramEditor.ClassDiagram.Connections
 {
-	internal sealed class Dependency : Connection
-	{
-		static Pen linePen = new Pen(Color.Black);
+    internal sealed class Dependency : Connection
+    {
+        private static readonly Pen linePen = new Pen(Color.Black);
 
-		DependencyRelationship dependency;
+        static Dependency()
+        {
+            linePen.MiterLimit = 2.0F;
+            linePen.LineJoin = LineJoin.MiterClipped;
+        }
 
-		static Dependency()
-		{
-			linePen.MiterLimit = 2.0F;
-			linePen.LineJoin = LineJoin.MiterClipped;
-		}
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="dependency" /> is null.-or-
+        ///     <paramref name="startShape" /> is null.-or-
+        ///     <paramref name="endShape" /> is null.
+        /// </exception>
+        public Dependency(DependencyRelationship dependency, Shape startShape, Shape endShape)
+            : base(dependency, startShape, endShape)
+        {
+            DependencyRelationship = dependency;
+        }
 
-		/// <exception cref="ArgumentNullException">
-		/// <paramref name="dependency"/> is null.-or-
-		/// <paramref name="startShape"/> is null.-or-
-		/// <paramref name="endShape"/> is null.
-		/// </exception>
-		public Dependency(DependencyRelationship dependency, Shape startShape, Shape endShape)
-			: base(dependency, startShape, endShape)
-		{
-			this.dependency = dependency;
-		}
+        internal DependencyRelationship DependencyRelationship { get; }
 
-		internal DependencyRelationship DependencyRelationship
-		{
-			get { return dependency; }
-		}
+        protected internal override Relationship Relationship { get { return DependencyRelationship; } }
 
-		protected internal override Relationship Relationship
-		{
-			get { return dependency; }
-		}
+        protected override bool IsDashed { get { return true; } }
 
-		protected override bool IsDashed
-		{
-			get { return true; }
-		}
+        protected override Size EndCapSize { get { return Arrowhead.OpenArrowSize; } }
 
-		protected override Size EndCapSize
-		{
-			get { return Arrowhead.OpenArrowSize; }
-		}
+        protected override void DrawEndCap(IGraphics g, bool onScreen, Style style)
+        {
+            linePen.Color = style.RelationshipColor;
+            linePen.Width = style.RelationshipWidth;
+            g.DrawLines(linePen, Arrowhead.OpenArrowPoints);
+        }
 
-		protected override void DrawEndCap(IGraphics g, bool onScreen, Style style)
-		{
-			linePen.Color = style.RelationshipColor;
-			linePen.Width = style.RelationshipWidth;
-			g.DrawLines(linePen, Arrowhead.OpenArrowPoints);
-		}
+        protected override bool CloneRelationship(Diagram diagram, Shape first, Shape second)
+        {
+            var firstType = first.Entity as TypeBase;
+            var secondType = second.Entity as TypeBase;
 
-		protected override bool CloneRelationship(Diagram diagram, Shape first, Shape second)
-		{
-			TypeBase firstType = first.Entity as TypeBase;
-			TypeBase secondType = second.Entity as TypeBase;
-
-			if (firstType != null && secondType != null)
-			{
-				DependencyRelationship clone = dependency.Clone(firstType, secondType);
-				return diagram.InsertDependency(clone);
-			}
-			else
-			{
-				return false;
-			}
-		}
-	}
+            if (firstType != null && secondType != null)
+            {
+                var clone = DependencyRelationship.Clone(firstType, secondType);
+                return diagram.InsertDependency(clone);
+            }
+            return false;
+        }
+    }
 }

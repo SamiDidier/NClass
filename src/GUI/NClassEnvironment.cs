@@ -13,31 +13,20 @@
 // this program; if not, write to the Free Software Foundation, Inc., 
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-using System;
-using NClass.Core;
 using NClass.DiagramEditor;
 
 namespace NClass.GUI
 {
-	public sealed class NClassEnvironment
-	{
-		Workspace workspace;
-		DocumentManager docManager;
+    public sealed class NClassEnvironment
+    {
+        internal NClassEnvironment(Workspace workspace, DocumentManager docManager)
+        {
+            Workspace = workspace;
+            DocumentManager = docManager;
+        }
 
-		internal NClassEnvironment(Workspace workspace, DocumentManager docManager)
-		{
-			this.workspace = workspace;
-			this.docManager = docManager;
-		}
+        public Workspace Workspace { get; }
 
-		public Workspace Workspace
-		{
-			get { return workspace; }
-		}
-
-		public DocumentManager DocumentManager
-		{
-			get { return docManager; }
-		}
-	}
+        public DocumentManager DocumentManager { get; }
+    }
 }
