@@ -13,39 +13,27 @@
 // this program; if not, write to the Free Software Foundation, Inc., 
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace NClass.DiagramEditor
 {
-	public abstract class ContextMenu
-	{
-		internal static readonly ContextMenuStrip MenuStrip = new ContextMenuStrip();
+    public abstract class ContextMenu
+    {
+        internal static readonly ContextMenuStrip MenuStrip = new ContextMenuStrip();
 
-		List<ToolStripItem> menuItems = new List<ToolStripItem>();
+        protected abstract IDocument Document { get; }
 
-		public IEnumerable<ToolStripItem> GetMenuItems(IDocument document)
-		{
-			ValidateMenuItems(document);
-			return menuItems;
-		}
+        internal IEnumerable<ToolStripItem> MenuItems { get { return MenuList; } }
 
-		protected abstract IDocument Document
-		{
-			get;
-		}
+        protected List<ToolStripItem> MenuList { get; } = new List<ToolStripItem>();
 
-		internal IEnumerable<ToolStripItem> MenuItems
-		{
-			get { return menuItems; }
-		}
+        public IEnumerable<ToolStripItem> GetMenuItems(IDocument document)
+        {
+            ValidateMenuItems(document);
+            return MenuList;
+        }
 
-		protected List<ToolStripItem> MenuList
-		{
-			get { return menuItems; }
-		}
-
-		public abstract void ValidateMenuItems(IDocument document);
-	}
+        public abstract void ValidateMenuItems(IDocument document);
+    }
 }

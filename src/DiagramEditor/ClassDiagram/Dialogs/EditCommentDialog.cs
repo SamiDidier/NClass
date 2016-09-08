@@ -19,36 +19,33 @@ using NClass.Translations;
 
 namespace NClass.DiagramEditor.ClassDiagram.Dialogs
 {
-	public partial class EditCommentDialog : Form
-	{
-		public EditCommentDialog()
-		{
-			InitializeComponent();
-		}
+    public partial class EditCommentDialog : Form
+    {
+        public EditCommentDialog()
+        {
+            InitializeComponent();
+        }
 
-		public EditCommentDialog(string initText)
-		{
-			InitializeComponent();
-			txtInput.Text = initText;
-		}
+        public EditCommentDialog(string initText)
+        {
+            InitializeComponent();
+            txtInput.Text = initText;
+        }
 
-		public string InputText
-		{
-			get { return txtInput.Text; }
-		}
+        public string InputText { get { return txtInput.Text; } }
 
-		private void UpdateTexts()
-		{
-			this.Text = Strings.EditComment;
-			lblEdit.Text = Strings.EditText;
-			btnOK.Text = Strings.ButtonOK;
-			btnCancel.Text = Strings.ButtonCancel;
-		}
+        private void UpdateTexts()
+        {
+            Text = Strings.EditComment;
+            lblEdit.Text = Strings.EditText;
+            btnOK.Text = Strings.ButtonOK;
+            btnCancel.Text = Strings.ButtonCancel;
+        }
 
-		protected override void OnLoad(EventArgs e)
-		{
-			base.OnLoad(e);
-			UpdateTexts();
-		}
-	}
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            UpdateTexts();
+        }
+    }
 }

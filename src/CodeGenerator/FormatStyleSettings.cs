@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using ICSharpCode.NRefactory.CSharp;
 
 namespace NClass.CodeGenerator
 {
@@ -20,20 +13,20 @@ namespace NClass.CodeGenerator
             // http://msdn.microsoft.com/en-us/library/aa302326.aspx
 
             // Create the AppSettings class and display it in the PropertyGrid.
-            CSharpFormattingOptionsUI formatStyle = FormattingOptionsFactoryUI.CreateEmpty();
+            var formatStyle = FormattingOptionsFactoryUI.CreateEmpty();
             propertyGridFormatStyle.SelectedObject = formatStyle;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            DialogResult = DialogResult.Cancel;
+            Close();
         }
     }
 }

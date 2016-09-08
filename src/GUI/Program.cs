@@ -14,38 +14,40 @@
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using System;
-using System.IO;
-using System.Reflection;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
+using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
 using CrashReporterDotNET;
-using NClass.Translations;
 using NClass.Common;
-
+using NClass.Translations;
 
 namespace NClass.GUI
 {
-	internal static class Program
-	{
-		public static readonly Version CurrentVersion =
-			Assembly.GetExecutingAssembly().GetName().Version;
-		public static readonly string AppDataDirectory =
-			Path.Combine(Environment.GetFolderPath(
-			Environment.SpecialFolder.LocalApplicationData), "NClass");
+    internal static class Program
+    {
+        public static readonly Version CurrentVersion =
+            Assembly.GetExecutingAssembly().GetName().Version;
 
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		[STAThread]
-		private static void Main(string[] args)
-		{
+        public static readonly string AppDataDirectory =
+            Path.Combine(Environment.GetFolderPath(
+                Environment.SpecialFolder.LocalApplicationData),
+                         "NClass");
+
+        /// <summary>
+        ///     The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        private static void Main(string[] args)
+        {
             // Run program with logger
-            App app = new App();
+            var app = new App();
             string result;
-            List<string> projectFiles = new List<string>();
+            var projectFiles = new List<string>();
 
-            for (int i = 0; i < args.Length; i++)
+            for (var i = 0; i < args.Length; i++)
             {
                 switch (args[i])
                 {
@@ -56,10 +58,10 @@ namespace NClass.GUI
                             return;
 
                         // Do we have other project behind the fist one
-                        for (int j = i + 2; j < args.Length; j++)
+                        for (var j = i + 2; j < args.Length; j++)
                         {
                             // If another arg is present
-                            if (args[j].StartsWith("-") == true)
+                            if (args[j].StartsWith("-"))
                                 break;
 
                             result = App.FileExist(j, args.Length, args[j], "-projects");
@@ -77,74 +79,72 @@ namespace NClass.GUI
                 }
             }
 
-            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomainOnUnhandledException);
-            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(ApplicationThreadException);
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
+            Application.ThreadException += ApplicationThreadException;
 
             app.Start();
-			UpdateSettings();
+            UpdateSettings();
 
-			// Set the user interface language
-			UILanguage language = UILanguage.CreateUILanguage(Settings.Default.UILanguage);
-			if (language != null)
-				Strings.Culture = language.Culture;
+            // Set the user interface language
+            var language = UILanguage.CreateUILanguage(Settings.Default.UILanguage);
+            if (language != null)
+                Strings.Culture = language.Culture;
 
-			// Some GUI settings
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
+            // Some GUI settings
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
             Application.DoEvents();
             ToolStripManager.VisualStylesEnabled = false;
 
-			// Launch the application
+            // Launch the application
             LoadProjects(projectFiles.ToArray());
-			Application.Run(new MainForm());
+            Application.Run(new MainForm());
 
-			// Save application settings
-			DiagramEditor.Settings.Default.Save();
-			Settings.Default.Save();
-		}
+            // Save application settings
+            DiagramEditor.Settings.Default.Save();
+            Settings.Default.Save();
+        }
 
-		private static void UpdateSettings()
-		{
-			if (Settings.Default.CallUpgrade)
-			{
-				Settings.Default.Upgrade();
-				Settings.Default.CallUpgrade = false;
-			}
+        private static void UpdateSettings()
+        {
+            if (Settings.Default.CallUpgrade)
+            {
+                Settings.Default.Upgrade();
+                Settings.Default.CallUpgrade = false;
+            }
 
-			if (Settings.Default.OpenedProjects == null)
-				Settings.Default.OpenedProjects = new StringCollection();
-			if (Settings.Default.RecentFiles == null)
-				Settings.Default.RecentFiles = new StringCollection();
-		}
+            if (Settings.Default.OpenedProjects == null)
+                Settings.Default.OpenedProjects = new StringCollection();
+            if (Settings.Default.RecentFiles == null)
+                Settings.Default.RecentFiles = new StringCollection();
+        }
 
-		public static string GetVersionString()
-		{
-			if (CurrentVersion.Minor == 0)
-			{
-				return string.Format("NClass {0}.0", CurrentVersion.Major);
-			}
-			else
-			{
-				return string.Format("NClass {0}.{1:00}",
-					CurrentVersion.Major, CurrentVersion.Minor);
-			}
-		}
+        public static string GetVersionString()
+        {
+            if (CurrentVersion.Minor == 0)
+            {
+                return string.Format("NClass {0}.0", CurrentVersion.Major);
+            }
+            return string.Format("NClass {0}.{1:00}",
+                                 CurrentVersion.Major,
+                                 CurrentVersion.Minor);
+        }
 
         private static void LoadProjects(string[] args)
-		{
-			if (args.Length >= 1)
-			{
-				foreach (string filePath in args)
-				{
-					Workspace.Default.OpenProject(filePath);
-				}
-			}
+        {
+            if (args.Length >= 1)
+            {
+                foreach (var filePath in args)
+                {
+                    Workspace.Default.OpenProject(filePath);
+                }
+            }
             else
             {
                 if (Settings.Default.RememberOpenProjects)
                     Workspace.Default.Load();
             }
-		}
+        }
 
         // Crash handling
         private static void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs e)
@@ -153,7 +153,7 @@ namespace NClass.GUI
             Environment.Exit(0);
         }
 
-        private static void ApplicationThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        private static void ApplicationThreadException(object sender, ThreadExceptionEventArgs e)
         {
             ReportCrash(e.Exception);
         }
@@ -167,5 +167,5 @@ namespace NClass.GUI
 
             reportCrash.Send(exception);
         }
-	}
+    }
 }

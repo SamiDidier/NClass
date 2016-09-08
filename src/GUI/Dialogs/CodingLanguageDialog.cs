@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using NClass.Core;
 using NClass.Translations;
@@ -13,16 +7,6 @@ namespace NClass.GUI.Dialogs
 {
     public partial class CodingLanguageDialog : Form
     {
-        private Language languageSelected;
-        public Language LanguageSelected
-        {
-            get
-            {
-                return languageSelected;
-            }
-        }
-
-
         public CodingLanguageDialog()
         {
             InitializeComponent();
@@ -44,9 +28,11 @@ namespace NClass.GUI.Dialogs
             }
         }
 
+        public Language LanguageSelected { get; }
+
         private void UpdateTexts()
         {
-            this.Text = Strings.ProgramingLanguage;
+            Text = Strings.ProgramingLanguage;
             btnOK.Text = Strings.ButtonOK;
             btnCancel.Text = Strings.ButtonCancel;
         }

@@ -19,44 +19,27 @@ using NClass.DiagramEditor;
 
 namespace NClass.GUI
 {
-	public abstract class Plugin
-	{
-		NClassEnvironment environment;
+    public abstract class Plugin
+    {
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="environment" /> is null.
+        /// </exception>
+        protected Plugin(NClassEnvironment environment)
+        {
+            if (environment == null)
+                throw new ArgumentNullException("environment");
 
-		/// <exception cref="ArgumentNullException">
-		/// <paramref name="environment"/> is null.
-		/// </exception>
-		protected Plugin(NClassEnvironment environment)
-		{
-			if (environment == null)
-				throw new ArgumentNullException("environment");
+            NClassEnvironment = environment;
+        }
 
-			this.environment = environment;
-		}
+        protected NClassEnvironment NClassEnvironment { get; }
 
-		protected NClassEnvironment NClassEnvironment
-		{
-			get { return environment; }
-		}
+        protected Workspace Workspace { get { return NClassEnvironment.Workspace; } }
 
-		protected Workspace Workspace
-		{
-			get { return environment.Workspace; }
-		}
+        protected DocumentManager DocumentManager { get { return NClassEnvironment.DocumentManager; } }
 
-		protected DocumentManager DocumentManager
-		{
-			get { return environment.DocumentManager; }
-		}
+        public abstract bool IsAvailable { get; }
 
-		public abstract bool IsAvailable
-		{
-			get;
-		}
-
-		public abstract ToolStripItem MenuItem
-		{
-			get;
-		}
-	}
+        public abstract ToolStripItem MenuItem { get; }
+    }
 }

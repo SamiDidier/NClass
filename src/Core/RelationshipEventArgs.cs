@@ -17,20 +17,15 @@ using System;
 
 namespace NClass.Core
 {
-	public delegate void RelationshipEventHandler(object sender, RelationshipEventArgs e);
+    public delegate void RelationshipEventHandler(object sender, RelationshipEventArgs e);
 
-	public class RelationshipEventArgs : EventArgs
-	{
-		Relationship relationship;
+    public class RelationshipEventArgs : EventArgs
+    {
+        public RelationshipEventArgs(Relationship relationship)
+        {
+            Relationship = relationship;
+        }
 
-		public RelationshipEventArgs(Relationship relationship)
-		{
-			this.relationship = relationship;
-		}
-
-		public Relationship Relationship
-		{
-			get { return relationship; }
-		}
-	}
+        public Relationship Relationship { get; }
+    }
 }

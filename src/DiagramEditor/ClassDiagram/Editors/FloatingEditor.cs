@@ -13,39 +13,30 @@
 // this program; if not, write to the Free Software Foundation, Inc., 
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using NClass.DiagramEditor.ClassDiagram.Shapes;
 using NClass.Core;
 
 namespace NClass.DiagramEditor.ClassDiagram.Editors
 {
-	public abstract class FloatingEditor : EditorWindow
-	{
-		protected const int MarginSize = 20;
-		static readonly Color beginColor = SystemColors.ControlLight;
-		static readonly Color endColor = SystemColors.Control;
+    public abstract class FloatingEditor : EditorWindow
+    {
+        protected const int MarginSize = 20;
+        private static readonly Color beginColor = SystemColors.ControlLight;
+        private static readonly Color endColor = SystemColors.Control;
 
-		static MemberType newMemberType = MemberType.Method;
+        protected FloatingEditor()
+        {
+            BackColor = SystemColors.Control;
+            Padding = new Padding(1);
+        }
 
-		protected FloatingEditor()
-		{
-			this.BackColor = System.Drawing.SystemColors.Control;
-			this.Padding = new Padding(1);
-		}
+        protected static MemberType NewMemberType { get; set; } = MemberType.Method;
 
-		protected static MemberType NewMemberType
-		{
-			get { return newMemberType; }
-			set { newMemberType = value; }
-		}
-
-		protected override void OnPaintBackground(PaintEventArgs e)
-		{
-			base.OnPaintBackground(e);
-			e.Graphics.DrawRectangle(SystemPens.ControlDark, 0, 0, Width - 1, Height - 1);
-		}
-	}
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            base.OnPaintBackground(e);
+            e.Graphics.DrawRectangle(SystemPens.ControlDark, 0, 0, Width - 1, Height - 1);
+        }
+    }
 }

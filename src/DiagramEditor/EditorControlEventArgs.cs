@@ -13,25 +13,17 @@
 // this program; if not, write to the Free Software Foundation, Inc., 
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-using System;
-using System.Windows.Forms;
-
 namespace NClass.DiagramEditor
 {
-	public delegate void PopupWindowEventHandler(object sender, PopupWindowEventArgs e);
+    public delegate void PopupWindowEventHandler(object sender, PopupWindowEventArgs e);
 
-	public class PopupWindowEventArgs
-	{
-		PopupWindow window;
+    public class PopupWindowEventArgs
+    {
+        public PopupWindowEventArgs(PopupWindow window)
+        {
+            Window = window;
+        }
 
-		public PopupWindowEventArgs(PopupWindow window)
-		{
-			this.window = window;
-		}
-
-		public PopupWindow Window
-		{
-			get { return window; }
-		}
-	}
+        public PopupWindow Window { get; }
+    }
 }

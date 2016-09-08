@@ -13,22 +13,12 @@
 // this program; if not, write to the Free Software Foundation, Inc., 
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-using System;
-
 namespace NClass.Core
 {
-	// To be implemented later...
-	public sealed class LanguageManager
-	{
-
+    // To be implemented later...
+    public sealed class LanguageManager
+    {
         // List<> Loaded = new List <>;
-
-        public LanguageManager ()
-        {
-            // List all language plugins loaded
-            // Loaded.Add ();
-
-        }
 
 
         public string[] GetAll()
@@ -38,10 +28,10 @@ namespace NClass.Core
         }
 
 
-        public Language GetLanguageInstance (string name)
+        public Language GetLanguageInstance(string name)
         {
             // Loaded.FindAll(Name == name);
             return null;
         }
-	}
+    }
 }

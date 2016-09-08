@@ -14,26 +14,18 @@
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using System;
-using System.Xml;
-using System.Drawing;
-using NClass.DiagramEditor.ClassDiagram.Shapes;
 
 namespace NClass.DiagramEditor.ClassDiagram.Connections
 {
-	public delegate void BendPointEventHandler(object sender, BendPointEventArgs e);
+    public delegate void BendPointEventHandler(object sender, BendPointEventArgs e);
 
-	public class BendPointEventArgs : EventArgs
-	{
-		BendPoint point;
+    public class BendPointEventArgs : EventArgs
+    {
+        public BendPointEventArgs(BendPoint point)
+        {
+            BendPoint = point;
+        }
 
-		public BendPointEventArgs(BendPoint point)
-		{
-			this.point = point;
-		}
-
-		public BendPoint BendPoint
-		{
-			get { return point; }
-		}
-	}
+        public BendPoint BendPoint { get; }
+    }
 }

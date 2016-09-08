@@ -13,60 +13,52 @@
 // this program; if not, write to the Free Software Foundation, Inc., 
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-using System;
 using System.Drawing;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace NClass.DiagramEditor
 {
-	public class PopupWindow : UserControl
-	{
-		const int ClientMargin = 20;
-		
-		Point parentLocation;
+    public class PopupWindow : UserControl
+    {
+        private const int ClientMargin = 20;
 
-		public new Point Location
-		{
-			get
-			{
-				return base.Location;
-			}
-			set
-			{
-				if (Parent != null)
-				{
-					Rectangle client = Parent.ClientRectangle;
+        private Point parentLocation;
 
-					if (value.X < ClientMargin)
-						value.X = ClientMargin;
-					if (value.Y < ClientMargin)
-						value.Y = ClientMargin;
-					if (value.X + Width > client.Width - ClientMargin)
-						value.X = client.Width - Width - ClientMargin;
-					if (value.Y + Height > client.Height - ClientMargin)
-						value.Y = client.Height - Height - ClientMargin;
-				}
-				base.Location = value;
-			}
-		}
+        public new Point Location
+        {
+            get { return base.Location; }
+            set
+            {
+                if (Parent != null)
+                {
+                    var client = Parent.ClientRectangle;
 
-		internal Point ParentLocation
-		{
-			get
-			{
-				return parentLocation;
-			}
-			set
-			{
-				Size offset = new Size(value.X - parentLocation.X, value.Y - parentLocation.Y);
-				parentLocation = value;
-				this.Location += offset;
-			}
-		}
+                    if (value.X < ClientMargin)
+                        value.X = ClientMargin;
+                    if (value.Y < ClientMargin)
+                        value.Y = ClientMargin;
+                    if (value.X + Width > client.Width - ClientMargin)
+                        value.X = client.Width - Width - ClientMargin;
+                    if (value.Y + Height > client.Height - ClientMargin)
+                        value.Y = client.Height - Height - ClientMargin;
+                }
+                base.Location = value;
+            }
+        }
 
-		public virtual void Closing()
-		{
-		}
-	}
+        internal Point ParentLocation
+        {
+            get { return parentLocation; }
+            set
+            {
+                var offset = new Size(value.X - parentLocation.X, value.Y - parentLocation.Y);
+                parentLocation = value;
+                Location += offset;
+            }
+        }
+
+        public virtual void Closing()
+        {
+        }
+    }
 }

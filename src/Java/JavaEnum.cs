@@ -19,118 +19,110 @@ using NClass.Core;
 
 namespace NClass.Java
 {
-	internal sealed class JavaEnum : EnumType
-	{
-		internal JavaEnum() : this("NewEnum")
-		{
-		}
+    internal sealed class JavaEnum : EnumType
+    {
+        internal JavaEnum()
+            : this("NewEnum")
+        {
+        }
 
-		/// <exception cref="BadSyntaxException">
-		/// The <paramref name="name"/> does not fit to the syntax.
-		/// </exception>
-		internal JavaEnum(string name) : base(name)
-		{
-		}
+        /// <exception cref="BadSyntaxException">
+        ///     The <paramref name="name" /> does not fit to the syntax.
+        /// </exception>
+        internal JavaEnum(string name)
+            : base(name)
+        {
+        }
 
-		public override AccessModifier AccessModifier
-		{
-			get
-			{
-				return base.AccessModifier;
-			}
-			set
-			{
-				if (IsNested ||
-					value == AccessModifier.Default ||
-					value == AccessModifier.Public)
-				{
-					base.AccessModifier = value;
-				}
-			}
-		}
+        public override AccessModifier AccessModifier
+        {
+            get { return base.AccessModifier; }
+            set
+            {
+                if (IsNested ||
+                    value == AccessModifier.Default ||
+                    value == AccessModifier.Public)
+                {
+                    base.AccessModifier = value;
+                }
+            }
+        }
 
-		public override AccessModifier DefaultAccess
-		{
-			get { return AccessModifier.Internal; }
-		}
+        public override AccessModifier DefaultAccess { get { return AccessModifier.Internal; } }
 
-		/// <exception cref="ArgumentException">
-		/// The <paramref name="value"/> is already a child member of the type.
-		/// </exception>
-		public override CompositeType NestingParent
-		{
-			get
-			{
-				return base.NestingParent;
-			}
-			protected set
-			{
-				try {
-					RaiseChangedEvent = false;
+        /// <exception cref="ArgumentException">
+        ///     The <paramref name="value" /> is already a child member of the type.
+        /// </exception>
+        public override CompositeType NestingParent
+        {
+            get { return base.NestingParent; }
+            protected set
+            {
+                try
+                {
+                    RaiseChangedEvent = false;
 
-					base.NestingParent = value;
-					if (NestingParent == null && Access != AccessModifier.Public)
-						AccessModifier = AccessModifier.Default;
-				}
-				finally {
-					RaiseChangedEvent = true;
-				}
-			}
-		}
+                    base.NestingParent = value;
+                    if (NestingParent == null && Access != AccessModifier.Public)
+                        AccessModifier = AccessModifier.Default;
+                }
+                finally
+                {
+                    RaiseChangedEvent = true;
+                }
+            }
+        }
 
-		public override Language Language
-		{
-			get { return JavaLanguage.Instance; }
-		}
+        public override Language Language { get { return JavaLanguage.Instance; } }
 
-		/// <exception cref="BadSyntaxException">
-		/// The name does not fit to the syntax.
-		/// </exception>
-		/// <exception cref="ReservedNameException">
-		/// The name is a reserved name.
-		/// </exception>
-		public override EnumValue AddValue(string declaration)
-		{
-			EnumValue value = new JavaEnumValue(declaration);
+        /// <exception cref="BadSyntaxException">
+        ///     The name does not fit to the syntax.
+        /// </exception>
+        /// <exception cref="ReservedNameException">
+        ///     The name is a reserved name.
+        /// </exception>
+        public override EnumValue AddValue(string declaration)
+        {
+            EnumValue value = new JavaEnumValue(declaration);
 
-			AddValue(value);
-			return value;
-		}
+            AddValue(value);
+            return value;
+        }
 
-		/// <exception cref="BadSyntaxException">
-		/// The name does not fit to the syntax.
-		/// </exception>
-		/// <exception cref="ReservedNameException">
-		/// The name is a reserved name.
-		/// </exception>
-		public override EnumValue ModifyValue(EnumValue value, string declaration)
-		{
-			EnumValue newValue = new JavaEnumValue(declaration);
+        /// <exception cref="BadSyntaxException">
+        ///     The name does not fit to the syntax.
+        /// </exception>
+        /// <exception cref="ReservedNameException">
+        ///     The name is a reserved name.
+        /// </exception>
+        public override EnumValue ModifyValue(EnumValue value, string declaration)
+        {
+            EnumValue newValue = new JavaEnumValue(declaration);
 
-			if (ChangeValue(value, newValue))
-				return newValue;
-			else
-				return value;
-		}
-		
-		public override string GetDeclaration()
-		{
-			StringBuilder builder = new StringBuilder();
+            if (ChangeValue(value, newValue))
+                return newValue;
+            return value;
+        }
 
-			if (AccessModifier != AccessModifier.Default) {
-				builder.Append(Language.GetAccessString(AccessModifier, true));
-				builder.Append(" ");
-			}
-			builder.AppendFormat("enum {0}", Name);
+        public override string GetDeclaration()
+        {
+            var builder = new StringBuilder();
 
-			return builder.ToString();
-		}
+            if (AccessModifier != AccessModifier.Default)
+            {
+                builder.Append(Language.GetAccessString(AccessModifier, true));
+                builder.Append(" ");
+            }
+            builder.AppendFormat("enum {0}", Name);
 
-		public override EnumType Clone()
-		{
-			JavaEnum newEnum = new JavaEnum();
-			newEnum.CopyFrom(this);
-			return newEnum;
-		}
-	}
+            return builder.ToString();
+        }
+
+        public override EnumType Clone()
+        {
+            var newEnum = new JavaEnum();
+            newEnum.CopyFrom(this);
+            return newEnum;
+        }
+    }
 }

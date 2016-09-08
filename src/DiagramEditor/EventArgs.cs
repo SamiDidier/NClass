@@ -17,19 +17,13 @@ using System;
 
 namespace NClass.DiagramEditor
 {
-	public class EventArgs<T> : EventArgs
-	{
-		T value;
+    public class EventArgs<T> : EventArgs
+    {
+        public EventArgs(T value)
+        {
+            Value = value;
+        }
 
-		public T Value
-		{
-			get { return this.value; }
-			set { this.value = value; }
-		}
-
-		public EventArgs(T value)
-		{
-			this.value = value;
-		}
-	}
+        public T Value { get; set; }
+    }
 }

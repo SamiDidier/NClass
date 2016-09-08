@@ -13,45 +13,22 @@
 // this program; if not, write to the Free Software Foundation, Inc., 
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-using System;
-
 namespace NClass.Core
 {
-	public abstract class DotNetLanguage : Language
-	{
-		public override bool SupportsAssemblyImport
-		{
-			get { return true; }
-		}
+    public abstract class DotNetLanguage : Language
+    {
+        public override bool SupportsAssemblyImport { get { return true; } }
 
-		public sealed override bool SupportsInterfaces
-		{
-			get { return true; }
-		}
+        public sealed override bool SupportsInterfaces { get { return true; } }
 
-		public sealed override bool SupportsStructures
-		{
-			get { return true; }
-		}
+        public sealed override bool SupportsStructures { get { return true; } }
 
-		public sealed override bool SupportsEnums
-		{
-			get { return true; }
-		}
+        public sealed override bool SupportsEnums { get { return true; } }
 
-		public sealed override bool SupportsDelegates
-		{
-			get { return true; }
-		}
+        public sealed override bool SupportsDelegates { get { return true; } }
 
-		public override bool SupportsExplicitImplementation
-		{
-			get { return true; }
-		}
+        public override bool SupportsExplicitImplementation { get { return true; } }
 
-		public override bool ExplicitVirtualMethods
-		{
-			get { return true; }
-		}
-	}
+        public override bool ExplicitVirtualMethods { get { return true; } }
+    }
 }

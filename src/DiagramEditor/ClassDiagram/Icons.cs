@@ -17,301 +17,280 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using NClass.Core;
-using System.Drawing.Imaging;
+using NClass.DiagramEditor.Properties;
 
 namespace NClass.DiagramEditor.ClassDiagram
 {
-	public static class Icons
-	{
-		const int DefaultDestructorIndex = 84;
-		const int PrivateDestructorIndex = 85;
-		public const int InterfaceImageIndex = 86;
-		public const int EnumItemImageIndex = 87;
-		public const int ParameterImageIndex = 88;
-		public const int ClassImageIndex = 89;
+    public static class Icons
+    {
+        private const int DefaultDestructorIndex = 84;
+        private const int PrivateDestructorIndex = 85;
+        public const int InterfaceImageIndex = 86;
+        public const int EnumItemImageIndex = 87;
+        public const int ParameterImageIndex = 88;
+        public const int ClassImageIndex = 89;
 
-		static Bitmap[] images;
-		static ImageList imageList;
+        private static Bitmap[] images;
 
-		static Icons()
-		{
-			LoadImages();
-		}
+        static Icons()
+        {
+            LoadImages();
+        }
 
-		public static ImageList IconList
-		{
-			get
-			{
-				return imageList;
-			}
-		}
+        public static ImageList IconList { get; private set; }
 
-		private static void LoadImages()
-		{
-			images = new Bitmap[] {
-				Properties.Resources.DefaultConst,
-				Properties.Resources.PublicConst,
-				Properties.Resources.ProtintConst,
-				Properties.Resources.InternalConst,
-				Properties.Resources.ProtectedConst,
-				Properties.Resources.PrivateConst,
+        private static void LoadImages()
+        {
+            images = new[]
+            {
+                Resources.DefaultConst,
+                Resources.PublicConst,
+                Resources.ProtintConst,
+                Resources.InternalConst,
+                Resources.ProtectedConst,
+                Resources.PrivateConst,
+                Resources.DefaultField,
+                Resources.PublicField,
+                Resources.ProtintField,
+                Resources.InternalField,
+                Resources.ProtectedField,
+                Resources.PrivateField,
+                Resources.DefaultConstructor,
+                Resources.PublicConstructor,
+                Resources.ProtintConstructor,
+                Resources.InternalConstructor,
+                Resources.ProtectedConstructor,
+                Resources.PrivateConstructor,
+                Resources.DefaultOperator,
+                Resources.PublicOperator,
+                Resources.ProtintOperator,
+                Resources.InternalOperator,
+                Resources.ProtectedOperator,
+                Resources.PrivateOperator,
+                Resources.DefaultMethod,
+                Resources.PublicMethod,
+                Resources.ProtintMethod,
+                Resources.InternalMethod,
+                Resources.ProtectedMethod,
+                Resources.PrivateMethod,
+                Resources.DefaultReadonly,
+                Resources.PublicReadonly,
+                Resources.ProtintReadonly,
+                Resources.InternalReadonly,
+                Resources.ProtectedReadonly,
+                Resources.PrivateReadonly,
+                Resources.DefaultWriteonly,
+                Resources.PublicWriteonly,
+                Resources.ProtintWriteonly,
+                Resources.InternalWriteoly,
+                Resources.ProtectedWriteonly,
+                Resources.PrivateWriteonly,
+                Resources.DefaultProperty,
+                Resources.PublicProperty,
+                Resources.ProtintProperty,
+                Resources.InternalProperty,
+                Resources.ProtectedProperty,
+                Resources.PrivateProperty,
+                Resources.DefaultEvent,
+                Resources.PublicEvent,
+                Resources.ProtintEvent,
+                Resources.InternalEvent,
+                Resources.ProtectedEvent,
+                Resources.PrivateEvent,
+                Resources.DefaultClass,
+                Resources.PublicClass,
+                Resources.ProtintClass,
+                Resources.InternalClass,
+                Resources.ProtectedClass,
+                Resources.PrivateClass,
+                Resources.DefaultStructure,
+                Resources.PublicStructure,
+                Resources.ProtintStructure,
+                Resources.InternalStructure,
+                Resources.ProtectedStructure,
+                Resources.PrivateStructure,
+                Resources.DefaultInterface,
+                Resources.PublicInterface,
+                Resources.ProtintInterface,
+                Resources.InternalInterface,
+                Resources.ProtectedInterface,
+                Resources.PrivateInterface,
+                Resources.DefaultEnum,
+                Resources.PublicEnum,
+                Resources.ProtintEnum,
+                Resources.InternalEnum,
+                Resources.ProtectedEnum,
+                Resources.PrivateEnum,
+                Resources.DefaultDelegate,
+                Resources.PublicDelegate,
+                Resources.ProtintDelegate,
+                Resources.InternalDelegate,
+                Resources.ProtectedDelegate,
+                Resources.PrivateDelegate,
+                Resources.DefaultDestructor, // 84.
+                Resources.PrivateDestructor, // 85.
+                Resources.Interface24, // 86.
+                Resources.EnumItem, // 87.
+                Resources.Parameter, // 88.
+                Resources.Class // 89.
+            };
 
-				Properties.Resources.DefaultField,
-				Properties.Resources.PublicField,
-				Properties.Resources.ProtintField,
-				Properties.Resources.InternalField,
-				Properties.Resources.ProtectedField,
-				Properties.Resources.PrivateField,
+            IconList = new ImageList();
+            IconList.ColorDepth = ColorDepth.Depth32Bit;
+            IconList.Images.AddRange(images);
+        }
 
-				Properties.Resources.DefaultConstructor,
-				Properties.Resources.PublicConstructor,
-				Properties.Resources.ProtintConstructor,
-				Properties.Resources.InternalConstructor,
-				Properties.Resources.ProtectedConstructor,
-				Properties.Resources.PrivateConstructor,
+        /// <exception cref="ArgumentNullException">
+        ///     A <paramref name="member" /> nem lehet null.
+        /// </exception>
+        public static int GetImageIndex(Member member)
+        {
+            if (member == null)
+                throw new ArgumentNullException("member");
 
-				Properties.Resources.DefaultOperator,
-				Properties.Resources.PublicOperator,
-				Properties.Resources.ProtintOperator,
-				Properties.Resources.InternalOperator,
-				Properties.Resources.ProtectedOperator,
-				Properties.Resources.PrivateOperator,
+            var group = 0;
 
-				Properties.Resources.DefaultMethod,
-				Properties.Resources.PublicMethod,
-				Properties.Resources.ProtintMethod,
-				Properties.Resources.InternalMethod,
-				Properties.Resources.ProtectedMethod,
-				Properties.Resources.PrivateMethod,
+            if (member is Field)
+            {
+                if (((Field) member).IsConstant)
+                {
+                    group = 0;
+                }
+                else
+                {
+                    group = 1;
+                }
+            }
+            else if (member is Method)
+            {
+                if (member is Destructor)
+                {
+                    return PrivateDestructorIndex;
+                }
+                if (member is Constructor)
+                {
+                    @group = 2;
+                }
+                else if (((Method) member).IsOperator)
+                {
+                    @group = 3;
+                }
+                else
+                {
+                    @group = 4;
+                }
+            }
+            else if (member is Property)
+            {
+                var property = (Property) member;
 
-				Properties.Resources.DefaultReadonly,
-				Properties.Resources.PublicReadonly,
-				Properties.Resources.ProtintReadonly,
-				Properties.Resources.InternalReadonly,
-				Properties.Resources.ProtectedReadonly,
-				Properties.Resources.PrivateReadonly,
+                if (property.IsReadonly)
+                {
+                    group = 5;
+                }
+                else if (property.IsWriteonly)
+                {
+                    group = 6;
+                }
+                else
+                {
+                    group = 7;
+                }
+            }
+            else if (member is Event)
+            {
+                group = 8;
+            }
 
-				Properties.Resources.DefaultWriteonly,
-				Properties.Resources.PublicWriteonly,
-				Properties.Resources.ProtintWriteonly,
-				Properties.Resources.InternalWriteoly,
-				Properties.Resources.ProtectedWriteonly,
-				Properties.Resources.PrivateWriteonly,
+            return group*6 + (int) member.Access;
+        }
 
-				Properties.Resources.DefaultProperty,
-				Properties.Resources.PublicProperty,
-				Properties.Resources.ProtintProperty,
-				Properties.Resources.InternalProperty,
-				Properties.Resources.ProtectedProperty,
-				Properties.Resources.PrivateProperty,
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="member" /> is null.
+        /// </exception>
+        public static Image GetImage(Member member)
+        {
+            var imageIndex = GetImageIndex(member);
+            return images[imageIndex];
+        }
 
-				Properties.Resources.DefaultEvent,
-				Properties.Resources.PublicEvent,
-				Properties.Resources.ProtintEvent,
-				Properties.Resources.InternalEvent,
-				Properties.Resources.ProtectedEvent,
-				Properties.Resources.PrivateEvent,
+        public static Image GetImage(MemberType type, AccessModifier access)
+        {
+            if (type == MemberType.Destructor)
+            {
+                if (access == AccessModifier.Default)
+                    return Resources.DefaultDestructor;
+                return Resources.PrivateDestructor;
+            }
 
-				Properties.Resources.DefaultClass,
-				Properties.Resources.PublicClass,
-				Properties.Resources.ProtintClass,
-				Properties.Resources.InternalClass,
-				Properties.Resources.ProtectedClass,
-				Properties.Resources.PrivateClass,
+            var group = 0;
+            switch (type)
+            {
+                case MemberType.Field:
+                    group = 1;
+                    break;
 
-				Properties.Resources.DefaultStructure,
-				Properties.Resources.PublicStructure,
-				Properties.Resources.ProtintStructure,
-				Properties.Resources.InternalStructure,
-				Properties.Resources.ProtectedStructure,
-				Properties.Resources.PrivateStructure,
+                case MemberType.Method:
+                    group = 4;
+                    break;
 
-				Properties.Resources.DefaultInterface,
-				Properties.Resources.PublicInterface,
-				Properties.Resources.ProtintInterface,
-				Properties.Resources.InternalInterface,
-				Properties.Resources.ProtectedInterface,
-				Properties.Resources.PrivateInterface,
+                case MemberType.Constructor:
+                    group = 2;
+                    break;
 
-				Properties.Resources.DefaultEnum,
-				Properties.Resources.PublicEnum,
-				Properties.Resources.ProtintEnum,
-				Properties.Resources.InternalEnum,
-				Properties.Resources.ProtectedEnum,
-				Properties.Resources.PrivateEnum,
+                case MemberType.Property:
+                    group = 7;
+                    break;
 
-				Properties.Resources.DefaultDelegate,
-				Properties.Resources.PublicDelegate,
-				Properties.Resources.ProtintDelegate,
-				Properties.Resources.InternalDelegate,
-				Properties.Resources.ProtectedDelegate,
-				Properties.Resources.PrivateDelegate,
+                case MemberType.Event:
+                    group = 8;
+                    break;
+            }
 
-				Properties.Resources.DefaultDestructor, // 84.
-				Properties.Resources.PrivateDestructor, // 85.
-				Properties.Resources.Interface24,       // 86.
-				Properties.Resources.EnumItem,          // 87.
-				Properties.Resources.Parameter,         // 88.
-				Properties.Resources.Class              // 89.
-			};
+            return images[group*6 + (int) access];
+        }
 
-			imageList = new ImageList();
-			imageList.ColorDepth = ColorDepth.Depth32Bit;
-			imageList.Images.AddRange(images);
-		}
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="type" /> is null.
+        /// </exception>
+        public static Image GetImage(TypeBase type)
+        {
+            if (type == null)
+                throw new ArgumentNullException("type");
 
-		/// <exception cref="ArgumentNullException">
-		/// A <paramref name="member"/> nem lehet null.
-		/// </exception>
-		public static int GetImageIndex(Member member)
-		{
-			if (member == null)
-				throw new ArgumentNullException("member");
+            return GetImage(type.EntityType, type.AccessModifier);
+        }
 
-			int group = 0;
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="type" /> is null.
+        /// </exception>
+        public static Image GetImage(EntityType type, AccessModifier access)
+        {
+            var group = 0;
+            switch (type)
+            {
+                case EntityType.Class:
+                    group = 9;
+                    break;
 
-			if (member is Field)
-			{
-				if (((Field) member).IsConstant)
-				{
-					group = 0;
-				}
-				else
-				{
-					group = 1;
-				}
-			}
-			else if (member is Method)
-			{
-				if (member is Destructor)
-				{
-					return PrivateDestructorIndex;
-				}
-				else if (member is Constructor)
-				{
-					group = 2;
-				}
-				else if (((Method) member).IsOperator)
-				{
-					group = 3;
-				}
-				else
-				{
-					group = 4;
-				}
-			}
-			else if (member is Property)
-			{
-				Property property = (Property) member;
+                case EntityType.Structure:
+                    group = 10;
+                    break;
 
-				if (property.IsReadonly)
-				{
-					group = 5;
-				}
-				else if (property.IsWriteonly)
-				{
-					group = 6;
-				}
-				else
-				{
-					group = 7;
-				}
-			}
-			else if (member is Event)
-			{
-				group = 8;
-			}
+                case EntityType.Interface:
+                    group = 11;
+                    break;
 
-			return group * 6 + (int) member.Access;
-		}
+                case EntityType.Enum:
+                    group = 12;
+                    break;
 
-		/// <exception cref="ArgumentNullException">
-		/// <paramref name="member"/> is null.
-		/// </exception>
-		public static Image GetImage(Member member)
-		{
-			int imageIndex = GetImageIndex(member);
-			return images[imageIndex];
-		}
+                case EntityType.Delegate:
+                    group = 13;
+                    break;
+            }
 
-		public static Image GetImage(MemberType type, AccessModifier access)
-		{
-			if (type == MemberType.Destructor)
-			{
-				if (access == AccessModifier.Default)
-					return Properties.Resources.DefaultDestructor;
-				else
-					return Properties.Resources.PrivateDestructor;
-			}
-
-			int group = 0;
-			switch (type)
-			{
-				case MemberType.Field:
-					group = 1;
-					break;
-
-				case MemberType.Method:
-					group = 4;
-					break;
-
-				case MemberType.Constructor:
-					group = 2;
-					break;
-
-				case MemberType.Property:
-					group = 7;
-					break;
-
-				case MemberType.Event:
-					group = 8;
-					break;
-			}
-
-			return images[group * 6 + (int) access];
-		}
-
-		/// <exception cref="ArgumentNullException">
-		/// <paramref name="type"/> is null.
-		/// </exception>
-		public static Image GetImage(TypeBase type)
-		{
-			if (type == null)
-				throw new ArgumentNullException("type");
-
-			return GetImage(type.EntityType, type.AccessModifier);
-		}
-
-		/// <exception cref="ArgumentNullException">
-		/// <paramref name="type"/> is null.
-		/// </exception>
-		public static Image GetImage(EntityType type, AccessModifier access)
-		{
-			int group = 0;
-			switch (type)
-			{
-				case EntityType.Class:
-					group = 9;
-					break;
-
-				case EntityType.Structure:
-					group = 10;
-					break;
-
-				case EntityType.Interface:
-					group = 11;
-					break;
-
-				case EntityType.Enum:
-					group = 12;
-					break;
-
-				case EntityType.Delegate:
-					group = 13;
-					break;
-			}
-
-			return images[group * 6 + (int) access];
-		}
-	}
+            return images[group*6 + (int) access];
+        }
+    }
 }

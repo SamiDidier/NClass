@@ -13,33 +13,30 @@
 // this program; if not, write to the Free Software Foundation, Inc., 
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-using System;
 using System.Drawing;
-using System.Windows.Forms;
-using NClass.Core;
 using NClass.DiagramEditor.ClassDiagram.Shapes;
 
 namespace NClass.DiagramEditor.ClassDiagram.Editors
 {
-	public abstract class TypeEditor : FloatingEditor
-	{
-		internal sealed override void Relocate(DiagramElement element)
-		{
-			Relocate((TypeShape) element);
-		}
+    public abstract class TypeEditor : FloatingEditor
+    {
+        internal sealed override void Relocate(DiagramElement element)
+        {
+            Relocate((TypeShape) element);
+        }
 
-		internal void Relocate(TypeShape shape)
-		{
-			Diagram diagram = shape.Diagram;
-			if (diagram != null)
-			{
-				Point absolute = new Point(shape.Right, shape.Top);
-				Size relative = new Size(
-					(int) (absolute.X * diagram.Zoom) - diagram.Offset.X + MarginSize,
-					(int) (absolute.Y * diagram.Zoom) - diagram.Offset.Y);
+        internal void Relocate(TypeShape shape)
+        {
+            var diagram = shape.Diagram;
+            if (diagram != null)
+            {
+                var absolute = new Point(shape.Right, shape.Top);
+                var relative = new Size(
+                    (int) (absolute.X*diagram.Zoom) - diagram.Offset.X + MarginSize,
+                    (int) (absolute.Y*diagram.Zoom) - diagram.Offset.Y);
 
-				this.Location = ParentLocation + relative;
-			}
-		}
-	}
+                Location = ParentLocation + relative;
+            }
+        }
+    }
 }

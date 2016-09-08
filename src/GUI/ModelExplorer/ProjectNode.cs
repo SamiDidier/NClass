@@ -14,220 +14,215 @@
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using NClass.Core;
-using NClass.DiagramEditor.ClassDiagram;
-using NClass.GUI.Properties;
-using NClass.GUI.Dialogs;
-using NClass.Translations;
 using NClass.DiagramEditor;
-
+using NClass.DiagramEditor.ClassDiagram;
+using NClass.GUI.Dialogs;
+using NClass.GUI.Properties;
+using NClass.Translations;
 
 namespace NClass.GUI.ModelExplorer
 {
-	public sealed class ProjectNode : ModelNode
-	{
-		Project project;
-		static ContextMenuStrip contextMenu = new ContextMenuStrip();
+    public sealed class ProjectNode : ModelNode
+    {
+        private static readonly ContextMenuStrip contextMenu = new ContextMenuStrip();
 
-		static ProjectNode()
-		{
-			contextMenu.Items.AddRange(new ToolStripItem[] {
-				new ToolStripMenuItem(Strings.MenuAddNew, Resources.NewDocument,
-					new ToolStripMenuItem(Strings.MenuCodingLanguageDiagram, null, mnuNewCodingLanguageDiagram_Click)
-				),
-				new ToolStripSeparator(),
-				new ToolStripMenuItem(Strings.MenuSave, Resources.Save, save_Click),
-				new ToolStripMenuItem(Strings.MenuSaveAs, null, saveAs_Click),
-				new ToolStripMenuItem(Strings.MenuRename, null, rename_Click, Keys.F2),
-				new ToolStripSeparator(),
-				new ToolStripMenuItem(Strings.MenuCloseProject, null, close_Click)
-			});
-		}
+        static ProjectNode()
+        {
+            contextMenu.Items.AddRange(new ToolStripItem[]
+            {
+                new ToolStripMenuItem(Strings.MenuAddNew,
+                                      Resources.NewDocument,
+                                      new ToolStripMenuItem(Strings.MenuCodingLanguageDiagram,
+                                                            null,
+                                                            mnuNewCodingLanguageDiagram_Click)
+                                           ),
+                new ToolStripSeparator(),
+                new ToolStripMenuItem(Strings.MenuSave, Resources.Save, save_Click),
+                new ToolStripMenuItem(Strings.MenuSaveAs, null, saveAs_Click),
+                new ToolStripMenuItem(Strings.MenuRename, null, rename_Click, Keys.F2),
+                new ToolStripSeparator(),
+                new ToolStripMenuItem(Strings.MenuCloseProject, null, close_Click)
+            });
+        }
 
-		/// <exception cref="ArgumentNullException">
-		/// <paramref name="project"/> is null.
-		/// </exception>
-		public ProjectNode(Project project)
-		{
-			if (project == null)
-				throw new ArgumentNullException("project");
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="project" /> is null.
+        /// </exception>
+        public ProjectNode(Project project)
+        {
+            if (project == null)
+                throw new ArgumentNullException("project");
 
-			this.project = project;
-			this.Text = project.Name;
-			this.ImageKey = "project";
-			this.SelectedImageKey = "project";
+            Project = project;
+            Text = project.Name;
+            ImageKey = "project";
+            SelectedImageKey = "project";
 
-			AddProjectItemNodes(project);
-			project.Renamed += new EventHandler(project_Renamed);
-			project.ItemAdded += new ProjectItemEventHandler(project_ItemAdded);
-			project.ItemRemoved += new ProjectItemEventHandler(project_ItemRemoved);
-		}
+            AddProjectItemNodes(project);
+            project.Renamed += project_Renamed;
+            project.ItemAdded += project_ItemAdded;
+            project.ItemRemoved += project_ItemRemoved;
+        }
 
-		public Project Project
-		{
-			get { return project; }
-		}
+        public Project Project { get; }
 
-		public override ContextMenuStrip ContextMenuStrip
-		{
-			get
-			{
-				contextMenu.Tag = this;
-				return contextMenu;
-			}
-			set
-			{
-				base.ContextMenuStrip = value;
-			}
-		}
+        public override ContextMenuStrip ContextMenuStrip
+        {
+            get
+            {
+                contextMenu.Tag = this;
+                return contextMenu;
+            }
+            set { base.ContextMenuStrip = value; }
+        }
 
-		private void AddProjectItemNodes(Project project)
-		{
-			if (project.IsEmpty)
-			{
-				ModelNode node = new EmptyProjectNode(project);
-				Nodes.Add(node);
-				if (TreeView != null)
-					node.AfterInitialized();
-			}
-			else
-			{
-				foreach (IProjectItem projectItem in project.Items)
-				{
-					AddProjectItemNode(projectItem);
-				}
-			}
-		}
+        private void AddProjectItemNodes(Project project)
+        {
+            if (project.IsEmpty)
+            {
+                ModelNode node = new EmptyProjectNode(project);
+                Nodes.Add(node);
+                if (TreeView != null)
+                    node.AfterInitialized();
+            }
+            else
+            {
+                foreach (var projectItem in project.Items)
+                {
+                    AddProjectItemNode(projectItem);
+                }
+            }
+        }
 
-		private void AddProjectItemNode(IProjectItem projectItem)
-		{
-			ModelNode node = null;
+        private void AddProjectItemNode(IProjectItem projectItem)
+        {
+            ModelNode node = null;
 
-			if (projectItem is Diagram)
-			{
-				Diagram diagram = (Diagram) projectItem;
-				node = new DiagramNode(diagram);
-				if (TreeView != null)
-					ModelView.OnDocumentOpening(new DocumentEventArgs(diagram));
-			}
-			// More kind of items might be possible later...
-			
-			if (node != null)
-			{
-				Nodes.Add(node);
-				if (TreeView != null)
-				{
-					node.AfterInitialized();
-					TreeView.SelectedNode = node;
-				}
-				if (projectItem.IsUntitled)
-				{
-					node.EditLabel();
-				}
-			}
-		}
+            if (projectItem is Diagram)
+            {
+                var diagram = (Diagram) projectItem;
+                node = new DiagramNode(diagram);
+                if (TreeView != null)
+                    ModelView.OnDocumentOpening(new DocumentEventArgs(diagram));
+            }
+            // More kind of items might be possible later...
 
-		private void RemoveProjectItemNode(IProjectItem projectItem)
-		{
-			foreach (ProjectItemNode node in Nodes)
-			{
-				if (node.ProjectItem == projectItem)
-				{
-					node.Delete();
-					return;
-				}
-			}
-		}
+            if (node != null)
+            {
+                Nodes.Add(node);
+                if (TreeView != null)
+                {
+                    node.AfterInitialized();
+                    TreeView.SelectedNode = node;
+                }
+                if (projectItem.IsUntitled)
+                {
+                    node.EditLabel();
+                }
+            }
+        }
 
-		public override void LabelModified(NodeLabelEditEventArgs e)
-		{
-			project.Name = e.Label;
+        private void RemoveProjectItemNode(IProjectItem projectItem)
+        {
+            foreach (ProjectItemNode node in Nodes)
+            {
+                if (node.ProjectItem == projectItem)
+                {
+                    node.Delete();
+                    return;
+                }
+            }
+        }
 
-			if (project.Name != e.Label)
-				e.CancelEdit = true;
-		}
+        public override void LabelModified(NodeLabelEditEventArgs e)
+        {
+            Project.Name = e.Label;
 
-		private void project_Renamed(object sender, EventArgs e)
-		{
-			Text = project.Name;
-		}
+            if (Project.Name != e.Label)
+                e.CancelEdit = true;
+        }
 
-		private void project_ItemAdded(object sender, ProjectItemEventArgs e)
-		{
-			AddProjectItemNode(e.ProjectItem);
-		}
+        private void project_Renamed(object sender, EventArgs e)
+        {
+            Text = Project.Name;
+        }
 
-		private void project_ItemRemoved(object sender, ProjectItemEventArgs e)
-		{
-			RemoveProjectItemNode(e.ProjectItem);
-			if (project.IsEmpty)
-			{
-				ModelNode node = new EmptyProjectNode(project);
-				Nodes.Add(node);
-				if (TreeView != null)
-					node.AfterInitialized();
-			}
-		}
+        private void project_ItemAdded(object sender, ProjectItemEventArgs e)
+        {
+            AddProjectItemNode(e.ProjectItem);
+        }
 
-		public override void BeforeDelete()
-		{
-			project.Renamed -= new EventHandler(project_Renamed);
-			project.ItemAdded -= new ProjectItemEventHandler(project_ItemAdded);
-			project.ItemRemoved -= new ProjectItemEventHandler(project_ItemRemoved);
-			base.BeforeDelete();
-		}
+        private void project_ItemRemoved(object sender, ProjectItemEventArgs e)
+        {
+            RemoveProjectItemNode(e.ProjectItem);
+            if (Project.IsEmpty)
+            {
+                ModelNode node = new EmptyProjectNode(Project);
+                Nodes.Add(node);
+                if (TreeView != null)
+                    node.AfterInitialized();
+            }
+        }
+
+        public override void BeforeDelete()
+        {
+            Project.Renamed -= project_Renamed;
+            Project.ItemAdded -= project_ItemAdded;
+            Project.ItemRemoved -= project_ItemRemoved;
+            base.BeforeDelete();
+        }
 
         private static void mnuNewCodingLanguageDiagram_Click(object sender, EventArgs e)
-		{
-            using (CodingLanguageDialog dialog = new CodingLanguageDialog())
+        {
+            using (var dialog = new CodingLanguageDialog())
             {
-                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     if (dialog.LanguageSelected == null)
                         throw new NotSupportedException("No Programming Language instance");
 
-                    ToolStripItem menuItem = (ToolStripItem)sender;
-                    Project project = ((ProjectNode)menuItem.OwnerItem.Owner.Tag).Project;
+                    var menuItem = (ToolStripItem) sender;
+                    var project = ((ProjectNode) menuItem.OwnerItem.Owner.Tag).Project;
 
-                    Diagram diagram = new Diagram(dialog.LanguageSelected);
+                    var diagram = new Diagram(dialog.LanguageSelected);
                     project.Add(diagram);
                     Settings.Default.DefaultLanguageName = dialog.LanguageSelected.AssemblyName;
                 }
             }
-		}
+        }
 
-		private static void rename_Click(object sender, EventArgs e)
-		{
-			ToolStripItem menuItem = (ToolStripItem) sender;
-			ProjectNode node = (ProjectNode) menuItem.Owner.Tag;
+        private static void rename_Click(object sender, EventArgs e)
+        {
+            var menuItem = (ToolStripItem) sender;
+            var node = (ProjectNode) menuItem.Owner.Tag;
 
-			node.EditLabel();
-		}
+            node.EditLabel();
+        }
 
-		private static void save_Click(object sender, EventArgs e)
-		{
-			ToolStripItem menuItem = (ToolStripItem) sender;
-			Project project = ((ProjectNode) menuItem.Owner.Tag).Project;
+        private static void save_Click(object sender, EventArgs e)
+        {
+            var menuItem = (ToolStripItem) sender;
+            var project = ((ProjectNode) menuItem.Owner.Tag).Project;
 
-			Workspace.Default.SaveProject(project);
-		}
+            Workspace.Default.SaveProject(project);
+        }
 
-		private static void saveAs_Click(object sender, EventArgs e)
-		{
-			ToolStripItem menuItem = (ToolStripItem) sender;
-			Project project = ((ProjectNode) menuItem.Owner.Tag).Project;
+        private static void saveAs_Click(object sender, EventArgs e)
+        {
+            var menuItem = (ToolStripItem) sender;
+            var project = ((ProjectNode) menuItem.Owner.Tag).Project;
 
-			Workspace.Default.SaveProjectAs(project);
-		}
+            Workspace.Default.SaveProjectAs(project);
+        }
 
-		private static void close_Click(object sender, EventArgs e)
-		{
-			ToolStripItem menuItem = (ToolStripItem) sender;
-			Project project = ((ProjectNode) menuItem.Owner.Tag).Project;
+        private static void close_Click(object sender, EventArgs e)
+        {
+            var menuItem = (ToolStripItem) sender;
+            var project = ((ProjectNode) menuItem.Owner.Tag).Project;
 
-			Workspace.Default.RemoveProject(project);
-		}
-	}
+            Workspace.Default.RemoveProject(project);
+        }
+    }
 }

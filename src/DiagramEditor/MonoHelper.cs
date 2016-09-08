@@ -18,47 +18,38 @@ using System.Reflection;
 
 namespace NClass.DiagramEditor
 {
-	public static class MonoHelper
-	{
-		static bool isMono;
-		static string version;
+    public static class MonoHelper
+    {
+        static MonoHelper()
+        {
+            var monoRuntime = Type.GetType("Mono.Runtime");
 
-		static MonoHelper()
-		{
-			Type monoRuntime = Type.GetType("Mono.Runtime");
+            if (monoRuntime != null)
+            {
+                IsRunningOnMono = true;
+                var method = monoRuntime.GetMethod("GetDisplayName",
+                                                   BindingFlags.NonPublic | BindingFlags.Static);
 
-			if (monoRuntime != null)
-			{
-				isMono = true;
-				MethodInfo method = monoRuntime.GetMethod("GetDisplayName",
-					BindingFlags.NonPublic | BindingFlags.Static);
-				
-				if (method != null)
-					version = method.Invoke(null, null) as string;
-				else
-					version = "Unknown version";
-			}
-			else
-			{
-				isMono = false;
-				version = string.Empty;
-			}
-		}
+                if (method != null)
+                    Version = method.Invoke(null, null) as string;
+                else
+                    Version = "Unknown version";
+            }
+            else
+            {
+                IsRunningOnMono = false;
+                Version = string.Empty;
+            }
+        }
 
-		public static bool IsRunningOnMono
-		{
-			get { return isMono; }
-		}
+        public static bool IsRunningOnMono { get; }
 
-		public static string Version
-		{
-			get { return version; }
-		}
+        public static string Version { get; }
 
-		public static bool IsOlderVersionThan(string version)
-		{
-			version = "Mono " + version;
-			return (Version.CompareTo(version) < 0);
-		}
-	}
+        public static bool IsOlderVersionThan(string version)
+        {
+            version = "Mono " + version;
+            return Version.CompareTo(version) < 0;
+        }
+    }
 }

@@ -18,21 +18,15 @@ using System.Drawing;
 
 namespace NClass.DiagramEditor.ClassDiagram.Shapes
 {
-	public delegate void ResizeEventHandler(object sender, ResizeEventArgs e);
+    public delegate void ResizeEventHandler(object sender, ResizeEventArgs e);
 
-	public class ResizeEventArgs : EventArgs
-	{
-		Size change;
+    public class ResizeEventArgs : EventArgs
+    {
+        public ResizeEventArgs(Size change)
+        {
+            Change = change;
+        }
 
-		public ResizeEventArgs(Size change)
-		{
-			this.change = change;
-		}
-
-		public Size Change
-		{
-			get { return change; }
-			set { change = value; }
-		}
-	}
+        public Size Change { get; set; }
+    }
 }

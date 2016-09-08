@@ -17,20 +17,15 @@ using System;
 
 namespace NClass.Core
 {
-	public delegate void EntityEventHandler(object sender, EntityEventArgs e);
+    public delegate void EntityEventHandler(object sender, EntityEventArgs e);
 
-	public class EntityEventArgs : EventArgs
-	{
-		IEntity entity;
+    public class EntityEventArgs : EventArgs
+    {
+        public EntityEventArgs(IEntity entity)
+        {
+            Entity = entity;
+        }
 
-		public EntityEventArgs(IEntity entity)
-		{
-			this.entity = entity;
-		}
-
-		public IEntity Entity
-		{
-			get { return entity; }
-		}
-	}
+        public IEntity Entity { get; }
+    }
 }

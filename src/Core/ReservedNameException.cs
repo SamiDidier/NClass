@@ -14,36 +14,30 @@
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using System;
-using System.Runtime.Serialization;
 using NClass.Translations;
 
 namespace NClass.Core
 {
-	public class ReservedNameException : BadSyntaxException
-	{
-		string name;
+    public class ReservedNameException : BadSyntaxException
+    {
+        public ReservedNameException()
+            : base(Strings.ErrorReservedName)
+        {
+            ReservedName = null;
+        }
 
-		public ReservedNameException()
-			: base(Strings.ErrorReservedName)
-		{
-			name = null;
-		}
+        public ReservedNameException(string name)
+            : base(Strings.ErrorReservedName)
+        {
+            ReservedName = name;
+        }
 
-		public ReservedNameException(string name)
-			: base(Strings.ErrorReservedName)
-		{
-			this.name = name;
-		}
+        public ReservedNameException(string name, Exception innerException)
+            : base(Strings.ErrorReservedName, innerException)
+        {
+            ReservedName = name;
+        }
 
-		public ReservedNameException(string name, Exception innerException)
-			: base(Strings.ErrorReservedName, innerException)
-		{
-			this.name = name;
-		}
-
-		public string ReservedName
-		{
-			get { return name; }
-		}
-	}
+        public string ReservedName { get; }
+    }
 }

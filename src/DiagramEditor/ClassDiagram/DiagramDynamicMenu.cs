@@ -15,391 +15,389 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
-using NClass.Translations;
+using NClass.CodeGenerator;
 using NClass.Core;
+using NClass.Translations;
 
 namespace NClass.DiagramEditor.ClassDiagram
 {
-	public sealed partial class DiagramDynamicMenu : DynamicMenu
-	{
-		static DiagramDynamicMenu _default = new DiagramDynamicMenu();
+    public sealed partial class DiagramDynamicMenu : DynamicMenu
+    {
+        private Diagram diagram;
 
-		ToolStripMenuItem[] menuItems;
-		Diagram diagram = null;
+        private readonly ToolStripMenuItem[] menuItems;
 
-		private DiagramDynamicMenu()
-		{
-			InitializeComponent();
-			UpdateTexts();
-			
-			menuItems = new ToolStripMenuItem[2] { mnuDiagram, mnuFormat };
-		}
+        private DiagramDynamicMenu()
+        {
+            InitializeComponent();
+            UpdateTexts();
 
-		public static DiagramDynamicMenu Default
-		{
-			get { return _default; }
-		}
+            menuItems = new ToolStripMenuItem[2] {mnuDiagram, mnuFormat};
+        }
 
-		public override IEnumerable<ToolStripMenuItem> GetMenuItems()
-		{
-			return menuItems;
-		}
+        public static DiagramDynamicMenu Default { get; } = new DiagramDynamicMenu();
 
-		public override ToolStrip GetToolStrip()
-		{
-			return elementsToolStrip;
-		}
+        public override IEnumerable<ToolStripMenuItem> GetMenuItems()
+        {
+            return menuItems;
+        }
 
-		public override void SetReference(IDocument document)
-		{
-			if (diagram != null)
-			{
-				diagram.SelectionChanged -= new EventHandler(diagram_SelectionChanged);
-			}
+        public override ToolStrip GetToolStrip()
+        {
+            return elementsToolStrip;
+        }
 
-			if (document == null)
-			{
-				diagram = null;
-			}
-			else
-			{
-				diagram = document as Diagram;
-				diagram.SelectionChanged += new EventHandler(diagram_SelectionChanged);
+        public override void SetReference(IDocument document)
+        {
+            if (diagram != null)
+            {
+                diagram.SelectionChanged -= diagram_SelectionChanged;
+            }
 
-				mnuNewStructure.Visible = diagram.Language.SupportsStructures;
-				mnuNewDelegate.Visible = diagram.Language.SupportsDelegates;
-				toolNewStructure.Visible = diagram.Language.SupportsStructures;
-				toolNewDelegate.Visible = diagram.Language.SupportsDelegates;
-				toolDelete.Enabled = diagram.HasSelectedElement;
-			}
-		}
+            if (document == null)
+            {
+                diagram = null;
+            }
+            else
+            {
+                diagram = document as Diagram;
+                diagram.SelectionChanged += diagram_SelectionChanged;
 
-		private void diagram_SelectionChanged(object sender, EventArgs e)
-		{
-			toolDelete.Enabled = (diagram != null && diagram.HasSelectedElement);
-		}
+                mnuNewStructure.Visible = diagram.Language.SupportsStructures;
+                mnuNewDelegate.Visible = diagram.Language.SupportsDelegates;
+                toolNewStructure.Visible = diagram.Language.SupportsStructures;
+                toolNewDelegate.Visible = diagram.Language.SupportsDelegates;
+                toolDelete.Enabled = diagram.HasSelectedElement;
+            }
+        }
 
-		private void UpdateTexts()
-		{
-			// Diagram menu
-			mnuDiagram.Text = Strings.MenuDiagram;
-			mnuAddNewElement.Text = Strings.MenuNew;
-			mnuNewClass.Text = Strings.MenuClass;
-			mnuNewStructure.Text = Strings.MenuStruct;
-			mnuNewInterface.Text = Strings.MenuInterface;
-			mnuNewEnum.Text = Strings.MenuEnum;
-			mnuNewDelegate.Text = Strings.MenuDelegate;
-			mnuNewComment.Text = Strings.MenuComment;
-			mnuNewAssociation.Text = Strings.MenuAssociation;
-			mnuNewComposition.Text = Strings.MenuComposition;
-			mnuNewAggregation.Text = Strings.MenuAggregation;
-			mnuNewGeneralization.Text = Strings.MenuGeneralization;
-			mnuNewRealization.Text = Strings.MenuRealization;
-			mnuNewDependency.Text = Strings.MenuDependency;
-			mnuNewNesting.Text = Strings.MenuNesting;
-			mnuNewCommentRelationship.Text = Strings.MenuCommentRelationship;
-			mnuMembersFormat.Text = Strings.MenuMembersFormat;
-			mnuShowType.Text = Strings.MenuType;
-			mnuShowParameters.Text = Strings.MenuParameters;
-			mnuShowParameterNames.Text = Strings.MenuParameterNames;
-			mnuShowInitialValue.Text = Strings.MenuInitialValue;
-			mnuGenerateCode.Text = Strings.MenuGenerateCode;
-			mnuSaveAsImage.Text = Strings.MenuSaveAsImage;
+        private void diagram_SelectionChanged(object sender, EventArgs e)
+        {
+            toolDelete.Enabled = diagram != null && diagram.HasSelectedElement;
+        }
 
-			// Format menu
-			mnuFormat.Text = Strings.MenuFormat;
-			mnuAlign.Text = Strings.MenuAlign;
-			mnuAlignTop.Text = Strings.MenuAlignTop;
-			mnuAlignLeft.Text = Strings.MenuAlignLeft;
-			mnuAlignBottom.Text = Strings.MenuAlignBottom;
-			mnuAlignRight.Text = Strings.MenuAlignRight;
-			mnuAlignHorizontal.Text = Strings.MenuAlignHorizontal;
-			mnuAlignVertical.Text = Strings.MenuAlignVertical;
-			mnuMakeSameSize.Text = Strings.MenuMakeSameSize;
-			mnuSameWidth.Text = Strings.MenuSameWidth;
-			mnuSameHeight.Text = Strings.MenuSameHeight;
-			mnuSameSize.Text = Strings.MenuSameSize;
-			mnuAutoSize.Text = Strings.MenuAutoSize;
-			mnuAutoWidth.Text = Strings.MenuAutoWidth;
-			mnuAutoHeight.Text = Strings.MenuAutoHeight;
-			mnuCollapseAll.Text = Strings.MenuCollapseAll;
-			mnuExpandAll.Text = Strings.MenuExpandAll;
+        private void UpdateTexts()
+        {
+            // Diagram menu
+            mnuDiagram.Text = Strings.MenuDiagram;
+            mnuAddNewElement.Text = Strings.MenuNew;
+            mnuNewClass.Text = Strings.MenuClass;
+            mnuNewStructure.Text = Strings.MenuStruct;
+            mnuNewInterface.Text = Strings.MenuInterface;
+            mnuNewEnum.Text = Strings.MenuEnum;
+            mnuNewDelegate.Text = Strings.MenuDelegate;
+            mnuNewComment.Text = Strings.MenuComment;
+            mnuNewAssociation.Text = Strings.MenuAssociation;
+            mnuNewComposition.Text = Strings.MenuComposition;
+            mnuNewAggregation.Text = Strings.MenuAggregation;
+            mnuNewGeneralization.Text = Strings.MenuGeneralization;
+            mnuNewRealization.Text = Strings.MenuRealization;
+            mnuNewDependency.Text = Strings.MenuDependency;
+            mnuNewNesting.Text = Strings.MenuNesting;
+            mnuNewCommentRelationship.Text = Strings.MenuCommentRelationship;
+            mnuMembersFormat.Text = Strings.MenuMembersFormat;
+            mnuShowType.Text = Strings.MenuType;
+            mnuShowParameters.Text = Strings.MenuParameters;
+            mnuShowParameterNames.Text = Strings.MenuParameterNames;
+            mnuShowInitialValue.Text = Strings.MenuInitialValue;
+            mnuGenerateCode.Text = Strings.MenuGenerateCode;
+            mnuSaveAsImage.Text = Strings.MenuSaveAsImage;
 
-			// Toolbar
-			toolNewClass.Text = Strings.AddNewClass;
-			toolNewStructure.Text = Strings.AddNewStructure;
-			toolNewInterface.Text = Strings.AddNewInterface;
-			toolNewEnum.Text = Strings.AddNewEnum;
-			toolNewDelegate.Text = Strings.AddNewDelegate;
-			toolNewComment.Text = Strings.AddNewComment;
-			toolNewAssociation.Text = Strings.AddNewAssociation;
-			toolNewComposition.Text = Strings.AddNewComposition;
-			toolNewAggregation.Text = Strings.AddNewAggregation;
-			toolNewGeneralization.Text = Strings.AddNewGeneralization;
-			toolNewRealization.Text = Strings.AddNewRealization;
-			toolNewDependency.Text = Strings.AddNewDependency;
-			toolNewNesting.Text = Strings.AddNewNesting;
-			toolNewCommentRelationship.Text = Strings.AddNewCommentRelationship;
-			toolDelete.Text = Strings.DeleteSelectedItems;
-		}
+            // Format menu
+            mnuFormat.Text = Strings.MenuFormat;
+            mnuAlign.Text = Strings.MenuAlign;
+            mnuAlignTop.Text = Strings.MenuAlignTop;
+            mnuAlignLeft.Text = Strings.MenuAlignLeft;
+            mnuAlignBottom.Text = Strings.MenuAlignBottom;
+            mnuAlignRight.Text = Strings.MenuAlignRight;
+            mnuAlignHorizontal.Text = Strings.MenuAlignHorizontal;
+            mnuAlignVertical.Text = Strings.MenuAlignVertical;
+            mnuMakeSameSize.Text = Strings.MenuMakeSameSize;
+            mnuSameWidth.Text = Strings.MenuSameWidth;
+            mnuSameHeight.Text = Strings.MenuSameHeight;
+            mnuSameSize.Text = Strings.MenuSameSize;
+            mnuAutoSize.Text = Strings.MenuAutoSize;
+            mnuAutoWidth.Text = Strings.MenuAutoWidth;
+            mnuAutoHeight.Text = Strings.MenuAutoHeight;
+            mnuCollapseAll.Text = Strings.MenuCollapseAll;
+            mnuExpandAll.Text = Strings.MenuExpandAll;
 
-		#region Event handlers
+            // Toolbar
+            toolNewClass.Text = Strings.AddNewClass;
+            toolNewStructure.Text = Strings.AddNewStructure;
+            toolNewInterface.Text = Strings.AddNewInterface;
+            toolNewEnum.Text = Strings.AddNewEnum;
+            toolNewDelegate.Text = Strings.AddNewDelegate;
+            toolNewComment.Text = Strings.AddNewComment;
+            toolNewAssociation.Text = Strings.AddNewAssociation;
+            toolNewComposition.Text = Strings.AddNewComposition;
+            toolNewAggregation.Text = Strings.AddNewAggregation;
+            toolNewGeneralization.Text = Strings.AddNewGeneralization;
+            toolNewRealization.Text = Strings.AddNewRealization;
+            toolNewDependency.Text = Strings.AddNewDependency;
+            toolNewNesting.Text = Strings.AddNewNesting;
+            toolNewCommentRelationship.Text = Strings.AddNewCommentRelationship;
+            toolDelete.Text = Strings.DeleteSelectedItems;
+        }
 
-		private void mnuDiagram_DropDownOpening(object sender, EventArgs e)
-		{
-			bool hasContent = (diagram != null && !diagram.IsEmpty);
-			mnuGenerateCode.Enabled = hasContent;
-			mnuSaveAsImage.Enabled = hasContent;
-		}
+        #region Event handlers
 
-		private void mnuNewClass_Click(object sender, EventArgs e)
-		{
-			if (diagram != null)
-				diagram.CreateShape(EntityType.Class);
-		}
+        private void mnuDiagram_DropDownOpening(object sender, EventArgs e)
+        {
+            var hasContent = diagram != null && !diagram.IsEmpty;
+            mnuGenerateCode.Enabled = hasContent;
+            mnuSaveAsImage.Enabled = hasContent;
+        }
 
-		private void mnuNewStructure_Click(object sender, EventArgs e)
-		{
-			if (diagram != null)
-				diagram.CreateShape(EntityType.Structure);
-		}
+        private void mnuNewClass_Click(object sender, EventArgs e)
+        {
+            if (diagram != null)
+                diagram.CreateShape(EntityType.Class);
+        }
 
-		private void mnuNewInterface_Click(object sender, EventArgs e)
-		{
-			if (diagram != null)
-				diagram.CreateShape(EntityType.Interface);
-		}
+        private void mnuNewStructure_Click(object sender, EventArgs e)
+        {
+            if (diagram != null)
+                diagram.CreateShape(EntityType.Structure);
+        }
 
-		private void mnuNewEnum_Click(object sender, EventArgs e)
-		{
-			if (diagram != null)
-				diagram.CreateShape(EntityType.Enum);
-		}
+        private void mnuNewInterface_Click(object sender, EventArgs e)
+        {
+            if (diagram != null)
+                diagram.CreateShape(EntityType.Interface);
+        }
 
-		private void mnuNewDelegate_Click(object sender, EventArgs e)
-		{
-			if (diagram != null)
-				diagram.CreateShape(EntityType.Delegate);
-		}
+        private void mnuNewEnum_Click(object sender, EventArgs e)
+        {
+            if (diagram != null)
+                diagram.CreateShape(EntityType.Enum);
+        }
 
-		private void mnuNewComment_Click(object sender, EventArgs e)
-		{
-			if (diagram != null)
-				diagram.CreateShape(EntityType.Comment);
-		}
+        private void mnuNewDelegate_Click(object sender, EventArgs e)
+        {
+            if (diagram != null)
+                diagram.CreateShape(EntityType.Delegate);
+        }
 
-		private void mnuNewAssociation_Click(object sender, EventArgs e)
-		{
-			diagram.CreateConnection(RelationshipType.Association);
-			//TODO: toolNewAssociation.Checked = true;
-		}
+        private void mnuNewComment_Click(object sender, EventArgs e)
+        {
+            if (diagram != null)
+                diagram.CreateShape(EntityType.Comment);
+        }
 
-		private void mnuNewComposition_Click(object sender, EventArgs e)
-		{
-			diagram.CreateConnection(RelationshipType.Composition);
-			//toolNewComposition.Checked = true;
-		}
+        private void mnuNewAssociation_Click(object sender, EventArgs e)
+        {
+            diagram.CreateConnection(RelationshipType.Association);
+            //TODO: toolNewAssociation.Checked = true;
+        }
 
-		private void mnuNewAggregation_Click(object sender, EventArgs e)
-		{
-			diagram.CreateConnection(RelationshipType.Aggregation);
-			//toolNewAggregation.Checked = true;
-		}
+        private void mnuNewComposition_Click(object sender, EventArgs e)
+        {
+            diagram.CreateConnection(RelationshipType.Composition);
+            //toolNewComposition.Checked = true;
+        }
 
-		private void mnuNewGeneralization_Click(object sender, EventArgs e)
-		{
-			diagram.CreateConnection(RelationshipType.Generalization);
-			//toolNewGeneralization.Checked = true;
-		}
+        private void mnuNewAggregation_Click(object sender, EventArgs e)
+        {
+            diagram.CreateConnection(RelationshipType.Aggregation);
+            //toolNewAggregation.Checked = true;
+        }
 
-		private void mnuNewRealization_Click(object sender, EventArgs e)
-		{
-			diagram.CreateConnection(RelationshipType.Realization);
-			//toolNewRealization.Checked = true;
-		}
+        private void mnuNewGeneralization_Click(object sender, EventArgs e)
+        {
+            diagram.CreateConnection(RelationshipType.Generalization);
+            //toolNewGeneralization.Checked = true;
+        }
 
-		private void mnuNewDependency_Click(object sender, EventArgs e)
-		{
-			diagram.CreateConnection(RelationshipType.Dependency);
-			//toolNewDependency.Checked = true;
-		}
+        private void mnuNewRealization_Click(object sender, EventArgs e)
+        {
+            diagram.CreateConnection(RelationshipType.Realization);
+            //toolNewRealization.Checked = true;
+        }
 
-		private void mnuNewNesting_Click(object sender, EventArgs e)
-		{
-			diagram.CreateConnection(RelationshipType.Nesting);
-			//toolNewNesting.Checked = true;
-		}
+        private void mnuNewDependency_Click(object sender, EventArgs e)
+        {
+            diagram.CreateConnection(RelationshipType.Dependency);
+            //toolNewDependency.Checked = true;
+        }
 
-		private void mnuNewCommentRelationship_Click(object sender, EventArgs e)
-		{
-			diagram.CreateConnection(RelationshipType.Comment);
-			//toolNewCommentRelationship.Checked = true;
-		}
+        private void mnuNewNesting_Click(object sender, EventArgs e)
+        {
+            diagram.CreateConnection(RelationshipType.Nesting);
+            //toolNewNesting.Checked = true;
+        }
 
-		private void mnuMembersFormat_DropDownOpening(object sender, EventArgs e)
-		{
-			mnuShowType.Checked = DiagramEditor.Settings.Default.ShowType;
-			mnuShowParameters.Checked = DiagramEditor.Settings.Default.ShowParameters;
-			mnuShowParameterNames.Checked = DiagramEditor.Settings.Default.ShowParameterNames;
-			mnuShowInitialValue.Checked = DiagramEditor.Settings.Default.ShowInitialValue;
-		}
+        private void mnuNewCommentRelationship_Click(object sender, EventArgs e)
+        {
+            diagram.CreateConnection(RelationshipType.Comment);
+            //toolNewCommentRelationship.Checked = true;
+        }
 
-		private void mnuShowType_Click(object sender, EventArgs e)
-		{
-			DiagramEditor.Settings.Default.ShowType = ((ToolStripMenuItem) sender).Checked;
-			if (diagram != null)
-				diagram.Redraw();
-		}
+        private void mnuMembersFormat_DropDownOpening(object sender, EventArgs e)
+        {
+            mnuShowType.Checked = Settings.Default.ShowType;
+            mnuShowParameters.Checked = Settings.Default.ShowParameters;
+            mnuShowParameterNames.Checked = Settings.Default.ShowParameterNames;
+            mnuShowInitialValue.Checked = Settings.Default.ShowInitialValue;
+        }
 
-		private void mnuShowParameters_Click(object sender, EventArgs e)
-		{
-			DiagramEditor.Settings.Default.ShowParameters = ((ToolStripMenuItem) sender).Checked;
-			if (diagram != null)
-				diagram.Redraw();
-		}
+        private void mnuShowType_Click(object sender, EventArgs e)
+        {
+            Settings.Default.ShowType = ((ToolStripMenuItem) sender).Checked;
+            if (diagram != null)
+                diagram.Redraw();
+        }
 
-		private void mnuShowParameterNames_Click(object sender, EventArgs e)
-		{
-			DiagramEditor.Settings.Default.ShowParameterNames = ((ToolStripMenuItem) sender).Checked;
-			if (diagram != null)
-				diagram.Redraw();
-		}
+        private void mnuShowParameters_Click(object sender, EventArgs e)
+        {
+            Settings.Default.ShowParameters = ((ToolStripMenuItem) sender).Checked;
+            if (diagram != null)
+                diagram.Redraw();
+        }
 
-		private void mnuShowInitialValue_Click(object sender, EventArgs e)
-		{
-			DiagramEditor.Settings.Default.ShowInitialValue = ((ToolStripMenuItem) sender).Checked;
-			if (diagram != null)
-				diagram.Redraw();
-		}
+        private void mnuShowParameterNames_Click(object sender, EventArgs e)
+        {
+            Settings.Default.ShowParameterNames = ((ToolStripMenuItem) sender).Checked;
+            if (diagram != null)
+                diagram.Redraw();
+        }
 
-		private void mnuGenerateCode_Click(object sender, EventArgs e)
-		{
-			if (diagram != null && diagram.Project != null)
-			{
-				using (CodeGenerator.Dialog dialog = new CodeGenerator.Dialog())
-				{
-					try
-					{
-						dialog.ShowDialog(diagram.Project);
-					}
-					catch (Exception ex)
-					{
-						MessageBox.Show(ex.Message, Strings.UnknownError,
-							MessageBoxButtons.OK, MessageBoxIcon.Error);
-					}
-				}
-			}
-		}
+        private void mnuShowInitialValue_Click(object sender, EventArgs e)
+        {
+            Settings.Default.ShowInitialValue = ((ToolStripMenuItem) sender).Checked;
+            if (diagram != null)
+                diagram.Redraw();
+        }
 
-		private void mnuSaveAsImage_Click(object sender, EventArgs e)
-		{
-			if (diagram != null && !diagram.IsEmpty)
-				diagram.SaveAsImage();
-		}
+        private void mnuGenerateCode_Click(object sender, EventArgs e)
+        {
+            if (diagram != null && diagram.Project != null)
+            {
+                using (var dialog = new Dialog())
+                {
+                    try
+                    {
+                        dialog.ShowDialog(diagram.Project);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message,
+                                        Strings.UnknownError,
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
 
-		private void mnuFormat_DropDownOpening(object sender, EventArgs e)		
-		{
-			bool shapeSelected = (diagram != null && diagram.SelectedShapeCount >= 1);
-			bool multiselection = (diagram != null && diagram.SelectedShapeCount >= 2);
+        private void mnuSaveAsImage_Click(object sender, EventArgs e)
+        {
+            if (diagram != null && !diagram.IsEmpty)
+                diagram.SaveAsImage();
+        }
 
-			mnuAutoWidth.Enabled = shapeSelected;
-			mnuAutoHeight.Enabled = shapeSelected;
-			mnuAlign.Enabled = multiselection;
-			mnuMakeSameSize.Enabled = multiselection;
-		}
+        private void mnuFormat_DropDownOpening(object sender, EventArgs e)
+        {
+            var shapeSelected = diagram != null && diagram.SelectedShapeCount >= 1;
+            var multiselection = diagram != null && diagram.SelectedShapeCount >= 2;
 
-		private void mnuAlignTop_Click(object sender, EventArgs e)
-		{
-			if (diagram != null)
-				diagram.AlignTop();
-		}
+            mnuAutoWidth.Enabled = shapeSelected;
+            mnuAutoHeight.Enabled = shapeSelected;
+            mnuAlign.Enabled = multiselection;
+            mnuMakeSameSize.Enabled = multiselection;
+        }
 
-		private void mnuAlignLeft_Click(object sender, EventArgs e)
-		{
-			if (diagram != null)
-				diagram.AlignLeft();
-		}
+        private void mnuAlignTop_Click(object sender, EventArgs e)
+        {
+            if (diagram != null)
+                diagram.AlignTop();
+        }
 
-		private void mnuAlignBottom_Click(object sender, EventArgs e)
-		{
-			if (diagram != null)
-				diagram.AlignBottom();
-		}
+        private void mnuAlignLeft_Click(object sender, EventArgs e)
+        {
+            if (diagram != null)
+                diagram.AlignLeft();
+        }
 
-		private void mnuAlignRight_Click(object sender, EventArgs e)
-		{
-			if (diagram != null)
-				diagram.AlignRight();
-		}
+        private void mnuAlignBottom_Click(object sender, EventArgs e)
+        {
+            if (diagram != null)
+                diagram.AlignBottom();
+        }
 
-		private void mnuAlignHorizontal_Click(object sender, EventArgs e)
-		{
-			if (diagram != null)
-				diagram.AlignHorizontal();
-		}
+        private void mnuAlignRight_Click(object sender, EventArgs e)
+        {
+            if (diagram != null)
+                diagram.AlignRight();
+        }
 
-		private void mnuAlignVertical_Click(object sender, EventArgs e)
-		{
-			if (diagram != null)
-				diagram.AlignVertical();
-		}
+        private void mnuAlignHorizontal_Click(object sender, EventArgs e)
+        {
+            if (diagram != null)
+                diagram.AlignHorizontal();
+        }
 
-		private void mnuSameWidth_Click(object sender, EventArgs e)
-		{
-			if (diagram != null)
-				diagram.AdjustToSameWidth();
-		}
+        private void mnuAlignVertical_Click(object sender, EventArgs e)
+        {
+            if (diagram != null)
+                diagram.AlignVertical();
+        }
 
-		private void mnuSameHeight_Click(object sender, EventArgs e)
-		{
-			if (diagram != null)
-				diagram.AdjustToSameHeight();
-		}
+        private void mnuSameWidth_Click(object sender, EventArgs e)
+        {
+            if (diagram != null)
+                diagram.AdjustToSameWidth();
+        }
 
-		private void mnuSameSize_Click(object sender, EventArgs e)
-		{
-			if (diagram != null)
-				diagram.AdjustToSameSize();
-		}
+        private void mnuSameHeight_Click(object sender, EventArgs e)
+        {
+            if (diagram != null)
+                diagram.AdjustToSameHeight();
+        }
 
-		private void mnuAutoSize_Click(object sender, EventArgs e)
-		{
-			if (diagram != null)
-				diagram.AutoSizeOfSelectedShapes();
-		}
+        private void mnuSameSize_Click(object sender, EventArgs e)
+        {
+            if (diagram != null)
+                diagram.AdjustToSameSize();
+        }
 
-		private void mnuAutoWidth_Click(object sender, EventArgs e)
-		{
-			if (diagram != null)
-				diagram.AutoWidthOfSelectedShapes();
-		}
+        private void mnuAutoSize_Click(object sender, EventArgs e)
+        {
+            if (diagram != null)
+                diagram.AutoSizeOfSelectedShapes();
+        }
 
-		private void mnuAutoHeight_Click(object sender, EventArgs e)
-		{
-			if (diagram != null)
-				diagram.AutoHeightOfSelectedShapes();
-		}
+        private void mnuAutoWidth_Click(object sender, EventArgs e)
+        {
+            if (diagram != null)
+                diagram.AutoWidthOfSelectedShapes();
+        }
 
-		private void mnuCollapseAll_Click(object sender, EventArgs e)
-		{
-			if (diagram != null)
-				diagram.CollapseAll();
-		}
+        private void mnuAutoHeight_Click(object sender, EventArgs e)
+        {
+            if (diagram != null)
+                diagram.AutoHeightOfSelectedShapes();
+        }
 
-		private void mnuExpandAll_Click(object sender, EventArgs e)
-		{
-			if (diagram != null)
-				diagram.ExpandAll();
-		}
+        private void mnuCollapseAll_Click(object sender, EventArgs e)
+        {
+            if (diagram != null)
+                diagram.CollapseAll();
+        }
 
-		private void toolDelete_Click(object sender, EventArgs e)
-		{
-			if (diagram != null)
-				diagram.DeleteSelectedElements();
-		}
+        private void mnuExpandAll_Click(object sender, EventArgs e)
+        {
+            if (diagram != null)
+                diagram.ExpandAll();
+        }
 
-		#endregion
-	}
+        private void toolDelete_Click(object sender, EventArgs e)
+        {
+            if (diagram != null)
+                diagram.DeleteSelectedElements();
+        }
+
+        #endregion
+    }
 }

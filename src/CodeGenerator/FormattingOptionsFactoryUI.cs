@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ICSharpCode.NRefactory.CSharp;
-
+﻿using ICSharpCode.NRefactory.CSharp;
 
 namespace NClass.CodeGenerator
 {
     /// <summary>
-    /// The formatting options factory creates pre defined formatting option styles.
+    ///     The formatting options factory creates pre defined formatting option styles.
     /// </summary>
     public static class FormattingOptionsFactoryUI
     {
         /// <summary>
-        /// Creates empty CSharpFormatting options.
+        ///     Creates empty CSharpFormatting options.
         /// </summary>
         public static CSharpFormattingOptionsUI CreateEmpty()
         {
@@ -21,7 +16,7 @@ namespace NClass.CodeGenerator
         }
 
         /// <summary>
-        /// Creates mono indent style CSharpFormatting options.
+        ///     Creates mono indent style CSharpFormatting options.
         /// </summary>
         public static CSharpFormattingOptionsUI CreateMono()
         {
@@ -50,20 +45,17 @@ namespace NClass.CodeGenerator
                 ConstructorBraceStyle = BraceStyle.NextLine,
                 DestructorBraceStyle = BraceStyle.NextLine,
                 AnonymousMethodBraceStyle = BraceStyle.EndOfLine,
-
                 PropertyBraceStyle = BraceStyle.EndOfLine,
                 PropertyGetBraceStyle = BraceStyle.EndOfLine,
                 PropertySetBraceStyle = BraceStyle.EndOfLine,
                 SimpleGetBlockFormatting = PropertyFormatting.AllowOneLine,
                 SimpleSetBlockFormatting = PropertyFormatting.AllowOneLine,
-
                 EventBraceStyle = BraceStyle.EndOfLine,
                 EventAddBraceStyle = BraceStyle.EndOfLine,
                 EventRemoveBraceStyle = BraceStyle.EndOfLine,
                 AllowEventAddBlockInline = true,
                 AllowEventRemoveBlockInline = true,
                 StatementBraceStyle = BraceStyle.EndOfLine,
-
                 ElseNewLinePlacement = NewLinePlacement.SameLine,
                 ElseIfNewLinePlacement = NewLinePlacement.SameLine,
                 CatchNewLinePlacement = NewLinePlacement.SameLine,
@@ -72,20 +64,17 @@ namespace NClass.CodeGenerator
                 ArrayInitializerWrapping = Wrapping.WrapIfTooLong,
                 ArrayInitializerBraceStyle = BraceStyle.EndOfLine,
                 AllowOneLinedArrayInitialziers = true,
-
                 SpaceBeforeMethodCallParentheses = true,
                 SpaceBeforeMethodDeclarationParentheses = true,
                 SpaceBeforeConstructorDeclarationParentheses = true,
                 SpaceBeforeDelegateDeclarationParentheses = true,
                 SpaceAfterMethodCallParameterComma = true,
                 SpaceAfterConstructorDeclarationParameterComma = true,
-
                 SpaceBeforeNewParentheses = true,
                 SpacesWithinNewParentheses = false,
                 SpacesBetweenEmptyNewParentheses = false,
                 SpaceBeforeNewParameterComma = false,
                 SpaceAfterNewParameterComma = true,
-
                 SpaceBeforeIfParentheses = true,
                 SpaceBeforeWhileParentheses = true,
                 SpaceBeforeForParentheses = true,
@@ -122,16 +111,13 @@ namespace NClass.CodeGenerator
                 SpaceAfterConditionalOperatorCondition = true,
                 SpaceBeforeConditionalOperatorSeparator = true,
                 SpaceAfterConditionalOperatorSeparator = true,
-
                 SpacesWithinBrackets = false,
                 SpacesBeforeBrackets = true,
                 SpaceBeforeBracketComma = false,
                 SpaceAfterBracketComma = true,
-
                 SpaceBeforeForSemicolon = false,
                 SpaceAfterForSemicolon = true,
                 SpaceAfterTypecast = false,
-
                 AlignEmbeddedStatements = true,
                 SimplePropertyFormatting = PropertyFormatting.AllowOneLine,
                 AutoPropertyFormatting = PropertyFormatting.AllowOneLine,
@@ -143,19 +129,15 @@ namespace NClass.CodeGenerator
                 SpaceAfterFieldDeclarationComma = true,
                 SpaceBeforeLocalVariableDeclarationComma = false,
                 SpaceAfterLocalVariableDeclarationComma = true,
-
                 SpaceBeforeIndexerDeclarationBracket = true,
                 SpaceWithinIndexerDeclarationBracket = false,
                 SpaceBeforeIndexerDeclarationParameterComma = false,
                 SpaceInNamedArgumentAfterDoubleColon = true,
                 RemoveEndOfLineWhiteSpace = true,
-
                 SpaceAfterIndexerDeclarationParameterComma = true,
-
                 MinimumBlankLinesBeforeUsings = 0,
                 MinimumBlankLinesAfterUsings = 1,
                 UsingPlacement = UsingPlacement.TopOfFile,
-
                 MinimumBlankLinesBeforeFirstDeclaration = 0,
                 MinimumBlankLinesBetweenTypes = 1,
                 MinimumBlankLinesBetweenFields = 0,
@@ -172,17 +154,15 @@ namespace NClass.CodeGenerator
                 MethodCallArgumentWrapping = Wrapping.DoNotChange,
                 NewLineAferMethodCallOpenParentheses = NewLinePlacement.DoNotCare,
                 MethodCallClosingParenthesesOnNewLine = NewLinePlacement.DoNotCare,
-
                 IndexerArgumentWrapping = Wrapping.DoNotChange,
                 NewLineAferIndexerOpenBracket = NewLinePlacement.DoNotCare,
                 IndexerClosingBracketOnNewLine = NewLinePlacement.DoNotCare,
-
                 NewLineBeforeNewQueryClause = NewLinePlacement.NewLine
             };
         }
 
         /// <summary>
-        /// Creates sharp develop indent style CSharpFormatting options.
+        ///     Creates sharp develop indent style CSharpFormatting options.
         /// </summary>
         public static CSharpFormattingOptionsUI CreateSharpDevelop()
         {
@@ -191,12 +171,12 @@ namespace NClass.CodeGenerator
         }
 
         /// <summary>
-        /// The K&R style, so named because it was used in Kernighan and Ritchie's book The C Programming Language,
-        /// is commonly used in C. It is less common for C++, C#, and others.
+        ///     The K&R style, so named because it was used in Kernighan and Ritchie's book The C Programming Language,
+        ///     is commonly used in C. It is less common for C++, C#, and others.
         /// </summary>
         public static CSharpFormattingOptionsUI CreateKRStyle()
         {
-            return new CSharpFormattingOptionsUI()
+            return new CSharpFormattingOptionsUI
             {
                 IndentNamespaceBody = true,
                 IndentClassBody = true,
@@ -225,14 +205,12 @@ namespace NClass.CodeGenerator
                 PropertySetBraceStyle = BraceStyle.EndOfLine,
                 SimpleGetBlockFormatting = PropertyFormatting.AllowOneLine,
                 SimpleSetBlockFormatting = PropertyFormatting.AllowOneLine,
-
                 EventBraceStyle = BraceStyle.EndOfLine,
                 EventAddBraceStyle = BraceStyle.EndOfLine,
                 EventRemoveBraceStyle = BraceStyle.EndOfLine,
                 AllowEventAddBlockInline = true,
                 AllowEventRemoveBlockInline = true,
                 StatementBraceStyle = BraceStyle.EndOfLine,
-
                 ElseNewLinePlacement = NewLinePlacement.SameLine,
                 ElseIfNewLinePlacement = NewLinePlacement.SameLine,
                 CatchNewLinePlacement = NewLinePlacement.SameLine,
@@ -240,7 +218,6 @@ namespace NClass.CodeGenerator
                 WhileNewLinePlacement = NewLinePlacement.SameLine,
                 ArrayInitializerWrapping = Wrapping.WrapIfTooLong,
                 ArrayInitializerBraceStyle = BraceStyle.EndOfLine,
-
                 SpaceBeforeMethodCallParentheses = false,
                 SpaceBeforeMethodDeclarationParentheses = false,
                 SpaceBeforeConstructorDeclarationParentheses = false,
@@ -250,13 +227,11 @@ namespace NClass.CodeGenerator
                 SpaceAfterConstructorDeclarationParameterComma = true,
                 NewLineBeforeConstructorInitializerColon = NewLinePlacement.NewLine,
                 NewLineAfterConstructorInitializerColon = NewLinePlacement.SameLine,
-
                 SpaceBeforeNewParentheses = false,
                 SpacesWithinNewParentheses = false,
                 SpacesBetweenEmptyNewParentheses = false,
                 SpaceBeforeNewParameterComma = false,
                 SpaceAfterNewParameterComma = true,
-
                 SpaceBeforeIfParentheses = true,
                 SpaceBeforeWhileParentheses = true,
                 SpaceBeforeForParentheses = true,
@@ -265,7 +240,6 @@ namespace NClass.CodeGenerator
                 SpaceBeforeSwitchParentheses = true,
                 SpaceBeforeLockParentheses = true,
                 SpaceBeforeUsingParentheses = true,
-
                 SpaceAroundAssignment = true,
                 SpaceAroundLogicalOperator = true,
                 SpaceAroundEqualityOperator = true,
@@ -295,16 +269,13 @@ namespace NClass.CodeGenerator
                 SpaceBeforeConditionalOperatorSeparator = true,
                 SpaceAfterConditionalOperatorSeparator = true,
                 SpaceBeforeArrayDeclarationBrackets = false,
-
                 SpacesWithinBrackets = false,
                 SpacesBeforeBrackets = false,
                 SpaceBeforeBracketComma = false,
                 SpaceAfterBracketComma = true,
-
                 SpaceBeforeForSemicolon = false,
                 SpaceAfterForSemicolon = true,
                 SpaceAfterTypecast = false,
-
                 AlignEmbeddedStatements = true,
                 SimplePropertyFormatting = PropertyFormatting.AllowOneLine,
                 AutoPropertyFormatting = PropertyFormatting.AllowOneLine,
@@ -316,17 +287,13 @@ namespace NClass.CodeGenerator
                 SpaceAfterFieldDeclarationComma = true,
                 SpaceBeforeLocalVariableDeclarationComma = false,
                 SpaceAfterLocalVariableDeclarationComma = true,
-
                 SpaceWithinIndexerDeclarationBracket = false,
                 SpaceBeforeIndexerDeclarationParameterComma = false,
                 SpaceInNamedArgumentAfterDoubleColon = true,
-
                 SpaceAfterIndexerDeclarationParameterComma = true,
                 RemoveEndOfLineWhiteSpace = true,
-
                 MinimumBlankLinesBeforeUsings = 0,
                 MinimumBlankLinesAfterUsings = 1,
-
                 MinimumBlankLinesBeforeFirstDeclaration = 0,
                 MinimumBlankLinesBetweenTypes = 1,
                 MinimumBlankLinesBetweenFields = 0,
@@ -334,23 +301,20 @@ namespace NClass.CodeGenerator
                 MinimumBlankLinesBetweenMembers = 1,
                 MinimumBlankLinesAroundRegion = 1,
                 MinimumBlankLinesInsideRegion = 1,
-
                 KeepCommentsAtFirstColumn = true,
                 ChainedMethodCallWrapping = Wrapping.DoNotChange,
                 MethodCallArgumentWrapping = Wrapping.DoNotChange,
                 NewLineAferMethodCallOpenParentheses = NewLinePlacement.DoNotCare,
                 MethodCallClosingParenthesesOnNewLine = NewLinePlacement.DoNotCare,
-
                 IndexerArgumentWrapping = Wrapping.DoNotChange,
                 NewLineAferIndexerOpenBracket = NewLinePlacement.DoNotCare,
                 IndexerClosingBracketOnNewLine = NewLinePlacement.DoNotCare,
-
                 NewLineBeforeNewQueryClause = NewLinePlacement.NewLine
             };
         }
 
         /// <summary>
-        /// Creates allman indent style CSharpFormatting options used in Visual Studio.
+        ///     Creates allman indent style CSharpFormatting options used in Visual Studio.
         /// </summary>
         public static CSharpFormattingOptionsUI CreateAllman()
         {
@@ -379,7 +343,8 @@ namespace NClass.CodeGenerator
         }
 
         /// <summary>
-        /// The Whitesmiths style, also called Wishart style to a lesser extent, is less common today than the previous three. It was originally used in the documentation for the first commercial C compiler, the Whitesmiths Compiler.
+        ///     The Whitesmiths style, also called Wishart style to a lesser extent, is less common today than the previous three.
+        ///     It was originally used in the documentation for the first commercial C compiler, the Whitesmiths Compiler.
         /// </summary>
         public static CSharpFormattingOptionsUI CreateWhitesmiths()
         {
@@ -407,15 +372,15 @@ namespace NClass.CodeGenerator
         }
 
         /// <summary>
-        /// Like the Allman and Whitesmiths styles, GNU style puts braces on a line by themselves, indented by 2 spaces,
-        /// except when opening a function definition, where they are not indented.
-        /// In either case, the contained code is indented by 2 spaces from the braces.
-        /// Popularised by Richard Stallman, the layout may be influenced by his background of writing Lisp code.
-        /// In Lisp the equivalent to a block (a progn) 
-        /// is a first class data entity and giving it its own indent level helps to emphasize that,
-        /// whereas in C a block is just syntax.
-        /// Although not directly related to indentation, GNU coding style also includes a space before the bracketed 
-        /// list of arguments to a function.
+        ///     Like the Allman and Whitesmiths styles, GNU style puts braces on a line by themselves, indented by 2 spaces,
+        ///     except when opening a function definition, where they are not indented.
+        ///     In either case, the contained code is indented by 2 spaces from the braces.
+        ///     Popularised by Richard Stallman, the layout may be influenced by his background of writing Lisp code.
+        ///     In Lisp the equivalent to a block (a progn)
+        ///     is a first class data entity and giving it its own indent level helps to emphasize that,
+        ///     whereas in C a block is just syntax.
+        ///     Although not directly related to indentation, GNU coding style also includes a space before the bracketed
+        ///     list of arguments to a function.
         /// </summary>
         public static CSharpFormattingOptionsUI CreateGNU()
         {

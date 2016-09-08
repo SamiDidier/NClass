@@ -14,35 +14,41 @@
 // 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 using System;
-using System.IO;
-using System.Collections.Generic;
 using NClass.Core;
-using NClass.CSharp;
 
 namespace NClass.CodeGenerator
 {
-	internal sealed class JavaProjectGenerator : ProjectGenerator
-	{
-		/// <exception cref="ArgumentNullException">
-		/// <paramref name="model"/> is null.
-		/// </exception>
-		public JavaProjectGenerator(Model model) : base(model)
-		{
-		}
+    internal sealed class JavaProjectGenerator : ProjectGenerator
+    {
+        /// <exception cref="ArgumentNullException">
+        ///     <paramref name="model" /> is null.
+        /// </exception>
+        public JavaProjectGenerator(Model model)
+            : base(model)
+        {
+        }
 
-		public override string RelativeProjectFileName
-		{
-			get { return null; }
-		}
+        public override string RelativeProjectFileName { get { return null; } }
 
-        protected override SourceFileGenerator CreateSourceFileGenerator(TypeBase type, bool sort_using, bool generate_document_comment, string compagny_name, string copyright_header, string author)
-		{
-            return new JavaSourceFileGenerator(type, RootNamespace, sort_using, generate_document_comment, compagny_name, copyright_header, author);
-		}
+        protected override SourceFileGenerator CreateSourceFileGenerator(TypeBase type,
+                                                                         bool sort_using,
+                                                                         bool generate_document_comment,
+                                                                         string compagny_name,
+                                                                         string copyright_header,
+                                                                         string author)
+        {
+            return new JavaSourceFileGenerator(type,
+                                               RootNamespace,
+                                               sort_using,
+                                               generate_document_comment,
+                                               compagny_name,
+                                               copyright_header,
+                                               author);
+        }
 
-		protected override bool GenerateProjectFiles(string location)
-		{
-			return true;
-		}
-	}
+        protected override bool GenerateProjectFiles(string location)
+        {
+            return true;
+        }
+    }
 }

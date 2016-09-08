@@ -2,14 +2,15 @@
 using System.Windows.Forms;
 using log4net;
 using log4net.Appender;
+using log4net.Core;
 using log4net.Repository.Hierarchy;
 
 namespace NClass.GUI
 {
     public class TextBoxAppender : IAppender
     {
-        private RichTextBox _textBox;
         private readonly object _lockObj = new object();
+        private RichTextBox _textBox;
 
         public TextBoxAppender(RichTextBox textBox)
         {
@@ -25,13 +26,6 @@ namespace NClass.GUI
 
         public string Name { get; set; }
 
-        public static void ConfigureTextBoxAppender(RichTextBox textBox)
-        {
-            var hierarchy = (Hierarchy)LogManager.GetRepository();
-            var appender = new TextBoxAppender(textBox);
-            hierarchy.Root.AddAppender(appender);
-        }
-
         public void Close()
         {
             try
@@ -44,7 +38,7 @@ namespace NClass.GUI
                     _textBox = null;
                 }
 
-                var hierarchy = (Hierarchy)LogManager.GetRepository();
+                var hierarchy = (Hierarchy) LogManager.GetRepository();
                 hierarchy.Root.RemoveAppender(this);
             }
             catch
@@ -54,7 +48,7 @@ namespace NClass.GUI
             }
         }
 
-        public void DoAppend(log4net.Core.LoggingEvent loggingEvent)
+        public void DoAppend(LoggingEvent loggingEvent)
         {
             try
             {
@@ -95,6 +89,13 @@ namespace NClass.GUI
                 // There is not much that can be done here, and
                 // swallowing the error is desired in my situation.
             }
+        }
+
+        public static void ConfigureTextBoxAppender(RichTextBox textBox)
+        {
+            var hierarchy = (Hierarchy) LogManager.GetRepository();
+            var appender = new TextBoxAppender(textBox);
+            hierarchy.Root.AddAppender(appender);
         }
     }
 }
